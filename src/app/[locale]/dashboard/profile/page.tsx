@@ -7,8 +7,8 @@ import { getAdvisorMode } from "@/actions/advisor/actions";
 import { getCurrentProfile } from "@/lib/auth";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import AdvisorDataSetting from "./_components/advisor-data-setting";
+import BusinessProfileCardForm from "./_components/business-profile-form";
 import DeleteAccountDialog from "./_components/delete-account-dialog";
-import PersonalContextCardForm from "./_components/personal-context-form";
 import ProfileDetailsForm from "./_components/profile-form";
 import SignOutButton from "./_components/sign-out-button";
 import {
@@ -85,17 +85,17 @@ export default function ProfilePage() {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>{t("advisorContext.title")}</h2>
+            <h2>{t("businessProfile.title")}</h2>
           </CardTitle>
-          <CardDescription>{t("advisorContext.description")}</CardDescription>
+          <CardDescription>{t("businessProfile.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Suspense
             fallback={
-              <FormSkeleton label={t("advisorContext.loading")} rows={5} />
+              <FormSkeleton label={t("businessProfile.loading")} rows={4} />
             }
           >
-            <PersonalContextSection />
+            <BusinessProfileSection />
           </Suspense>
         </CardContent>
       </Card>
@@ -160,10 +160,10 @@ async function AccountSection() {
   return <ProfileDetailsForm profile={profile} />;
 }
 
-async function PersonalContextSection() {
+async function BusinessProfileSection() {
   const profile = await getCurrentProfile();
 
-  return <PersonalContextCardForm profile={profile} />;
+  return <BusinessProfileCardForm profile={profile} />;
 }
 
 async function AdvisorDataSection() {

@@ -10,10 +10,10 @@ import { createClient } from "@/lib/supabase/server";
 import {
   DELETE_ACCOUNT_CONFIRMATION,
   deleteAccountSchema,
+  BusinessProfileForm,
+  businessProfileFormSchema,
   OnboardingForm,
   onboardingFormSchema,
-  PersonalContextForm,
-  personalContextFormSchema,
   ProfileForm,
   profileFormSchema,
 } from "@/validations/profile-validations";
@@ -23,18 +23,13 @@ type ActionResult = { error: string } | { success: true };
 
 const UNIQUE_VIOLATION = "23505";
 
-function toNullableNumber(value: string): number | null {
-  return value === "" ? null : Number(value);
-}
-
 // Form answers are strings, with "" meaning "not provided"; the database stores those as NULL.
-function toPersonalContextColumns(data: PersonalContextForm) {
+function toBusinessProfileColumns(data: BusinessProfileForm) {
   return {
-    monthly_income: toNullableNumber(data.monthly_income),
-    birth_year: toNullableNumber(data.birth_year),
-    financial_goal: data.financial_goal === "" ? null : data.financial_goal,
-    dependents: toNullableNumber(data.dependents),
-    has_debt: data.has_debt === "" ? null : data.has_debt === "yes",
+    business_name: data.business_name || null,
+    business_type: data.business_type || null,
+    regency: data.regency || null,
+    tourist_dependence: data.tourist_dependence || null,
   };
 }
 
@@ -53,17 +48,17 @@ async function updateOwnProfile(
   return error;
 }
 
-export async function updatePersonalContext(
-  input: PersonalContextForm,
+export async function updateBusinessProfile(
+  input: BusinessProfileForm,
 ): Promise<ActionResult> {
   const t = await getCookieTranslations("actionErrors");
-  const parsed = personalContextFormSchema.safeParse(input);
+  const parsed = businessProfileFormSchema.safeParse(input);
 
   if (!parsed.success) {
     return { error: t("checkForm") };
   }
 
-  if (await updateOwnProfile(toPersonalContextColumns(parsed.data))) {
+  if (await updateOwnProfile(toBusinessProfileColumns(parsed.data))) {
     return { error: t("answersSaveFailed") };
   }
 
@@ -84,7 +79,7 @@ export async function completeOnboarding(
 
   const userId = await requireUserId();
   const error = await updateOwnProfile({
-    ...toPersonalContextColumns(parsed.data),
+    ...toBusinessProfileColumns(parsed.data),
     onboarding_completed_at: new Date().toISOString(),
   });
 

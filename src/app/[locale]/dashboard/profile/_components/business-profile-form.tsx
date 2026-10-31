@@ -6,32 +6,32 @@ import { useMutation } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { updatePersonalContext } from "@/actions/profile/actions";
-import PersonalContextFields, {
-  toPersonalContextDefaults,
-} from "@/components/profile/personal-context-fields";
+import { updateBusinessProfile } from "@/actions/profile/actions";
+import BusinessProfileFields, {
+  toBusinessProfileDefaults,
+} from "@/components/profile/business-profile-fields";
 import { Profile } from "@/types/profile";
 import {
-  PersonalContextForm,
-  personalContextFormSchema,
+  BusinessProfileForm,
+  businessProfileFormSchema,
 } from "@/validations/profile-validations";
 import { Button } from "@/components/ui/button";
 import { FieldError, FieldGroup } from "@/components/ui/field";
 
-export default function PersonalContextCardForm({
+export default function BusinessProfileCardForm({
   profile,
 }: {
   profile: Profile;
 }) {
-  const t = useTranslations("profile.advisorContext");
+  const t = useTranslations("profile.businessProfile");
   const tCommon = useTranslations("common");
-  const form = useForm<PersonalContextForm>({
-    resolver: zodResolver(personalContextFormSchema),
-    defaultValues: toPersonalContextDefaults(profile),
+  const form = useForm<BusinessProfileForm>({
+    resolver: zodResolver(businessProfileFormSchema),
+    defaultValues: toBusinessProfileDefaults(profile),
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: PersonalContextForm) => updatePersonalContext(data),
+    mutationFn: (data: BusinessProfileForm) => updateBusinessProfile(data),
     onSuccess: (result, data) => {
       if ("error" in result) {
         form.setError("root", { type: "server", message: result.error });
@@ -52,7 +52,7 @@ export default function PersonalContextCardForm({
   return (
     <form onSubmit={form.handleSubmit((data) => mutate(data))} noValidate>
       <FieldGroup className="gap-4">
-        <PersonalContextFields control={form.control} idPrefix="profile" />
+        <BusinessProfileFields control={form.control} idPrefix="profile" />
         <FieldError errors={[form.formState.errors.root]} />
         <Button
           type="submit"

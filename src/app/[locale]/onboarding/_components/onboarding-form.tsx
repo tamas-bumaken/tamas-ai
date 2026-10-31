@@ -8,10 +8,10 @@ import { Loader2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { completeOnboarding, skipOnboarding } from "@/actions/profile/actions";
 import { isNavigationError } from "@/lib/navigation-error";
-import PersonalContextFields from "@/components/profile/personal-context-fields";
+import BusinessProfileFields from "@/components/profile/business-profile-fields";
 import {
-  PersonalContextForm,
-  personalContextFormSchema,
+  BusinessProfileForm,
+  businessProfileFormSchema,
 } from "@/validations/profile-validations";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -28,14 +28,13 @@ export default function OnboardingForm() {
   const [consent, setConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
 
-  const form = useForm<PersonalContextForm>({
-    resolver: zodResolver(personalContextFormSchema),
+  const form = useForm<BusinessProfileForm>({
+    resolver: zodResolver(businessProfileFormSchema),
     defaultValues: {
-      monthly_income: "",
-      birth_year: "",
-      financial_goal: "",
-      dependents: "",
-      has_debt: "",
+      business_name: "",
+      business_type: "",
+      regency: "",
+      tourist_dependence: "",
     },
   });
 
@@ -44,7 +43,7 @@ export default function OnboardingForm() {
 
   // Both actions redirect to the dashboard on success, so only failures come back here.
   const save = useMutation({
-    mutationFn: (data: PersonalContextForm) =>
+    mutationFn: (data: BusinessProfileForm) =>
       completeOnboarding({ ...data, consent }),
     onSuccess: (result) => {
       if (result && "error" in result) setServerError(result.error);
@@ -69,7 +68,7 @@ export default function OnboardingForm() {
 
   const isPending = save.isPending || skip.isPending;
 
-  function onSubmit(data: PersonalContextForm) {
+  function onSubmit(data: BusinessProfileForm) {
     if (!consent) {
       setConsentError("consentRequired");
       return;
@@ -81,7 +80,7 @@ export default function OnboardingForm() {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
       <FieldGroup className="gap-4">
-        <PersonalContextFields control={form.control} idPrefix="onboarding" />
+        <BusinessProfileFields control={form.control} idPrefix="onboarding" />
         <Field
           orientation="horizontal"
           className="items-start gap-2"

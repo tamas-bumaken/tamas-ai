@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export async function CompleteProfileBanner() {
   const profile = await getCurrentProfile();
 
-  if (profile.monthly_income !== null || profile.financial_goal !== null) {
+  if (profile.business_name !== null || profile.business_type !== null) {
     return null;
   }
 

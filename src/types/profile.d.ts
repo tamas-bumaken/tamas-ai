@@ -1,11 +1,14 @@
-import { FinancialGoal } from "@/constans/financial-goals";
+import {
+  BusinessType,
+  Regency,
+  TouristDependence,
+} from "@/constans/business-profile";
 
 export type Profile = {
   id: string;
   username: string;
-  monthly_income: number | null;
-  birth_year: number | null;
-  financial_goal: FinancialGoal | null;
-  dependents: number | null;
-  has_debt: boolean | null;
+  business_name: string | null;
+  business_type: BusinessType | null;
+  regency: Regency | null;
+  tourist_dependence: TouristDependence | null;
 };

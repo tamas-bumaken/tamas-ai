@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Profile } from "@/types/profile";
 
 const PROFILE_COLUMNS =
-  "id, username, monthly_income, birth_year, financial_goal, dependents, has_debt";
+  "id, username, business_name, business_type, regency, tourist_dependence";
 
 // getClaims verifies the JWT signature; getSession would trust whatever the cookie says.
 // An invalid or expired token comes back as an error, which is treated the same as being signed out.
