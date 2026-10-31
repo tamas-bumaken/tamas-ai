@@ -241,7 +241,7 @@
     "use": {
       "title": "Bagaimana kami memakainya",
       "run": "Menjalankan aplikasi: menyimpan dan menampilkan catatanmu.",
-      "ai": "Menjalankan fitur AI: mengubah kalimat menjadi transaksi, menjawab pertanyaanmu, dan mencari di catatanmu.",
+      "ai": "Menjalankan fitur AI: mengubah kalimat atau foto nota menjadi transaksi, menjawab pertanyaanmu, dan mencari di catatanmu.",
       "safety": "Menjaga layanan tetap aman dan dalam batas pemakaian wajar.",
       "improve": "Memahami fitur mana yang membantu, supaya kami bisa memperbaiki TAMAS."
     },
@@ -249,7 +249,7 @@
       "title": "Siapa yang memproses datamu untuk kami",
       "supabase": "<strong>Supabase</strong>: database, login, dan penyimpanan file ({region}).",
       "vercel": "<strong>Vercel</strong>: hosting aplikasi.",
-      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Saat “Izinkan AI Advisor memakai dataku” aktif, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu. Kamu bisa mematikannya di Profil kapan saja.",
+      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota dan screenshot yang kamu unggah (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Saat “Izinkan AI Advisor memakai dataku” aktif, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu. Kamu bisa mematikannya di Profil kapan saja.",
       "googleSignIn": "<strong>Google (Masuk dengan Google)</strong>: hanya jika kamu memilih masuk dengan Google.",
       "posthog": "<strong>PostHog</strong>: event analitik produk yang dijelaskan di atas.",
       "abroad": "Sebagian penyedia ini memproses data di luar Indonesia. Kami memakainya hanya untuk menjalankan TAMAS.",
@@ -536,6 +536,11 @@
         "description": "Deskripsi",
         "date": "Tanggal"
       }
+    },
+    "image": {
+      "label": "Foto nota atau screenshot",
+      "reading": "Membaca gambar...",
+      "unreadable": "Gambar ini tidak bisa dibuka. Coba foto lain."
     }
   },
   "transactions": {
@@ -708,7 +713,12 @@
     "dailyChat": "Kamu sudah memakai {limit} pesan AI Advisor hari ini. Batasnya diatur ulang tengah malam (WIB).",
     "dailyWizard": "Kamu sudah memakai {limit} quick entry hari ini. Batasnya diatur ulang tengah malam (WIB); kamu tetap bisa menambah transaksi lewat form.",
     "wizardTooMany": "Tulis maksimal {max} transaksi per pesan.",
-    "wizardNothingFound": "Tidak ada transaksi yang bisa dicatat, diubah, atau dihapus dari pesan itu."
+    "wizardNothingFound": "Tidak ada transaksi yang bisa dicatat, diubah, atau dihapus dari pesan itu.",
+    "imageTooLarge": "Gambar ini terlalu besar. Coba foto lain.",
+    "imageInvalid": "File ini tidak didukung. Pakai gambar JPG, PNG, atau WebP.",
+    "imageTooMany": "Gambar ini berisi lebih dari {max} transaksi. Potong ke bagian yang ingin dicatat.",
+    "imageNothingFound": "Tidak ada transaksi yang terbaca dari gambar ini. Coba foto yang lebih jelas, atau ketik saja.",
+    "imageFailed": "Gagal memproses gambar."
   },
   "actionErrors": {
     "checkForm": "Periksa lagi formnya lalu coba lagi",

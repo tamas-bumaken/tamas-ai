@@ -73,6 +73,13 @@ export function getWizardToolDeclarations(
     : MUTATING_DECLARATIONS;
 }
 
+// A photo can carry text that was written to trick the model, so it can only ever produce drafts the user reviews.
+export function getWizardImageToolDeclarations(): FunctionDeclaration[] {
+  return MUTATING_DECLARATIONS.filter(
+    ({ name }) => name === "create_transaction",
+  );
+}
+
 export type WizardRunState = {
   // Only rows the model has seen in a search may be changed, so it cannot act on an id it made up.
   knownRows: Map<string, WizardTransactionRow>;

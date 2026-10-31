@@ -241,7 +241,7 @@
     "use": {
       "title": "How we use it",
       "run": "To run the app: save and show your records.",
-      "ai": "To power AI features: turning a sentence into transactions, answering your questions, and searching your records.",
+      "ai": "To power AI features: turning a sentence or a receipt photo into transactions, answering your questions, and searching your records.",
       "safety": "To keep the service safe and within fair-use limits.",
       "improve": "To understand which features help, so we can improve TAMAS."
     },
@@ -249,7 +249,7 @@
       "title": "Who processes your data for us",
       "supabase": "<strong>Supabase</strong>: database, sign-in and file storage ({region}).",
       "vercel": "<strong>Vercel</strong>: hosting of the app.",
-      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. When “Let AI Advisor use my data” is on, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can turn that off in Profile at any time.",
+      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. When “Let AI Advisor use my data” is on, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can turn that off in Profile at any time.",
       "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
       "posthog": "<strong>PostHog</strong>: the product analytics events described above.",
       "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
@@ -536,6 +536,11 @@
         "description": "Description",
         "date": "Date"
       }
+    },
+    "image": {
+      "label": "Photo of a receipt or screenshot",
+      "reading": "Reading the image...",
+      "unreadable": "This image can't be opened. Try another photo."
     }
   },
   "transactions": {
@@ -708,7 +713,12 @@
     "dailyChat": "You've used today's {limit} AI Advisor messages. The limit resets at midnight (WIB).",
     "dailyWizard": "You've used today's {limit} quick entries. The limit resets at midnight (WIB); you can still add transactions with the form.",
     "wizardTooMany": "Describe at most {max} transactions per message.",
-    "wizardNothingFound": "Couldn't find a transaction to record, update, or delete in that message."
+    "wizardNothingFound": "Couldn't find a transaction to record, update, or delete in that message.",
+    "imageTooLarge": "This image is too large. Try another photo.",
+    "imageInvalid": "This file isn't supported. Use a JPG, PNG or WebP image.",
+    "imageTooMany": "This image has more than {max} transactions. Crop it to the ones you want to record.",
+    "imageNothingFound": "Couldn't read a transaction from this image. Try a clearer photo, or type it in.",
+    "imageFailed": "Couldn't process the image."
   },
   "actionErrors": {
     "checkForm": "Please check the form and try again",
