@@ -1,0 +1,768 @@
+{
+  "metadata": {
+    "description": "Asisten Bisnis AI untuk UMKM Bali"
+  },
+  "navigation": {
+    "main": "Utama",
+    "dashboard": "Dashboard",
+    "transactions": "Transaksi",
+    "profile": "Profil",
+    "log": "Catat",
+    "advisor": "Advisor"
+  },
+  "language": {
+    "label": "Bahasa",
+    "title": "Bahasa",
+    "description": "Bahasa yang dipakai TAMAS di layar.",
+    "saveFailed": "Gagal mengganti bahasa. Silakan coba lagi."
+  },
+  "notFound": {
+    "title": "Halaman tidak ditemukan",
+    "description": "Halaman yang kamu cari tidak ada atau sudah dipindah.",
+    "home": "Kembali ke beranda"
+  },
+  "categories": {
+    "Food": "Makan",
+    "Transportation": "Transportasi",
+    "Housing": "Tempat tinggal",
+    "Shopping": "Belanja",
+    "Subscription": "Langganan",
+    "Installments": "Cicilan",
+    "Phone & Data": "Pulsa & data",
+    "Family Transfer": "Kiriman keluarga",
+    "Health": "Kesehatan",
+    "Entertainment": "Hiburan",
+    "Education": "Pendidikan",
+    "Savings & Investment": "Tabungan & investasi",
+    "Others": "Lainnya",
+    "Salary": "Gaji",
+    "Side Income": "Penghasilan sampingan"
+  },
+  "chatModes": {
+    "personal": {
+      "label": "Akses data aktif",
+      "description": "Memakai profil dan transaksimu",
+      "suggestions": {
+        "q1": "Berapa total pengeluaranku bulan ini?",
+        "q2": "Kategori apa yang paling boros bulan ini?",
+        "q3": "Berapa yang bisa aku tabung tiap bulan?"
+      }
+    },
+    "general": {
+      "label": "Akses data mati",
+      "description": "Datamu tidak dipakai",
+      "suggestions": {
+        "q1": "Berapa idealnya dana darurat untuk gaji 6 juta?",
+        "q2": "Apa beda reksa dana pasar uang dan deposito?",
+        "q3": "Cara mulai investasi dengan 500 ribu per bulan"
+      }
+    }
+  },
+  "landing": {
+    "metadata": {
+      "title": "TAMAS — Asisten Bisnis AI untuk UMKM Bali",
+      "description": "Catat pemasukan dan pengeluaran dengan satu kalimat, lalu tanya AI Advisor ke mana uangmu pergi dan apa yang bisa diubah. Gratis, dalam Bahasa Indonesia atau Inggris."
+    },
+    "header": {
+      "sections": "Bagian halaman",
+      "signIn": "Masuk",
+      "signUp": "Daftar",
+      "createAccount": "Buat akun gratis",
+      "openDashboard": "Buka dashboard"
+    },
+    "nav": {
+      "howItWorks": "Cara kerja",
+      "advisor": "AI Advisor",
+      "privacy": "Privasi",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "title": "Pencatat pengeluaran yang bisa kamu tanya",
+      "body": "Catat pemasukan dan pengeluaran dengan satu kalimat. AI Advisor di TAMAS membaca angkamu sendiri, lalu menjelaskan ke mana gajimu pergi dan apa yang bisa kamu ubah, dalam Bahasa Indonesia atau Inggris yang sederhana.",
+      "createAccount": "Buat akun gratis",
+      "haveAccount": "Saya sudah punya akun",
+      "note": "Tanpa login bank. Hanya kamu yang bisa melihat transaksimu."
+    },
+    "preview": {
+      "answerTop": "Paling besar ke <strong>makan</strong>: {food}, sepertiga dari total pengeluaranmu bulan ini ({expense}).",
+      "answerBottom": "Kabar baiknya, kamu masih menyisakan {saved} atau {rate}% gaji, di atas target {target}%. Mau lebih longgar? Batasi belanja ke {shoppingCap}, jadi ada tambahan {trim} tiap bulan.",
+      "caption": "Contoh jawaban dari satu bulan contoh: pemasukan {income}, pengeluaran {expense}."
+    },
+    "howItWorks": {
+      "title": "Dari satu kalimat jadi rencana, dalam tiga langkah",
+      "body": "Tanpa spreadsheet dan tanpa login bank. Kamu yang menentukan apa yang dicatat, TAMAS membantu memahaminya.",
+      "steps": {
+        "quickEntry": {
+          "title": "Tulis seperti kamu bicara",
+          "body": "Ketik satu kalimat dalam Bahasa Indonesia atau Inggris. TAMAS mengisi nominal, kategori, dan tanggalnya untukmu, atau kamu bisa pakai form biasa."
+        },
+        "savings": {
+          "title": "Lihat bulanmu sekilas",
+          "body": "Dashboard menampilkan saldo dan berapa banyak pemasukan bulan ini yang berhasil kamu sisihkan, dibandingkan target tabungan {target}%."
+        },
+        "starterQuestions": {
+          "title": "Tanyakan ke Advisor",
+          "body": "Buka AI Advisor dari halaman mana pun dan tanya soal angkamu sendiri. Bingung mau tanya apa? Mulai dari salah satu pertanyaan yang disarankan."
+        }
+      }
+    },
+    "quickEntry": {
+      "input": "makan siang nasi padang 25rb",
+      "description": "Makan siang nasi padang",
+      "descriptionLabel": "Deskripsi",
+      "categoryLabel": "Kategori",
+      "amountLabel": "Nominal"
+    },
+    "savingsExample": {
+      "title": "Tersisa bulan ini",
+      "barLabel": "{rate}% pemasukan tersisa, target {target}%",
+      "rate": "{rate}% pemasukan",
+      "target": "Target {target}%"
+    },
+    "advisor": {
+      "title": "Pertanyaan yang biasa kamu tanyakan ke teman yang jago atur uang",
+      "body": "Advisor membaca profil dan transaksi yang kamu catat, lalu menjawab dengan angkamu sendiri dan satu langkah praktis. Begini jawabannya untuk bulan khas pekerja pemula.",
+      "questions": {
+        "biggest": {
+          "question": "Uangku paling banyak ke mana?",
+          "answer": "Makan, {food}. Itu sepertiga dari semua pengeluaranmu bulan ini."
+        },
+        "trend": {
+          "question": "Apakah pengeluaranku naik?",
+          "answer": "Ya. Kamu keluar {increase} lebih banyak dari bulan lalu ({previous}), dan sebagian besar kenaikannya dari makan di luar."
+        },
+        "cut": {
+          "question": "Apa yang bisa kupangkas tanpa terasa?",
+          "answer": "Belanja paling mudah dikurangi. Menurunkannya dari {shopping} ke {shoppingCap} membebaskan {trim} sebulan, atau {trimYear} setahun."
+        },
+        "emergencyFund": {
+          "question": "Kapan dana daruratku terkumpul?",
+          "answer": "Tiga bulan pengeluaran adalah {target}. Menabung {saved} sebulan membuatnya terkumpul dalam {months} bulan, atau {monthsWithTrim} bulan kalau belanja juga dikurangi."
+        }
+      }
+    },
+    "sampleMonth": {
+      "title": "Bulan contoh",
+      "income": "Pemasukan",
+      "spent": "Pengeluaran",
+      "byCategory": "Pengeluaran per kategori",
+      "saved": "Tersisa",
+      "savedRate": "({rate}%, target {target}%)"
+    },
+    "privacy": {
+      "title": "Kamu yang menentukan apa yang bisa dilihat Advisor",
+      "body": "Satu pengaturan di Profil, bisa dinyalakan atau dimatikan kapan saja. Saat mati, transaksimu tidak pernah sampai ke Advisor.",
+      "modes": {
+        "personal": "Untuk pertanyaan soal uangmu: total, kategori, tren, dan seberapa dekat kamu dengan tujuanmu.",
+        "general": "Hanya panduan umum: berapa besar dana darurat, deposito atau reksa dana pasar uang, cara mulai investasi."
+      },
+      "facts": {
+        "noBankLogin": {
+          "title": "Tanpa login bank",
+          "body": "Kamu sendiri yang mencatat transaksi. TAMAS tidak pernah meminta kata sandi bank atau e-wallet."
+        },
+        "onlyYou": {
+          "title": "Hanya kamu yang bisa membaca catatanmu",
+          "body": "Setiap transaksi terikat ke akunmu, dan database menolak permintaan dari orang lain."
+        },
+        "realFigures": {
+          "title": "Angka dari catatanmu",
+          "body": "Dengan akses data aktif, Advisor mencari transaksimu sebelum menjawab dan menyebut periode yang dihitung. Advisor tidak menebak total."
+        }
+      }
+    },
+    "faq": {
+      "title": "Pertanyaan sebelum mendaftar",
+      "items": {
+        "free": {
+          "question": "Apakah TAMAS gratis?",
+          "answer": "Ya. Membuat akun, mencatat transaksi, dan bertanya ke Advisor semuanya gratis."
+        },
+        "bank": {
+          "question": "Apakah aku harus menghubungkan rekening bank?",
+          "answer": "Tidak. Kamu mencatat transaksi sendiri, dengan mengetik satu kalimat atau mengisi form singkat. Tidak ada data yang diambil dari bank atau e-wallet."
+        },
+        "beginner": {
+          "question": "Aku baru belajar atur uang. Cocok untukku?",
+          "answer": "Justru dibuat untuk itu. Catat uang masuk dan keluar, lalu tanya Advisor dengan bahasa sehari-hari, misalnya \"kenapa uangku cepat habis?\". Tidak perlu istilah keuangan."
+        },
+        "languages": {
+          "question": "TAMAS tersedia dalam bahasa apa?",
+          "answer": "Aplikasinya dalam Bahasa Inggris atau Bahasa Indonesia; ganti kapan saja dari menu di atas atau di Profil. Advisor menjawab dalam bahasa yang kamu pakai, dan memakai Bahasa Indonesia bila tidak jelas."
+        },
+        "visibility": {
+          "question": "Siapa yang bisa melihat transaksiku?",
+          "answer": "Hanya kamu. Setiap transaksi milik akunmu, dan database menolak permintaan dari orang lain. Matikan akses data Advisor di Profil dan Advisor tidak membacanya sama sekali."
+        },
+        "advice": {
+          "question": "Apakah Advisor itu nasihat keuangan profesional?",
+          "answer": "Bukan. Advisor membantumu memahami angkamu sendiri dan menyarankan langkah praktis. Untuk keputusan besar seperti pinjaman atau investasi besar, bicarakan juga dengan perencana keuangan berlisensi."
+        }
+      }
+    },
+    "closing": {
+      "title": "Mulai dari gaji bulan ini",
+      "body": "Catat pemasukanmu, tambahkan beberapa pengeluaran, lalu ajukan pertanyaan pertamamu ke Advisor. Cuma sekitar lima menit.",
+      "cta": "Buat akun gratis"
+    },
+    "footer": {
+      "tagline": "Asisten Bisnis AI untuk UMKM Bali",
+      "label": "Footer",
+      "signIn": "Masuk",
+      "createAccount": "Buat akun",
+      "privacy": "Kebijakan Privasi"
+    }
+  },
+  "betaAiNotice": {
+    "body": "Selama beta, fitur AI berjalan di Google Gemini tier gratis, dan Google boleh memakai apa yang kamu kirim untuk meningkatkan produknya. Sebaiknya pakai data contoh, atau jangan sertakan detail yang ingin kamu rahasiakan.",
+    "link": "Kebijakan Privasi"
+  },
+  "privacy": {
+    "metadata": {
+      "title": "TAMAS - Kebijakan Privasi",
+      "description": "Apa yang dikumpulkan TAMAS, untuk apa, siapa yang memprosesnya, dan hak-hakmu."
+    },
+    "title": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir diperbarui: {date}",
+    "intro": "TAMAS adalah asisten bisnis AI untuk UMKM Bali yang dikelola oleh {operator}. Kebijakan ini menjelaskan apa yang kami kumpulkan, untuk apa, siapa yang memprosesnya untuk kami, dan hak-hakmu menurut Undang-Undang Pelindungan Data Pribadi (UU No. 27 Tahun 2022).",
+    "beta": {
+      "title": "Selama beta: AI di Google Gemini tier gratis",
+      "body": "Selama TAMAS masih beta, fitur AI-nya berjalan di <strong>tier gratis Google Gemini API</strong>. Menurut ketentuan Google untuk tier tersebut, Google boleh memakai apa yang dikirim TAMAS untuk meningkatkan produknya, dan staf Google dapat meninjaunya. Kami menyarankan memakai data contoh, atau tidak menyertakan detail yang ingin kamu rahasiakan. Sebelum TAMAS keluar dari beta, kami akan pindah ke tier berbayar Gemini, yang kontennya tidak dipakai Google untuk meningkatkan produknya, dan memperbarui kebijakan ini."
+    },
+    "collect": {
+      "title": "Apa yang kami kumpulkan",
+      "account": "<strong>Akun:</strong> alamat email dan kata sandimu (disimpan dalam bentuk hash oleh penyedia autentikasi kami), atau nama, email, dan foto yang dibagikan Google saat kamu masuk dengan Google; serta username.",
+      "profile": "<strong>Jawaban profil</strong> yang kamu pilih untuk diberikan: pendapatan bulanan, tahun lahir, tujuan keuangan utama, jumlah tanggungan, dan apakah kamu punya utang.",
+      "records": "<strong>Catatanmu:</strong> transaksi (nominal, jenis, kategori, deskripsi, tanggal).",
+      "conversations": "<strong>Percakapan dengan AI Advisor:</strong> pertanyaanmu dan jawaban Advisor, supaya kamu bisa membukanya lagi. Disimpan sampai kamu menghapus percakapan atau akunmu.",
+      "settings": "<strong>Pengaturan:</strong> bahasa dan apakah AI Advisor boleh memakai datamu.",
+      "usage": "<strong>Catatan pemakaian AI:</strong> kapan kamu memakai fitur AI dan berapa token yang dipakai, untuk menerapkan batas pemakaian wajar dan mengukur biaya. Bukan isi pesanmu.",
+      "analytics": "<strong>Analitik produk:</strong> event seperti “mendaftar”, “transaksi dibuat”, atau “jawaban advisor dinilai”, terhubung ke ID akun acak. Tidak pernah berisi nominal, deskripsi, atau jawaban profil.",
+      "noSale": "Kami tidak pernah meminta login bank atau e-wallet, tidak menjual datamu, dan tidak menampilkan iklan."
+    },
+    "use": {
+      "title": "Bagaimana kami memakainya",
+      "run": "Menjalankan aplikasi: menyimpan dan menampilkan catatanmu.",
+      "ai": "Menjalankan fitur AI: mengubah kalimat menjadi transaksi, menjawab pertanyaanmu, dan mencari di catatanmu.",
+      "safety": "Menjaga layanan tetap aman dan dalam batas pemakaian wajar.",
+      "improve": "Memahami fitur mana yang membantu, supaya kami bisa memperbaiki TAMAS."
+    },
+    "processors": {
+      "title": "Siapa yang memproses datamu untuk kami",
+      "supabase": "<strong>Supabase</strong>: database, login, dan penyimpanan file ({region}).",
+      "vercel": "<strong>Vercel</strong>: hosting aplikasi.",
+      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Saat “Izinkan AI Advisor memakai dataku” aktif, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu. Kamu bisa mematikannya di Profil kapan saja.",
+      "googleSignIn": "<strong>Google (Masuk dengan Google)</strong>: hanya jika kamu memilih masuk dengan Google.",
+      "posthog": "<strong>PostHog</strong>: event analitik produk yang dijelaskan di atas.",
+      "abroad": "Sebagian penyedia ini memproses data di luar Indonesia. Kami memakainya hanya untuk menjalankan TAMAS.",
+      "region": "Australia, Sydney"
+    },
+    "retention": {
+      "title": "Berapa lama kami menyimpannya",
+      "body": "Kami menyimpan datamu selama kamu memiliki akun. Saat kamu menghapus akun di Profil, profil, catatan, percakapan Advisor, pengaturan, dan catatan pemakaian AI langsung dihapus. Kamu juga bisa menghapus satu percakapan dari riwayat Advisor kapan saja. Untuk menghapus event analitikmu juga, hubungi kami."
+    },
+    "rights": {
+      "title": "Hak-hakmu",
+      "access": "<strong>Melihat dan mengambil datamu:</strong> unduh semua transaksimu sebagai file CSV di Profil.",
+      "correct": "<strong>Memperbaikinya:</strong> ubah transaksi atau jawaban profil mana pun.",
+      "delete": "<strong>Menghapusnya:</strong> hapus catatan satu per satu, atau seluruh akunmu di Profil.",
+      "withdraw": "<strong>Menarik persetujuan:</strong> matikan akses data AI Advisor di Profil.",
+      "contactEmail": "Untuk hal lain, atau untuk mengajukan keluhan, kirim email ke <link>{email}</link>.",
+      "contactPending": "Untuk hal lain, atau untuk mengajukan keluhan, hubungi kami. Email kontak akan dicantumkan di sini sebelum beta dibuka."
+    },
+    "security": {
+      "title": "Keamanan",
+      "body": "Setiap catatan terikat ke akunmu, dan database menolak permintaan atas data orang lain. Lalu lintas data dienkripsi dengan HTTPS, dan kunci yang bisa melewati aturan ini tidak pernah keluar dari server kami."
+    },
+    "age": {
+      "title": "Usia",
+      "body": "TAMAS ditujukan untuk pengguna berusia 18 tahun ke atas."
+    },
+    "changes": {
+      "title": "Perubahan",
+      "body": "Saat kebijakan ini berubah, kami memperbarui tanggal di atas, dan memberi tahu di aplikasi bila perubahannya memengaruhi apa yang kami kumpulkan atau siapa yang memprosesnya."
+    }
+  },
+  "validation": {
+    "emailInvalid": "Masukkan email yang valid",
+    "passwordRequired": "Kata sandi wajib diisi",
+    "passwordTooShort": "Kata sandi minimal 8 karakter",
+    "passwordTooLong": "Kata sandi maksimal 72 karakter",
+    "usernameInvalid": "Gunakan 3–30 huruf kecil, angka, atau garis bawah",
+    "passwordsMismatch": "Kata sandi tidak sama",
+    "numberNotNegative": "Masukkan angka 0 atau lebih",
+    "birthYearInvalid": "Masukkan tahun lahir yang valid",
+    "dependentsRange": "Masukkan bilangan bulat dari 0 sampai 20",
+    "consentRequired": "Setujui dulu sebelum menyimpan jawabanmu",
+    "deleteConfirmation": "Ketik DELETE untuk konfirmasi",
+    "categoryRequired": "Kategori wajib diisi",
+    "amountRequired": "Nominal wajib diisi",
+    "amountWholePositive": "Masukkan nominal bulat di atas 0",
+    "amountTooLarge": "Nominal itu terlalu besar",
+    "amountPositive": "Nominal harus lebih dari 0",
+    "typeRequired": "Jenis wajib diisi",
+    "dateRequired": "Tanggal wajib diisi",
+    "descriptionRequired": "Deskripsi wajib diisi",
+    "categoryFitsType": "Pilih kategori yang sesuai dengan jenisnya",
+    "messageRequired": "Pesan wajib diisi",
+    "messageTooLong": "Pesan terlalu panjang"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Kata sandi",
+      "confirmPassword": "Ulangi kata sandi",
+      "newPassword": "Kata sandi baru",
+      "confirmNewPassword": "Ulangi kata sandi baru"
+    },
+    "google": {
+      "continue": "Lanjutkan dengan Google",
+      "orEmail": "atau dengan email"
+    },
+    "login": {
+      "metadata": {
+        "title": "TAMAS - Masuk",
+        "description": "Masuk ke akun TAMAS-mu"
+      },
+      "title": "Masuk",
+      "description": "Selamat datang kembali di TAMAS",
+      "forgotPassword": "Lupa kata sandi?",
+      "submit": "Masuk",
+      "submitting": "Sedang masuk...",
+      "noAccount": "Belum punya akun?",
+      "createOne": "Buat akun",
+      "linkErrors": {
+        "confirmation_failed": "Link konfirmasi tidak valid atau sudah kedaluwarsa. Silakan daftar lagi.",
+        "google_failed": "Masuk dengan Google tidak selesai. Coba lagi, atau masuk dengan email."
+      }
+    },
+    "register": {
+      "metadata": {
+        "title": "TAMAS - Buat akun",
+        "description": "Buat akun TAMAS-mu"
+      },
+      "title": "Buat akun",
+      "description": "Catat uangmu dan dapatkan saran dari AI Advisor",
+      "consent": "Dengan membuat akun, kamu menyetujui <link>Kebijakan Privasi</link> kami.",
+      "submit": "Buat akun",
+      "submitting": "Membuat akun...",
+      "checkEmailTitle": "Cek email kamu",
+      "checkEmailBody": "Kami mengirim link konfirmasi ke <strong>{email}</strong>. Buka link itu untuk mengaktifkan akunmu.",
+      "haveAccount": "Sudah punya akun?",
+      "signIn": "Masuk"
+    },
+    "forgotPassword": {
+      "metadata": {
+        "title": "TAMAS - Atur ulang kata sandi",
+        "description": "Dapatkan link untuk mengatur ulang kata sandi TAMAS-mu"
+      },
+      "title": "Atur ulang kata sandi",
+      "description": "Masukkan email dan kami akan mengirim link untuk mengatur ulang",
+      "submit": "Kirim link",
+      "submitting": "Mengirim...",
+      "sent": "Jika ada akun dengan email itu, kami sudah mengirim link untuk mengatur ulang kata sandi. Cek kotak masuk dan folder spam.",
+      "remembered": "Sudah ingat?",
+      "backToSignIn": "Kembali ke halaman masuk",
+      "linkExpired": "Link atur ulang itu tidak valid, sudah kedaluwarsa, atau dibuka di browser lain. Minta link baru di bawah dan buka di browser ini."
+    },
+    "resetPassword": {
+      "metadata": {
+        "title": "TAMAS - Pilih kata sandi baru",
+        "description": "Pilih kata sandi baru untuk akun TAMAS-mu"
+      },
+      "title": "Pilih kata sandi baru",
+      "description": "Minimal 8 karakter",
+      "submit": "Perbarui kata sandi",
+      "submitting": "Menyimpan...",
+      "updated": "Kata sandi diperbarui"
+    },
+    "errors": {
+      "invalidCredentials": "Email atau kata sandi salah",
+      "emailNotConfirmed": "Konfirmasi email kamu dulu sebelum masuk",
+      "signInFailed": "Gagal masuk. Silakan coba lagi.",
+      "googleFailed": "Gagal memulai masuk dengan Google. Silakan coba lagi.",
+      "checkForm": "Periksa lagi formnya lalu coba lagi",
+      "signUpFailed": "Gagal membuat akun. Silakan coba lagi.",
+      "alreadyExists": "Akun dengan email ini sudah ada",
+      "tooManyAttempts": "Terlalu banyak percobaan. Coba lagi nanti.",
+      "invalidEmail": "Masukkan email yang valid",
+      "resetEmailFailed": "Gagal mengirim email atur ulang. Silakan coba lagi.",
+      "samePassword": "Pilih kata sandi yang berbeda dari yang sekarang",
+      "weakPassword": "Kata sandi ini terlalu lemah. Coba yang lebih panjang.",
+      "reauthenticationNeeded": "Demi keamanan, minta link atur ulang baru lalu coba lagi.",
+      "updatePasswordFailed": "Gagal memperbarui kata sandi. Silakan coba lagi."
+    }
+  },
+  "financialGoals": {
+    "emergency_fund": "Membangun dana darurat",
+    "pay_off_debt": "Melunasi utang",
+    "start_investing": "Mulai berinvestasi",
+    "control_spending": "Mengendalikan pengeluaran",
+    "save_for_goal": "Menabung untuk tujuan tertentu"
+  },
+  "personalContext": {
+    "monthlyIncome": "Pendapatan bulanan",
+    "monthlyIncomePlaceholder": "mis. 7000000",
+    "birthYear": "Tahun lahir",
+    "birthYearPlaceholder": "mis. 1998",
+    "financialGoal": "Tujuan keuangan utama",
+    "financialGoalPlaceholder": "Pilih tujuan",
+    "dependents": "Orang yang bergantung pada penghasilanmu",
+    "dependentsPlaceholder": "mis. 0",
+    "hasDebt": "Apakah kamu punya pinjaman atau cicilan aktif?",
+    "hasDebtPlaceholder": "Pilih jawaban",
+    "yes": "Ya",
+    "no": "Tidak"
+  },
+  "onboarding": {
+    "metadata": {
+      "title": "TAMAS - Mulai",
+      "description": "Ceritakan keuanganmu ke AI Advisor"
+    },
+    "title": "Bantu AI Advisor mengenalmu",
+    "description": "Beberapa pertanyaan singkat supaya sarannya cocok dengan kondisimu. Semua pertanyaan boleh dilewati.",
+    "consent": "Saya setuju jawaban ini dipakai untuk menyesuaikan AI Advisor dan diproses oleh Google Gemini. Saya bisa mengubahnya kapan saja di Profil.",
+    "skip": "Lewati dulu",
+    "submit": "Simpan dan lanjut",
+    "submitting": "Menyimpan...",
+    "saveFailed": "Gagal menyimpan jawabanmu. Silakan coba lagi.",
+    "genericError": "Terjadi kesalahan. Silakan coba lagi."
+  },
+  "common": {
+    "tryAgain": "Coba lagi",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "delete": "Hapus",
+    "deleting": "Menghapus...",
+    "edit": "Ubah",
+    "close": "Tutup",
+    "loadingAccount": "Memuat akun",
+    "income": "Pemasukan",
+    "expense": "Pengeluaran",
+    "toggleSidebar": "Buka/tutup sidebar"
+  },
+  "dashboard": {
+    "metadata": {
+      "title": "TAMAS - Dashboard",
+      "description": "Dashboard keuangan pribadimu"
+    },
+    "title": "Dashboard",
+    "completeProfile": {
+      "body": "Ceritakan pendapatan dan tujuanmu ke AI Advisor supaya sarannya cocok untukmu.",
+      "cta": "Lengkapi profil"
+    },
+    "quickLog": {
+      "title": "Catat transaksi",
+      "description": "Tulis seperti kamu bicara, mis. \"makan siang 25rb, parkir 5rb\"."
+    },
+    "userMenu": {
+      "signedInAs": "Masuk sebagai {username}",
+      "profile": "Profil",
+      "signOut": "Keluar"
+    },
+    "balance": {
+      "title": "Selisih sejak mulai mencatat",
+      "description": "Pemasukan dikurangi pengeluaran yang tercatat, bukan saldo bankmu",
+      "loading": "Memuat saldo",
+      "loadError": "Gagal memuat saldomu. Cek koneksi lalu coba lagi.",
+      "income": "Pemasukan",
+      "expenses": "Pengeluaran",
+      "reminderLabel": "Pengingat keuangan",
+      "reminders": {
+        "empty": "Mulai dengan mencatat gaji dan beberapa pengeluaran harian. Sebulan mencatat akan menunjukkan ke mana uangmu benar-benar pergi.",
+        "negative": "Sejauh ini pengeluaranmu lebih besar dari pemasukan. Pilih satu pengeluaran untuk dikurangi minggu ini, mulai dari kategori terbesar.",
+        "highSpending": "Lebih dari 80% pemasukanmu habis. Coba patokan 50% kebutuhan, 30% keinginan, dan 20% tabungan.",
+        "habits": {
+          "payYourselfFirst": "Bayar dirimu dulu: pindahkan tabungan ke rekening terpisah saat gajian, sebelum mulai belanja.",
+          "emergencyFund": "Kumpulkan dana darurat 3 sampai 6 bulan pengeluaran sebelum masuk ke investasi yang lebih berisiko.",
+          "debtLimit": "Jaga cicilan dan pinjaman di bawah 30% pemasukan, supaya satu bulan yang buruk tidak menumpuk.",
+          "subscriptions": "Cek langgananmu sebulan sekali. Tagihan kecil yang rutin diam-diam jadi besar.",
+          "paylater": "Paylater tetap utang. Hitung setiap cicilan sebagai bagian dari budget bulan depan.",
+          "investHorizon": "Investasikan hanya uang yang tidak kamu perlukan selama 3 sampai 5 tahun. Uang untuk tujuan yang lebih dekat sebaiknya di tabungan atau reksa dana pasar uang."
+        }
+      }
+    },
+    "savings": {
+      "title": "Tersisa bulan ini",
+      "loading": "Memuat sisa bulan ini",
+      "loadError": "Gagal memuat sisa bulan ini. Cek koneksi lalu coba lagi.",
+      "noIncome": "Belum ada pemasukan bulan ini. Tambahkan gajimu untuk melihat persentase tabungan.",
+      "nothing": "Belum ada catatan bulan ini. Tambahkan gaji dan pengeluaran untuk melihat berapa yang tersisa.",
+      "overspent": "Pengeluaranmu {amount} lebih besar dari pemasukan bulan ini.",
+      "aboveTarget": "{amount} di atas target {target}%.",
+      "belowTarget": "Sisihkan {amount} lagi untuk mencapai {target}%.",
+      "previousNothing": "Tidak ada catatan",
+      "previousNoIncome": "{amount}, tanpa pemasukan",
+      "meterLabel": "Porsi pemasukan bulan ini yang tersisa",
+      "meterValue": "{rate} pemasukan tersisa, target {target}%",
+      "rate": "{rate} pemasukan",
+      "target": "Target {target}%",
+      "income": "Pemasukan",
+      "spent": "Pengeluaran"
+    },
+    "categorySpending": {
+      "title": "Pengeluaran bulan ini",
+      "loading": "Memuat pengeluaran per kategori",
+      "loadError": "Gagal memuat pengeluaran bulan ini. Cek koneksi lalu coba lagi.",
+      "empty": "Belum ada pengeluaran bulan ini. Catat pengeluaran lewat quick entry di atas dan akan muncul di sini per kategori.",
+      "otherCategories": "{count} kategori lain",
+      "chartLabel": "Pengeluaran per kategori: {breakdown}"
+    },
+    "recent": {
+      "title": "Transaksi terbaru",
+      "viewAll": "Lihat semua",
+      "loading": "Memuat transaksi",
+      "loadError": "Gagal memuat transaksimu. Cek koneksi lalu coba lagi.",
+      "empty": "Belum ada transaksi. Setelah kamu mencatat pemasukan atau pengeluaran, lima yang terbaru muncul di sini."
+    },
+    "loggingFeedback": {
+      "noneLastMonth": "{category} bulan ini: {spent}. Bulan lalu di tanggal yang sama belum ada.",
+      "sameAsLastMonth": "{category} bulan ini: {spent}, sama dengan bulan lalu di tanggal yang sama.",
+      "moreThanLastMonth": "{category} bulan ini: {spent}, {difference} lebih banyak dari bulan lalu di tanggal yang sama.",
+      "lessThanLastMonth": "{category} bulan ini: {spent}, {difference} lebih sedikit dari bulan lalu di tanggal yang sama."
+    }
+  },
+  "transactionPage": {
+    "metadata": {
+      "title": "TAMAS - Transaksi",
+      "description": "Lihat dan kelola transaksi keuanganmu"
+    },
+    "title": "Transaksi",
+    "description": "Lihat dan kelola transaksi keuanganmu"
+  },
+  "wizard": {
+    "inputLabel": "Quick entry: tulis transaksi yang ingin dicatat",
+    "placeholder": "Catat transaksi, mis. \"makan siang 25rb, parkir 5rb\"",
+    "submit": "Catat transaksi",
+    "tooManyDrafts": "Kamu bisa meninjau maksimal {max} transaksi sekaligus. Simpan atau buang yang di bawah dulu.",
+    "requestFailed": "Permintaan gagal dengan status {status}",
+    "drafts": {
+      "title": "Tinjau sebelum menyimpan",
+      "description": "Belum ada yang tersimpan sampai kamu menekan Simpan.",
+      "edit": "Ubah {name}",
+      "remove": "Hapus {name}",
+      "discard": "Buang",
+      "save": "Simpan {count} transaksi",
+      "logged": "{count} transaksi tercatat",
+      "saveFailed": "Gagal menyimpan. Drafmu tetap ada, coba lagi."
+    },
+    "editDialog": {
+      "title": "Ubah transaksi",
+      "description": "Perbaiki apa pun yang keliru dari quick entry. Akan disimpan bersama yang lain saat kamu menekan Simpan.",
+      "apply": "Terapkan"
+    },
+    "confirm": {
+      "title": "Konfirmasi perubahan",
+      "description": "Wizard ingin mengubah transaksi ini. Belum ada yang berubah sampai kamu mengonfirmasi.",
+      "descriptionWithDelete": "Wizard ingin mengubah transaksi ini. Belum ada yang berubah sampai kamu mengonfirmasi, dan penghapusan tidak bisa dibatalkan.",
+      "delete": "Hapus",
+      "update": "Ubah",
+      "applied": "{count, plural, one {Perubahan diterapkan} other {# perubahan diterapkan}}",
+      "submit": "Konfirmasi",
+      "submitting": "Menerapkan...",
+      "fields": {
+        "amount": "Nominal",
+        "type": "Jenis",
+        "category": "Kategori",
+        "description": "Deskripsi",
+        "date": "Tanggal"
+      }
+    }
+  },
+  "transactions": {
+    "fields": {
+      "amount": "Nominal",
+      "amountPlaceholder": "0",
+      "type": "Jenis",
+      "typePlaceholder": "Pilih jenis",
+      "category": "Kategori",
+      "categoryPlaceholder": "Pilih kategori",
+      "date": "Tanggal",
+      "datePlaceholder": "Pilih tanggal",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Transaksi ini untuk apa?"
+    },
+    "table": {
+      "title": "Transaksi terbaru",
+      "description": "Aktivitas keuanganmu yang terbaru",
+      "searchPlaceholder": "Cari deskripsi…",
+      "searchLabel": "Cari transaksi berdasarkan deskripsi",
+      "headers": {
+        "number": "#",
+        "date": "Tanggal",
+        "description": "Deskripsi",
+        "category": "Kategori",
+        "amount": "Nominal",
+        "action": "Aksi"
+      },
+      "empty": "Tidak ada transaksi",
+      "loading": "Memuat...",
+      "rowsPerPage": "Baris per halaman",
+      "previous": "Sebelumnya",
+      "previousLabel": "Ke halaman sebelumnya",
+      "next": "Berikutnya",
+      "nextLabel": "Ke halaman berikutnya",
+      "actions": "Buka aksi transaksi",
+      "pagination": "Navigasi halaman"
+    },
+    "create": {
+      "title": "Tambah Transaksi",
+      "description": "Catat aktivitas keuangan baru",
+      "submit": "Tambah Transaksi",
+      "success": "Transaksi berhasil ditambahkan",
+      "failed": "Gagal menambahkan transaksi"
+    },
+    "update": {
+      "title": "Ubah Transaksi",
+      "description": "Ubah detail aktivitas keuangan ini",
+      "submit": "Simpan Perubahan",
+      "success": "Transaksi berhasil diubah",
+      "failed": "Gagal mengubah transaksi"
+    },
+    "delete": {
+      "title": "Hapus Transaksi",
+      "description": "Ini akan menghapus <strong>{name}</strong> ({amount}) secara permanen. Tindakan ini tidak bisa dibatalkan.",
+      "success": "Transaksi berhasil dihapus",
+      "failed": "Gagal menghapus transaksi"
+    }
+  },
+  "advisor": {
+    "open": "Buka AI Advisor",
+    "close": "Tutup AI Advisor",
+    "defaultDescription": "Tanya soal uangmu",
+    "history": "Percakapan tersimpan",
+    "newChat": "Mulai percakapan baru",
+    "newChatTitle": "Percakapan baru",
+    "emptyTitle": "Tanya soal uangmu",
+    "emptyBody": "Pilih pertanyaan untuk memulai, atau tulis sendiri di bawah.",
+    "streamErrorSuffix": "{message} Coba kirim lagi.",
+    "unreachable": "Tidak bisa menghubungi AI Advisor ({reason}). Coba kirim lagi.",
+    "unknownError": "kesalahan tidak diketahui",
+    "requestFailed": "Permintaan gagal dengan status {status}",
+    "typing": "AI Advisor sedang mengetik",
+    "composer": {
+      "label": "Kirim pesan ke AI Advisor",
+      "placeholder": "Tanya soal uangmu…",
+      "send": "Kirim pesan"
+    },
+    "feedback": {
+      "thanks": "Terima kasih atas masukannya",
+      "rateLabel": "Nilai jawaban ini",
+      "question": "Apakah ini membantu?",
+      "helpful": "Membantu",
+      "notHelpful": "Tidak membantu",
+      "whatWentWrong": "Apa yang kurang?",
+      "skip": "Lewati",
+      "failed": "Gagal mengirim masukanmu. Coba lagi.",
+      "reasons": {
+        "wrong_numbers": "Angkanya salah",
+        "not_helpful": "Tidak membantu",
+        "too_long": "Terlalu panjang",
+        "misunderstood": "Salah paham"
+      }
+    },
+    "historyList": {
+      "loading": "Memuat percakapan",
+      "loadError": "Gagal memuat percakapanmu. Cek koneksi lalu coba lagi.",
+      "empty": "Belum ada percakapan tersimpan. Jawaban dari AI Advisor disimpan di sini sampai kamu menghapusnya.",
+      "openFailed": "Gagal membuka percakapan. Silakan coba lagi.",
+      "deleteFailed": "Gagal menghapus percakapan. Silakan coba lagi.",
+      "delete": "Hapus \"{title}\"",
+      "confirmDelete": "Konfirmasi hapus \"{title}\""
+    }
+  },
+  "profile": {
+    "metadata": {
+      "title": "TAMAS - Profil",
+      "description": "Kelola profil TAMAS-mu"
+    },
+    "title": "Profil",
+    "account": {
+      "title": "Akun",
+      "description": "Nama dan foto publikmu",
+      "loading": "Memuat profil",
+      "username": "Username",
+      "submit": "Simpan perubahan",
+      "updated": "Profil diperbarui",
+      "updateFailed": "Gagal memperbarui profil. Silakan coba lagi."
+    },
+    "advisorData": {
+      "title": "Akses data AI Advisor",
+      "description": "Apa yang boleh dibaca AI Advisor saat menjawab. Pesan diproses oleh Google Gemini.",
+      "loading": "Memuat akses data",
+      "label": "Izinkan AI Advisor memakai dataku",
+      "help": "Jawaban profil dan transaksimu, supaya jawabannya tentang uangmu sendiri. Saat mati, AI Advisor hanya memberi panduan umum.",
+      "enabled": "AI Advisor akan memakai datamu.",
+      "disabled": "AI Advisor tidak akan membaca datamu lagi.",
+      "saveFailed": "Gagal menyimpan pengaturan. Silakan coba lagi."
+    },
+    "advisorContext": {
+      "title": "Konteks AI Advisor",
+      "description": "AI Advisor memakai jawaban ini untuk menyesuaikan sarannya. Jawaban diproses oleh Google Gemini.",
+      "loading": "Memuat jawabanmu",
+      "submit": "Simpan jawaban",
+      "updated": "Konteks AI Advisor diperbarui",
+      "saveFailed": "Gagal menyimpan jawabanmu. Silakan coba lagi."
+    },
+    "data": {
+      "title": "Datamu",
+      "description": "Unduh semua transaksi yang kamu catat sebagai file CSV yang bisa dibuka di Excel atau Google Sheets.",
+      "export": "Ekspor transaksi (CSV)"
+    },
+    "signOut": {
+      "title": "Keluar",
+      "description": "Keluar dari TAMAS di perangkat ini.",
+      "button": "Keluar"
+    },
+    "deleteAccount": {
+      "title": "Hapus akun",
+      "description": "Hapus akun dan semua datamu secara permanen.",
+      "button": "Hapus akun",
+      "dialogTitle": "Hapus akunmu?",
+      "dialogDescription": "Ini akan menghapus transaksi, profil, dan jawaban AI Advisor secara permanen. Tidak bisa dibatalkan. Ekspor transaksimu dulu jika ingin menyimpannya.",
+      "confirmLabel": "Ketik {word} untuk konfirmasi",
+      "deleted": "Akunmu sudah dihapus",
+      "failed": "Gagal menghapus akunmu. Silakan coba lagi."
+    }
+  },
+  "apiErrors": {
+    "unauthorized": "Silakan masuk lagi.",
+    "invalidRequest": "Isi permintaan tidak valid",
+    "profileLoadFailed": "Gagal memuat profilmu.",
+    "chatFailed": "Gagal membuat jawaban.",
+    "wizardFailed": "Gagal memproses pesan.",
+    "exportFailed": "Gagal mengekspor transaksimu.",
+    "busy": "Layanan AI sedang sibuk. Coba lagi beberapa menit lagi.",
+    "busyWizard": "Layanan AI sedang sibuk. Coba lagi beberapa menit lagi. Kamu tetap bisa menambah transaksi lewat form.",
+    "rateLimit": "Kamu mengirim pesan terlalu cepat. Tunggu sebentar lalu coba lagi.",
+    "quotaCheckFailed": "Gagal memeriksa batas pemakaian AI. Coba lagi nanti.",
+    "dailyChat": "Kamu sudah memakai {limit} pesan AI Advisor hari ini. Batasnya diatur ulang tengah malam (WIB).",
+    "dailyWizard": "Kamu sudah memakai {limit} quick entry hari ini. Batasnya diatur ulang tengah malam (WIB); kamu tetap bisa menambah transaksi lewat form.",
+    "wizardTooMany": "Tulis maksimal {max} transaksi per pesan.",
+    "wizardNothingFound": "Tidak ada transaksi yang bisa dicatat, diubah, atau dihapus dari pesan itu."
+  },
+  "actionErrors": {
+    "checkForm": "Periksa lagi formnya lalu coba lagi",
+    "invalidSetting": "Pengaturan tidak valid",
+    "invalidFeedback": "Masukan tidak valid",
+    "settingSaveFailed": "Gagal menyimpan pengaturan. Silakan coba lagi.",
+    "unknownConversation": "Percakapan tidak ditemukan",
+    "conversationDeleteFailed": "Gagal menghapus percakapan. Silakan coba lagi.",
+    "answersSaveFailed": "Gagal menyimpan jawabanmu. Silakan coba lagi.",
+    "generic": "Terjadi kesalahan. Silakan coba lagi.",
+    "usernameTaken": "Username sudah dipakai",
+    "profileUpdateFailed": "Gagal memperbarui profil. Silakan coba lagi.",
+    "deleteConfirmation": "Ketik {word} untuk konfirmasi",
+    "accountDeleteFailed": "Gagal menghapus akunmu. Silakan coba lagi."
+  },
+  "export": {
+    "headers": {
+      "date": "Tanggal",
+      "type": "Jenis",
+      "category": "Kategori",
+      "amount": "Nominal",
+      "description": "Deskripsi"
+    }
+  }
+}

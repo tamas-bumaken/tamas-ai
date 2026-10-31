@@ -1,0 +1,768 @@
+{
+  "metadata": {
+    "description": "AI Business Assistant for MSMEs in Bali"
+  },
+  "navigation": {
+    "main": "Main",
+    "dashboard": "Dashboard",
+    "transactions": "Transaction",
+    "profile": "Profile",
+    "log": "Log",
+    "advisor": "Advisor"
+  },
+  "language": {
+    "label": "Language",
+    "title": "Language",
+    "description": "The language TAMAS uses on screen.",
+    "saveFailed": "Couldn't change the language. Please try again."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has moved.",
+    "home": "Back to home"
+  },
+  "categories": {
+    "Food": "Food",
+    "Transportation": "Transportation",
+    "Housing": "Housing",
+    "Shopping": "Shopping",
+    "Subscription": "Subscription",
+    "Installments": "Installments",
+    "Phone & Data": "Phone & Data",
+    "Family Transfer": "Family Transfer",
+    "Health": "Health",
+    "Entertainment": "Entertainment",
+    "Education": "Education",
+    "Savings & Investment": "Savings & Investment",
+    "Others": "Others",
+    "Salary": "Salary",
+    "Side Income": "Side Income"
+  },
+  "chatModes": {
+    "personal": {
+      "label": "Data access on",
+      "description": "Uses your profile and transactions",
+      "suggestions": {
+        "q1": "What's my total spending this month?",
+        "q2": "Which category am I overspending on this month?",
+        "q3": "How much can I save each month?"
+      }
+    },
+    "general": {
+      "label": "Data access off",
+      "description": "Your data stays out",
+      "suggestions": {
+        "q1": "How big should my emergency fund be on a 6 million salary?",
+        "q2": "What's the difference between a money market fund and a deposit?",
+        "q3": "How do I start investing with 500k a month?"
+      }
+    }
+  },
+  "landing": {
+    "metadata": {
+      "title": "TAMAS — AI Business Assistant for MSMEs in Bali",
+      "description": "Record your income and spending in a sentence, then ask an AI Advisor where your money goes and what to change. Free, in Bahasa Indonesia or English."
+    },
+    "header": {
+      "sections": "Page sections",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "createAccount": "Create free account",
+      "openDashboard": "Open dashboard"
+    },
+    "nav": {
+      "howItWorks": "How it works",
+      "advisor": "AI Advisor",
+      "privacy": "Privacy",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "title": "The expense tracker you can ask questions",
+      "body": "Record your income and spending in a sentence. TAMAS's AI Advisor reads your own numbers and tells you where your salary goes and what you could change, in plain Bahasa Indonesia or English.",
+      "createAccount": "Create free account",
+      "haveAccount": "I already have an account",
+      "note": "No bank login needed. Only you can see your transactions."
+    },
+    "preview": {
+      "answerTop": "Most of it goes to <strong>food</strong>: {food}, a third of everything you spent this month ({expense}).",
+      "answerBottom": "The good news: you still kept {saved}, or {rate}% of your salary, above the {target}% target. Want more room? Cap shopping at {shoppingCap} and you'll have an extra {trim} every month.",
+      "caption": "Example answer from a sample month: {income} income, {expense} spent."
+    },
+    "howItWorks": {
+      "title": "From one sentence to a plan, in three steps",
+      "body": "No spreadsheets and no bank login. You decide what goes in, and TAMAS helps you make sense of it.",
+      "steps": {
+        "quickEntry": {
+          "title": "Write it the way you'd say it",
+          "body": "Type a sentence in Bahasa Indonesia or English. TAMAS fills in the amount, category and date for you, or you can use the regular form."
+        },
+        "savings": {
+          "title": "See your month at a glance",
+          "body": "Your dashboard shows your balance and how much of this month's income you've kept, measured against a {target}% savings target."
+        },
+        "starterQuestions": {
+          "title": "Ask the Advisor about it",
+          "body": "Open the AI Advisor from any page and ask about your own numbers. Not sure what to ask? Start with one of the suggested questions."
+        }
+      }
+    },
+    "quickEntry": {
+      "input": "nasi padang lunch 25k",
+      "description": "Nasi padang lunch",
+      "descriptionLabel": "Description",
+      "categoryLabel": "Category",
+      "amountLabel": "Amount"
+    },
+    "savingsExample": {
+      "title": "Saved this month",
+      "barLabel": "{rate}% of income saved, target {target}%",
+      "rate": "{rate}% of income",
+      "target": "Target {target}%"
+    },
+    "advisor": {
+      "title": "Questions you'd ask a friend who's good with money",
+      "body": "The Advisor reads your profile and the transactions you've recorded, then answers with your own figures and one practical next step. Here is what it says about a typical first-job month.",
+      "questions": {
+        "biggest": {
+          "question": "Where does most of my money go?",
+          "answer": "Food, at {food}. That's a third of everything you spent this month."
+        },
+        "trend": {
+          "question": "Is my spending going up?",
+          "answer": "Yes. You spent {increase} more than last month ({previous}), and most of the increase is eating out."
+        },
+        "cut": {
+          "question": "What could I cut without feeling it?",
+          "answer": "Shopping is the easiest to trim. Bringing it from {shopping} to {shoppingCap} frees {trim} a month, or {trimYear} a year."
+        },
+        "emergencyFund": {
+          "question": "When will my emergency fund be ready?",
+          "answer": "Three months of expenses is {target}. Saving {saved} a month gets you there in {months} months, or {monthsWithTrim} if you also trim shopping."
+        }
+      }
+    },
+    "sampleMonth": {
+      "title": "Sample month",
+      "income": "Income",
+      "spent": "Spent",
+      "byCategory": "Spending by category",
+      "saved": "Saved",
+      "savedRate": "({rate}%, target {target}%)"
+    },
+    "privacy": {
+      "title": "You choose what the Advisor can see",
+      "body": "One setting in your Profile, on or off any time. When it's off, your transactions never reach the Advisor.",
+      "modes": {
+        "personal": "For questions about your money: totals, categories, trends and how close you are to your goal.",
+        "general": "General guidance only: how big an emergency fund should be, deposits versus money market funds, how to start investing."
+      },
+      "facts": {
+        "noBankLogin": {
+          "title": "No bank login",
+          "body": "You add transactions yourself. TAMAS never asks for your bank or e-wallet password."
+        },
+        "onlyYou": {
+          "title": "Only you can read your records",
+          "body": "Every transaction is tied to your account, and the database refuses requests from anyone else."
+        },
+        "realFigures": {
+          "title": "Figures from your records",
+          "body": "With data access on, the Advisor looks up your transactions before answering and says which period a number covers. It doesn't guess totals."
+        }
+      }
+    },
+    "faq": {
+      "title": "Questions before you sign up",
+      "items": {
+        "free": {
+          "question": "Is TAMAS free?",
+          "answer": "Yes. Creating an account, recording transactions and asking the Advisor are free."
+        },
+        "bank": {
+          "question": "Do I need to connect my bank account?",
+          "answer": "No. You add transactions yourself, by typing a sentence or filling in a short form. Nothing is pulled from your bank or e-wallet."
+        },
+        "beginner": {
+          "question": "I'm new to managing money. Is this for me?",
+          "answer": "It's built for exactly that. Record what comes in and goes out, and ask the Advisor anything in everyday words, like \"why does my money run out so fast?\". No finance vocabulary needed."
+        },
+        "languages": {
+          "question": "Which languages does TAMAS speak?",
+          "answer": "The app is in English or Bahasa Indonesia; switch any time from the menu at the top or in Profile. The Advisor replies in the language you write in, and uses Bahasa Indonesia if it can't tell."
+        },
+        "visibility": {
+          "question": "Who can see my transactions?",
+          "answer": "Only you. Each transaction belongs to your account, and the database rejects requests from anyone else. Turn off the Advisor's data access in Profile and it doesn't read them at all."
+        },
+        "advice": {
+          "question": "Is the Advisor professional financial advice?",
+          "answer": "No. It helps you understand your own numbers and suggests practical next steps. For big decisions like a loan or a large investment, talk to a licensed financial planner too."
+        }
+      }
+    },
+    "closing": {
+      "title": "Start with this month's salary",
+      "body": "Record your income, add a few expenses, and ask the Advisor your first question. It takes about five minutes.",
+      "cta": "Create free account"
+    },
+    "footer": {
+      "tagline": "AI Business Assistant for MSMEs in Bali",
+      "label": "Footer",
+      "signIn": "Sign in",
+      "createAccount": "Create account",
+      "privacy": "Privacy Policy"
+    }
+  },
+  "betaAiNotice": {
+    "body": "During the beta, AI features run on Google Gemini's free tier, where Google may use what you send to improve its products. Consider using sample data, or leave out details you'd rather keep private.",
+    "link": "Privacy Policy"
+  },
+  "privacy": {
+    "metadata": {
+      "title": "TAMAS - Privacy Policy",
+      "description": "What TAMAS collects, why, who processes it, and your rights."
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: {date}",
+    "intro": "TAMAS is an AI business assistant for MSMEs in Bali, run by {operator}. This policy explains what we collect, why, who processes it for us, and the rights you have under Indonesia's Personal Data Protection Law (UU No. 27 Tahun 2022).",
+    "beta": {
+      "title": "During the beta: AI on Google Gemini's free tier",
+      "body": "While TAMAS is in beta, its AI features run on the <strong>free tier of the Google Gemini API</strong>. Under Google's terms for that tier, Google may use what TAMAS sends to improve its products, and people at Google may review it. We recommend using sample data, or leaving out details you would rather keep private. Before TAMAS leaves beta we will move to Gemini's paid tier, where Google does not use this content to improve its products, and update this policy."
+    },
+    "collect": {
+      "title": "What we collect",
+      "account": "<strong>Account:</strong> your email address and password (stored hashed by our authentication provider), or the name, email and picture Google shares when you sign in with Google; and a username.",
+      "profile": "<strong>Profile answers</strong> you choose to give: monthly income, birth year, main financial goal, number of dependents, whether you have debt.",
+      "records": "<strong>Your records:</strong> transactions (amount, type, category, description, date).",
+      "conversations": "<strong>AI Advisor conversations:</strong> your questions and the Advisor's answers, so you can return to them. They are kept until you delete the conversation or your account.",
+      "settings": "<strong>Settings:</strong> your language and whether the AI Advisor may use your data.",
+      "usage": "<strong>AI usage records:</strong> when you used an AI feature and how many tokens it took, to enforce fair-use limits and measure cost. Not the content of your messages.",
+      "analytics": "<strong>Product analytics:</strong> events such as “signed up”, “transaction created” or “advisor answer rated”, linked to a random account ID. They never include amounts, descriptions or profile answers.",
+      "noSale": "We never ask for bank or e-wallet logins, and we do not sell your data or show ads."
+    },
+    "use": {
+      "title": "How we use it",
+      "run": "To run the app: save and show your records.",
+      "ai": "To power AI features: turning a sentence into transactions, answering your questions, and searching your records.",
+      "safety": "To keep the service safe and within fair-use limits.",
+      "improve": "To understand which features help, so we can improve TAMAS."
+    },
+    "processors": {
+      "title": "Who processes your data for us",
+      "supabase": "<strong>Supabase</strong>: database, sign-in and file storage ({region}).",
+      "vercel": "<strong>Vercel</strong>: hosting of the app.",
+      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. When “Let AI Advisor use my data” is on, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can turn that off in Profile at any time.",
+      "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
+      "posthog": "<strong>PostHog</strong>: the product analytics events described above.",
+      "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
+      "region": "Australia, Sydney"
+    },
+    "retention": {
+      "title": "How long we keep it",
+      "body": "We keep your data while you have an account. When you delete your account in Profile, your profile, records, Advisor conversations, settings and AI usage records are deleted immediately. You can also delete a single conversation from the Advisor's history at any time. To have your analytics events deleted as well, contact us."
+    },
+    "rights": {
+      "title": "Your rights",
+      "access": "<strong>See and take your data:</strong> download all your transactions as a CSV file in Profile.",
+      "correct": "<strong>Correct it:</strong> edit any transaction or profile answer.",
+      "delete": "<strong>Delete it:</strong> delete single records, or your whole account in Profile.",
+      "withdraw": "<strong>Withdraw consent:</strong> turn off the AI Advisor's data access in Profile.",
+      "contactEmail": "For anything else, or to file a complaint, email us at <link>{email}</link>.",
+      "contactPending": "For anything else, or to file a complaint, contact us. A contact email will be listed here before the beta opens."
+    },
+    "security": {
+      "title": "Security",
+      "body": "Every record is tied to your account, and the database refuses requests for anyone else's data. Traffic is encrypted with HTTPS, and keys that can bypass these rules never leave our servers."
+    },
+    "age": {
+      "title": "Age",
+      "body": "TAMAS is meant for people aged 18 and over."
+    },
+    "changes": {
+      "title": "Changes",
+      "body": "When we change this policy we update the date above, and tell you in the app when the change affects what we collect or who processes it."
+    }
+  },
+  "validation": {
+    "emailInvalid": "Enter a valid email",
+    "passwordRequired": "Password is required",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordTooLong": "Password must be at most 72 characters",
+    "usernameInvalid": "Use 3–30 lowercase letters, numbers, or underscores",
+    "passwordsMismatch": "Passwords do not match",
+    "numberNotNegative": "Enter a number of 0 or more",
+    "birthYearInvalid": "Enter a valid birth year",
+    "dependentsRange": "Enter a whole number from 0 to 20",
+    "consentRequired": "Please agree before saving your answers",
+    "deleteConfirmation": "Type DELETE to confirm",
+    "categoryRequired": "Category is required",
+    "amountRequired": "Amount is required",
+    "amountWholePositive": "Enter a whole amount above 0",
+    "amountTooLarge": "That amount is too large",
+    "amountPositive": "Amount must be greater than 0",
+    "typeRequired": "Type is required",
+    "dateRequired": "Date is required",
+    "descriptionRequired": "Description is required",
+    "categoryFitsType": "Pick a category that fits the type",
+    "messageRequired": "Message is required",
+    "messageTooLong": "Message is too long"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password"
+    },
+    "google": {
+      "continue": "Continue with Google",
+      "orEmail": "or with email"
+    },
+    "login": {
+      "metadata": {
+        "title": "TAMAS - Sign in",
+        "description": "Sign in to your TAMAS account"
+      },
+      "title": "Sign in",
+      "description": "Welcome back to TAMAS",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "No account yet?",
+      "createOne": "Create one",
+      "linkErrors": {
+        "confirmation_failed": "The confirmation link is invalid or has expired. Please sign up again.",
+        "google_failed": "Google sign-in didn't finish. Please try again, or sign in with your email."
+      }
+    },
+    "register": {
+      "metadata": {
+        "title": "TAMAS - Create account",
+        "description": "Create your TAMAS account"
+      },
+      "title": "Create account",
+      "description": "Track your money and get advice from AI Advisor",
+      "consent": "By creating an account you agree to our <link>Privacy Policy</link>.",
+      "submit": "Create account",
+      "submitting": "Creating account...",
+      "checkEmailTitle": "Check your email",
+      "checkEmailBody": "We sent a confirmation link to <strong>{email}</strong>. Open it to activate your account.",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "forgotPassword": {
+      "metadata": {
+        "title": "TAMAS - Reset password",
+        "description": "Get a link to reset your TAMAS password"
+      },
+      "title": "Reset your password",
+      "description": "Enter your email and we'll send you a reset link",
+      "submit": "Send reset link",
+      "submitting": "Sending...",
+      "sent": "If an account exists for that email, we've sent a link to reset your password. Check your inbox and spam folder.",
+      "remembered": "Remembered it?",
+      "backToSignIn": "Back to sign in",
+      "linkExpired": "That reset link is invalid, has expired, or was opened in a different browser. Request a new one below and open it in this browser."
+    },
+    "resetPassword": {
+      "metadata": {
+        "title": "TAMAS - Choose a new password",
+        "description": "Choose a new password for your TAMAS account"
+      },
+      "title": "Choose a new password",
+      "description": "At least 8 characters",
+      "submit": "Update password",
+      "submitting": "Saving...",
+      "updated": "Password updated"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailNotConfirmed": "Please confirm your email before signing in",
+      "signInFailed": "Failed to sign in. Please try again.",
+      "googleFailed": "Failed to start Google sign-in. Please try again.",
+      "checkForm": "Please check the form and try again",
+      "signUpFailed": "Failed to create account. Please try again.",
+      "alreadyExists": "An account with this email already exists",
+      "tooManyAttempts": "Too many attempts. Please try again later.",
+      "invalidEmail": "Enter a valid email",
+      "resetEmailFailed": "Failed to send the reset email. Please try again.",
+      "samePassword": "Choose a password different from your current one",
+      "weakPassword": "This password is too weak. Try a longer one.",
+      "reauthenticationNeeded": "For your security, request a new reset link and try again.",
+      "updatePasswordFailed": "Failed to update your password. Please try again."
+    }
+  },
+  "financialGoals": {
+    "emergency_fund": "Build an emergency fund",
+    "pay_off_debt": "Pay off debt",
+    "start_investing": "Start investing",
+    "control_spending": "Control my spending",
+    "save_for_goal": "Save for a specific goal"
+  },
+  "personalContext": {
+    "monthlyIncome": "Monthly income",
+    "monthlyIncomePlaceholder": "e.g. 7000000",
+    "birthYear": "Birth year",
+    "birthYearPlaceholder": "e.g. 1998",
+    "financialGoal": "Main financial goal",
+    "financialGoalPlaceholder": "Select a goal",
+    "dependents": "People who depend on your income",
+    "dependentsPlaceholder": "e.g. 0",
+    "hasDebt": "Do you have active loans or installments?",
+    "hasDebtPlaceholder": "Select an answer",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "onboarding": {
+    "metadata": {
+      "title": "TAMAS - Get started",
+      "description": "Tell AI Advisor about your finances"
+    },
+    "title": "Help AI Advisor get to know you",
+    "description": "A few quick questions so the advice fits your situation. Every question is optional.",
+    "consent": "I agree that these answers are used to personalize AI Advisor and are processed by Google Gemini. I can change them anytime in Profile.",
+    "skip": "Skip for now",
+    "submit": "Save and continue",
+    "submitting": "Saving...",
+    "saveFailed": "Failed to save your answers. Please try again.",
+    "genericError": "Something went wrong. Please try again."
+  },
+  "common": {
+    "tryAgain": "Try again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "edit": "Edit",
+    "close": "Close",
+    "loadingAccount": "Loading account",
+    "income": "Income",
+    "expense": "Expense",
+    "toggleSidebar": "Toggle sidebar"
+  },
+  "dashboard": {
+    "metadata": {
+      "title": "TAMAS - Dashboard",
+      "description": "Your personal financial dashboard"
+    },
+    "title": "Dashboard",
+    "completeProfile": {
+      "body": "Tell AI Advisor about your income and goals to get advice that fits you.",
+      "cta": "Complete profile"
+    },
+    "quickLog": {
+      "title": "Log a transaction",
+      "description": "Write it the way you would say it, e.g. \"lunch 25k, parking 5k\"."
+    },
+    "userMenu": {
+      "signedInAs": "Signed in as {username}",
+      "profile": "Profile",
+      "signOut": "Sign out"
+    },
+    "balance": {
+      "title": "Net since you started tracking",
+      "description": "Recorded income minus expenses, not your bank balance",
+      "loading": "Loading balance",
+      "loadError": "We couldn't load your balance. Check your connection and try again.",
+      "income": "Income",
+      "expenses": "Expenses",
+      "reminderLabel": "Money reminder",
+      "reminders": {
+        "empty": "Start by recording your salary and a few daily expenses. A month of tracking shows where your money really goes.",
+        "negative": "You've spent more than you've earned so far. Pick one expense to cut this week, starting with your biggest category.",
+        "highSpending": "More than 80% of your income is going out. Aim for 50% needs, 30% wants and 20% savings.",
+        "habits": {
+          "payYourselfFirst": "Pay yourself first: move your savings to a separate account on payday, before the spending starts.",
+          "emergencyFund": "Build an emergency fund of 3 to 6 months of expenses before putting money into riskier investments.",
+          "debtLimit": "Keep loan and installment payments under 30% of your income, so one bad month doesn't snowball.",
+          "subscriptions": "Check your subscriptions once a month. Small recurring charges add up quietly.",
+          "paylater": "Paylater is still debt. Count every installment as part of next month's budget.",
+          "investHorizon": "Only invest money you won't need for 3 to 5 years. Money for sooner goals belongs in savings or a money market fund."
+        }
+      }
+    },
+    "savings": {
+      "title": "Saved this month",
+      "loading": "Loading this month's savings",
+      "loadError": "We couldn't load this month's savings. Check your connection and try again.",
+      "noIncome": "No income recorded this month yet. Add your salary to see your savings rate.",
+      "nothing": "Nothing recorded this month yet. Add your salary and spending to see how much you keep.",
+      "overspent": "You spent {amount} more than you earned this month.",
+      "aboveTarget": "{amount} above the {target}% target.",
+      "belowTarget": "Save {amount} more to reach {target}%.",
+      "previousNothing": "Nothing recorded",
+      "previousNoIncome": "{amount}, no income",
+      "meterLabel": "Share of this month's income saved",
+      "meterValue": "{rate} of income saved, target {target}%",
+      "rate": "{rate} of income",
+      "target": "Target {target}%",
+      "income": "Income",
+      "spent": "Spent"
+    },
+    "categorySpending": {
+      "title": "Spent this month",
+      "loading": "Loading spending by category",
+      "loadError": "We couldn't load this month's spending. Check your connection and try again.",
+      "empty": "No spending recorded this month yet. Log an expense with the quick entry above and it will show up here by category.",
+      "otherCategories": "{count} other categories",
+      "chartLabel": "Spending by category: {breakdown}"
+    },
+    "recent": {
+      "title": "Recent transactions",
+      "viewAll": "View all",
+      "loading": "Loading transactions",
+      "loadError": "We couldn't load your transactions. Check your connection and try again.",
+      "empty": "No transactions yet. Once you record income or an expense, the latest five show up here."
+    },
+    "loggingFeedback": {
+      "noneLastMonth": "{category} this month: {spent}. None by this point last month.",
+      "sameAsLastMonth": "{category} this month: {spent}, the same as by this point last month.",
+      "moreThanLastMonth": "{category} this month: {spent}, {difference} more than by this point last month.",
+      "lessThanLastMonth": "{category} this month: {spent}, {difference} less than by this point last month."
+    }
+  },
+  "transactionPage": {
+    "metadata": {
+      "title": "TAMAS - Transaction",
+      "description": "View and manage your financial transactions"
+    },
+    "title": "Transaction",
+    "description": "View and manage your financial transactions"
+  },
+  "wizard": {
+    "inputLabel": "Quick entry: describe transactions to log",
+    "placeholder": "Log a transaction, e.g. \"lunch 25k, parking 5k\"",
+    "submit": "Log transaction",
+    "tooManyDrafts": "You can review up to {max} transactions at once. Save or discard the ones below first.",
+    "requestFailed": "Request failed with status {status}",
+    "drafts": {
+      "title": "Review before saving",
+      "description": "Nothing is saved until you press Save.",
+      "edit": "Edit {name}",
+      "remove": "Remove {name}",
+      "discard": "Discard",
+      "save": "Save {count, plural, one {# transaction} other {# transactions}}",
+      "logged": "Logged {count, plural, one {# transaction} other {# transactions}}",
+      "saveFailed": "Failed to save. Your drafts are kept, try again."
+    },
+    "editDialog": {
+      "title": "Edit transaction",
+      "description": "Fix anything the quick entry got wrong. It is saved together with the others when you press Save.",
+      "apply": "Apply"
+    },
+    "confirm": {
+      "title": "Confirm changes",
+      "description": "The wizard wants to change these transactions. Nothing is changed until you confirm.",
+      "descriptionWithDelete": "The wizard wants to change these transactions. Nothing is changed until you confirm, and deletes cannot be undone.",
+      "delete": "Delete",
+      "update": "Update",
+      "applied": "{count, plural, one {Change applied} other {# changes applied}}",
+      "submit": "Confirm",
+      "submitting": "Applying...",
+      "fields": {
+        "amount": "Amount",
+        "type": "Type",
+        "category": "Category",
+        "description": "Description",
+        "date": "Date"
+      }
+    }
+  },
+  "transactions": {
+    "fields": {
+      "amount": "Amount",
+      "amountPlaceholder": "0",
+      "type": "Type",
+      "typePlaceholder": "Select type",
+      "category": "Category",
+      "categoryPlaceholder": "Select category",
+      "date": "Date",
+      "datePlaceholder": "Pick a date",
+      "description": "Description",
+      "descriptionPlaceholder": "What was this transaction for?"
+    },
+    "table": {
+      "title": "Recent transactions",
+      "description": "Your latest financial activity",
+      "searchPlaceholder": "Search descriptions…",
+      "searchLabel": "Search transactions by description",
+      "headers": {
+        "number": "#",
+        "date": "Date",
+        "description": "Description",
+        "category": "Category",
+        "amount": "Amount",
+        "action": "Action"
+      },
+      "empty": "No transactions found",
+      "loading": "Loading...",
+      "rowsPerPage": "Rows per page",
+      "previous": "Previous",
+      "previousLabel": "Go to previous page",
+      "next": "Next",
+      "nextLabel": "Go to next page",
+      "actions": "Open transaction actions",
+      "pagination": "Pagination"
+    },
+    "create": {
+      "title": "Create Transaction",
+      "description": "Add a new financial activity",
+      "submit": "Create Transaction",
+      "success": "Transaction created successfully",
+      "failed": "Failed to create transaction"
+    },
+    "update": {
+      "title": "Update Transaction",
+      "description": "Edit the details of this financial activity",
+      "submit": "Save Changes",
+      "success": "Transaction updated successfully",
+      "failed": "Failed to update transaction"
+    },
+    "delete": {
+      "title": "Delete Transaction",
+      "description": "This will permanently delete <strong>{name}</strong> ({amount}). This action cannot be undone.",
+      "success": "Transaction deleted successfully",
+      "failed": "Failed to delete transaction"
+    }
+  },
+  "advisor": {
+    "open": "Open AI Advisor",
+    "close": "Close AI Advisor",
+    "defaultDescription": "Ask about your money",
+    "history": "Saved conversations",
+    "newChat": "Start a new chat",
+    "newChatTitle": "New chat",
+    "emptyTitle": "Ask about your money",
+    "emptyBody": "Pick a question to start, or write your own below.",
+    "streamErrorSuffix": "{message} Try sending it again.",
+    "unreachable": "Couldn't reach AI Advisor ({reason}). Try sending it again.",
+    "unknownError": "unknown error",
+    "requestFailed": "Request failed with status {status}",
+    "typing": "AI Advisor is typing",
+    "composer": {
+      "label": "Message AI Advisor",
+      "placeholder": "Ask about your money…",
+      "send": "Send message"
+    },
+    "feedback": {
+      "thanks": "Thanks for the feedback",
+      "rateLabel": "Rate this answer",
+      "question": "Was this helpful?",
+      "helpful": "Helpful",
+      "notHelpful": "Not helpful",
+      "whatWentWrong": "What went wrong?",
+      "skip": "Skip",
+      "failed": "Couldn't send your feedback. Try again.",
+      "reasons": {
+        "wrong_numbers": "Wrong numbers",
+        "not_helpful": "Not helpful",
+        "too_long": "Too long",
+        "misunderstood": "Misunderstood me"
+      }
+    },
+    "historyList": {
+      "loading": "Loading conversations",
+      "loadError": "We couldn't load your conversations. Check your connection and try again.",
+      "empty": "No saved conversations yet. Answers you get from AI Advisor are kept here until you delete them.",
+      "openFailed": "Couldn't open the conversation. Please try again.",
+      "deleteFailed": "Couldn't delete the conversation. Please try again.",
+      "delete": "Delete \"{title}\"",
+      "confirmDelete": "Confirm deleting \"{title}\""
+    }
+  },
+  "profile": {
+    "metadata": {
+      "title": "TAMAS - Profile",
+      "description": "Manage your TAMAS profile"
+    },
+    "title": "Profile",
+    "account": {
+      "title": "Account",
+      "description": "Your public name and picture",
+      "loading": "Loading profile",
+      "username": "Username",
+      "submit": "Save changes",
+      "updated": "Profile updated",
+      "updateFailed": "Failed to update profile. Please try again."
+    },
+    "advisorData": {
+      "title": "AI Advisor data access",
+      "description": "What AI Advisor may read when it answers. Messages are processed by Google Gemini.",
+      "loading": "Loading data access",
+      "label": "Let AI Advisor use my data",
+      "help": "Your profile answers and transactions, so answers are about your own money. When off, AI Advisor only gives general guidance.",
+      "enabled": "AI Advisor will use your data.",
+      "disabled": "AI Advisor will no longer read your data.",
+      "saveFailed": "Couldn't save the setting. Please try again."
+    },
+    "advisorContext": {
+      "title": "AI Advisor context",
+      "description": "AI Advisor uses these answers to tailor its advice. They are processed by Google Gemini.",
+      "loading": "Loading your answers",
+      "submit": "Save answers",
+      "updated": "AI Advisor context updated",
+      "saveFailed": "Failed to save your answers. Please try again."
+    },
+    "data": {
+      "title": "Your data",
+      "description": "Download every transaction you've recorded as a CSV file you can open in Excel or Google Sheets.",
+      "export": "Export transactions (CSV)"
+    },
+    "signOut": {
+      "title": "Sign out",
+      "description": "Sign out of TAMAS on this device.",
+      "button": "Sign out"
+    },
+    "deleteAccount": {
+      "title": "Delete account",
+      "description": "Permanently delete your account and all of your data.",
+      "button": "Delete account",
+      "dialogTitle": "Delete your account?",
+      "dialogDescription": "This permanently deletes your transactions, profile and AI Advisor answers. It can't be undone. Export your transactions first if you want to keep them.",
+      "confirmLabel": "Type {word} to confirm",
+      "deleted": "Your account has been deleted",
+      "failed": "Failed to delete your account. Please try again."
+    }
+  },
+  "apiErrors": {
+    "unauthorized": "Unauthorized",
+    "invalidRequest": "Invalid request body",
+    "profileLoadFailed": "Failed to load your profile.",
+    "chatFailed": "Failed to generate a response.",
+    "wizardFailed": "Failed to process the message.",
+    "exportFailed": "Failed to export your transactions.",
+    "busy": "The AI service is busy right now. Try again in a few minutes.",
+    "busyWizard": "The AI service is busy right now. Try again in a few minutes. You can still add transactions with the form.",
+    "rateLimit": "You're sending messages too quickly. Wait a minute and try again.",
+    "quotaCheckFailed": "Couldn't check your AI usage limit. Try again later.",
+    "dailyChat": "You've used today's {limit} AI Advisor messages. The limit resets at midnight (WIB).",
+    "dailyWizard": "You've used today's {limit} quick entries. The limit resets at midnight (WIB); you can still add transactions with the form.",
+    "wizardTooMany": "Describe at most {max} transactions per message.",
+    "wizardNothingFound": "Couldn't find a transaction to record, update, or delete in that message."
+  },
+  "actionErrors": {
+    "checkForm": "Please check the form and try again",
+    "invalidSetting": "Invalid setting",
+    "invalidFeedback": "Invalid feedback",
+    "settingSaveFailed": "Couldn't save the setting. Please try again.",
+    "unknownConversation": "Unknown conversation",
+    "conversationDeleteFailed": "Couldn't delete the conversation. Please try again.",
+    "answersSaveFailed": "Failed to save your answers. Please try again.",
+    "generic": "Something went wrong. Please try again.",
+    "usernameTaken": "Username is already taken",
+    "profileUpdateFailed": "Failed to update profile. Please try again.",
+    "deleteConfirmation": "Type {word} to confirm",
+    "accountDeleteFailed": "Failed to delete your account. Please try again."
+  },
+  "export": {
+    "headers": {
+      "date": "Date",
+      "type": "Type",
+      "category": "Category",
+      "amount": "Amount",
+      "description": "Description"
+    }
+  }
+}
