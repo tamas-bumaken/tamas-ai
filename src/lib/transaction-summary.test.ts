@@ -12,6 +12,21 @@ function fakeClient(result: {
   return { client: { rpc } as unknown as SupabaseClient, rpc };
 }
 
+function row(
+  type: "income" | "expense",
+  category: string,
+  total: number | string,
+  transaction_count: number | string = 1,
+) {
+  return { type, category, total, transaction_count };
+}
+
+async function summarize(rows: ReturnType<typeof row>[]) {
+  const { client } = fakeClient({ data: rows, error: null });
+
+  return summarizeTransactions(client, "2026-10-01", "2026-10-31");
+}
+
 describe("percentOf", () => {
   it("returns the share as a percentage", () => {
     expect(percentOf(25, 100)).toBe(25);
@@ -34,150 +49,124 @@ describe("percentOf", () => {
 });
 
 describe("summarizeTransactions", () => {
-  it("adds up income and expense from the per-category rows of the RPC", async () => {
-    const { client, rpc } = fakeClient({
-      data: [
-        {
-          type: "income",
-          category: "Salary",
-          total: 6_000_000,
-          transaction_count: 1,
-        },
-        {
-          type: "income",
-          category: "Side Income",
-          total: 500_000,
-          transaction_count: 2,
-        },
-        {
-          type: "expense",
-          category: "Food",
-          total: 1_500_000,
-          transaction_count: 40,
-        },
-        {
-          type: "expense",
-          category: "Housing",
-          total: 1_200_000,
-          transaction_count: 1,
-        },
-      ],
-      error: null,
-    });
+  it("calls the RPC with the range", async () => {
+    const { client, rpc } = fakeClient({ data: [], error: null });
 
-    const summary = await summarizeTransactions(
-      client,
-      "2026-10-01",
-      "2026-10-22",
-    );
+    await summarizeTransactions(client, "2026-10-01", "2026-10-22");
 
     expect(rpc).toHaveBeenCalledWith("summarize_transactions", {
       start_date: "2026-10-01",
       end_date: "2026-10-22",
     });
-    expect(summary).toMatchObject({
-      totalIncome: 6_500_000,
-      totalExpense: 2_700_000,
-      net: 3_800_000,
-      savingsRatePercent: 58.4,
+  });
+
+  const MONTH = [
+    row("income", "Sales", 800_000),
+    row("income", "Other Business Income", 50_000),
+    row("income", "Owner Capital", 500_000),
+    row("expense", "Raw Materials", 400_000),
+    row("expense", "Loan Installments", 200_000),
+    row("expense", "Owner Withdrawal", 100_000),
+    row("expense", "Ceremony & Adat", 150_000),
+  ];
+
+  it("counts only business income and business costs toward profit", async () => {
+    expect(await summarize(MONTH)).toMatchObject({
+      businessIncome: 850_000,
+      businessExpense: 400_000,
+      profit: 450_000,
+      profitMarginPercent: 52.9,
     });
-    expect(summary.categories).toHaveLength(4);
+  });
+
+  it("keeps what the owner takes apart from business costs", async () => {
+    expect(await summarize(MONTH)).toMatchObject({
+      ownerWithdrawals: 100_000,
+      ceremony: 150_000,
+      ownerTaken: 250_000,
+    });
+  });
+
+  it("reports capital and loan payments separately from profit", async () => {
+    expect(await summarize(MONTH)).toMatchObject({
+      ownerCapital: 500_000,
+      loanInstallments: 200_000,
+    });
+  });
+
+  it("counts every movement in the cash left", async () => {
+    expect(await summarize(MONTH)).toMatchObject({
+      totalIncome: 1_350_000,
+      totalExpense: 850_000,
+      net: 500_000,
+    });
+  });
+
+  it("reconciles profit with cash, so the dashboard's figures always add up", async () => {
+    const summary = await summarize(MONTH);
+
+    expect(
+      summary.profit +
+        summary.ownerCapital -
+        summary.loanInstallments -
+        summary.ownerTaken,
+    ).toBe(summary.net);
   });
 
   it("accepts numeric and bigint columns that arrive as strings", async () => {
-    const { client } = fakeClient({
-      data: [
-        {
-          type: "income",
-          category: "Salary",
-          total: "7000000",
-          transaction_count: "1",
-        },
-        {
-          type: "expense",
-          category: "Food",
-          total: "1750000.50",
-          transaction_count: "12",
-        },
-      ],
-      error: null,
-    });
+    const summary = await summarize([
+      row("income", "Sales", "7000000", "1"),
+      row("expense", "Raw Materials", "1750000.50", "12"),
+    ]);
 
-    const summary = await summarizeTransactions(
-      client,
-      "2026-10-01",
-      "2026-10-31",
-    );
-
-    expect(summary.totalIncome).toBe(7_000_000);
-    expect(summary.totalExpense).toBe(1_750_000.5);
+    expect(summary.businessIncome).toBe(7_000_000);
+    expect(summary.businessExpense).toBe(1_750_000.5);
     expect(summary.categories[1].transaction_count).toBe(12);
   });
 
-  it("returns zeros and no savings rate for a period without transactions", async () => {
-    const { client } = fakeClient({ data: [], error: null });
-
-    expect(
-      await summarizeTransactions(client, "2026-10-01", "2026-10-31"),
-    ).toEqual({
+  it("returns zeros and no margin for a period without transactions", async () => {
+    expect(await summarize([])).toEqual({
       totalIncome: 0,
       totalExpense: 0,
       net: 0,
-      savingsRatePercent: null,
+      businessIncome: 0,
+      businessExpense: 0,
+      profit: 0,
+      profitMarginPercent: null,
+      ownerCapital: 0,
+      loanInstallments: 0,
+      ownerWithdrawals: 0,
+      ceremony: 0,
+      ownerTaken: 0,
       categories: [],
     });
   });
 
-  it("reports a negative net and savings rate when spending exceeds income", async () => {
-    const { client } = fakeClient({
-      data: [
-        {
-          type: "income",
-          category: "Salary",
-          total: 5_000_000,
-          transaction_count: 1,
-        },
-        {
-          type: "expense",
-          category: "Installments",
-          total: 6_000_000,
-          transaction_count: 3,
-        },
-      ],
-      error: null,
-    });
+  it("reports a loss and a negative margin when costs exceed sales", async () => {
+    const summary = await summarize([
+      row("income", "Sales", 500_000),
+      row("expense", "Raw Materials", 600_000),
+    ]);
 
-    const summary = await summarizeTransactions(
-      client,
-      "2026-10-01",
-      "2026-10-31",
-    );
-
-    expect(summary.net).toBe(-1_000_000);
-    expect(summary.savingsRatePercent).toBe(-20);
+    expect(summary.profit).toBe(-100_000);
+    expect(summary.profitMarginPercent).toBe(-20);
   });
 
-  it("has no savings rate when only expenses were recorded", async () => {
-    const { client } = fakeClient({
-      data: [
-        {
-          type: "expense",
-          category: "Food",
-          total: 250_000,
-          transaction_count: 5,
-        },
-      ],
-      error: null,
-    });
+  it("has no margin when only costs were recorded", async () => {
+    const summary = await summarize([row("expense", "Raw Materials", 250_000)]);
 
-    const summary = await summarizeTransactions(
-      client,
-      "2026-10-01",
-      "2026-10-31",
-    );
+    expect(summary.profit).toBe(-250_000);
+    expect(summary.profitMarginPercent).toBeNull();
+  });
 
-    expect(summary.net).toBe(-250_000);
-    expect(summary.savingsRatePercent).toBeNull();
+  it("does not treat capital as sales when nothing was sold", async () => {
+    const summary = await summarize([
+      row("income", "Owner Capital", 1_000_000),
+    ]);
+
+    expect(summary.businessIncome).toBe(0);
+    expect(summary.profit).toBe(0);
+    expect(summary.net).toBe(1_000_000);
   });
 
   it("throws when the RPC fails instead of reporting zero", async () => {
@@ -196,7 +185,7 @@ describe("summarizeTransactions", () => {
       data: [
         {
           type: "transfer",
-          category: "Others",
+          category: "Sales",
           total: 100,
           transaction_count: 1,
         },

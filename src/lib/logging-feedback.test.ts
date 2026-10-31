@@ -16,13 +16,13 @@ describe("sumAddedThisMonth", () => {
   it("sums this month's expenses per category and skips income and other months", () => {
     const added = sumAddedThisMonth(
       [
-        expense("Food", 25_000),
-        expense("Food", 18_000),
-        expense("Transportation", 5_000),
-        expense("Shopping", 300_000, "2026-09-30"),
+        expense("Raw Materials", 25_000),
+        expense("Raw Materials", 18_000),
+        expense("Transport & Delivery", 5_000),
+        expense("Equipment", 300_000, "2026-09-30"),
         {
           type: "income",
-          category: "Salary",
+          category: "Sales",
           amount: 10_000_000,
           date: "2026-10-23",
           description: "",
@@ -32,8 +32,8 @@ describe("sumAddedThisMonth", () => {
     );
 
     expect([...added]).toEqual([
-      ["Food", 43_000],
-      ["Transportation", 5_000],
+      ["Raw Materials", 43_000],
+      ["Transport & Delivery", 5_000],
     ]);
   });
 });
@@ -42,18 +42,18 @@ describe("buildLoggingInsight", () => {
   it("compares the category that got the most money with the same point last month", () => {
     const insight = buildLoggingInsight({
       added: new Map([
-        ["Transportation", 5_000],
-        ["Food", 25_000],
+        ["Transport & Delivery", 5_000],
+        ["Raw Materials", 25_000],
       ]),
       spentThisMonth: new Map([
-        ["Food", 320_000],
-        ["Transportation", 50_000],
+        ["Raw Materials", 320_000],
+        ["Transport & Delivery", 50_000],
       ]),
-      spentLastMonthToDate: new Map([["Food", 400_000]]),
+      spentLastMonthToDate: new Map([["Raw Materials", 400_000]]),
     });
 
     expect(insight).toEqual({
-      category: "Food",
+      category: "Raw Materials",
       spent: 320_000,
       previousSpent: 400_000,
       difference: -80_000,
@@ -62,13 +62,13 @@ describe("buildLoggingInsight", () => {
 
   it("treats a category with no spending last month as zero", () => {
     const insight = buildLoggingInsight({
-      added: new Map([["Food", 25_000]]),
-      spentThisMonth: new Map([["Food", 25_000]]),
+      added: new Map([["Raw Materials", 25_000]]),
+      spentThisMonth: new Map([["Raw Materials", 25_000]]),
       spentLastMonthToDate: new Map(),
     });
 
     expect(insight).toEqual({
-      category: "Food",
+      category: "Raw Materials",
       spent: 25_000,
       previousSpent: 0,
       difference: 25_000,
