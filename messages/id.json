@@ -22,39 +22,37 @@
     "home": "Kembali ke beranda"
   },
   "categories": {
-    "Food": "Makan",
-    "Transportation": "Transportasi",
-    "Housing": "Tempat tinggal",
-    "Shopping": "Belanja",
-    "Subscription": "Langganan",
-    "Installments": "Cicilan",
-    "Phone & Data": "Pulsa & data",
-    "Family Transfer": "Kiriman keluarga",
-    "Health": "Kesehatan",
-    "Entertainment": "Hiburan",
-    "Education": "Pendidikan",
-    "Savings & Investment": "Tabungan & investasi",
-    "Others": "Lainnya",
-    "Salary": "Gaji",
-    "Side Income": "Penghasilan sampingan"
+    "Sales": "Penjualan",
+    "Other Business Income": "Pendapatan usaha lain",
+    "Owner Capital": "Modal masuk",
+    "Raw Materials": "Bahan & barang dagangan",
+    "Staff Wages": "Upah karyawan",
+    "Rent & Utilities": "Sewa & listrik",
+    "Transport & Delivery": "Transportasi & kirim",
+    "Marketing & Platform Fees": "Promosi & biaya platform",
+    "Equipment": "Peralatan",
+    "Other Business Expense": "Biaya usaha lain",
+    "Loan Installments": "Cicilan pinjaman",
+    "Owner Withdrawal": "Diambil untuk pribadi",
+    "Ceremony & Adat": "Upacara & adat"
   },
   "chatModes": {
     "personal": {
       "label": "Akses data aktif",
       "description": "Memakai profil dan transaksimu",
       "suggestions": {
-        "q1": "Berapa total pengeluaranku bulan ini?",
-        "q2": "Kategori apa yang paling boros bulan ini?",
-        "q3": "Berapa yang bisa aku tabung tiap bulan?"
+        "q1": "Bulan ini untung berapa?",
+        "q2": "Berapa uang usaha yang kepakai untuk pribadi dan adat?",
+        "q3": "Apa yang harus saya perbaiki minggu ini?"
       }
     },
     "general": {
       "label": "Akses data mati",
       "description": "Datamu tidak dipakai",
       "suggestions": {
-        "q1": "Berapa idealnya dana darurat untuk gaji 6 juta?",
-        "q2": "Apa beda reksa dana pasar uang dan deposito?",
-        "q3": "Cara mulai investasi dengan 500 ribu per bulan"
+        "q1": "Bagaimana cara memisahkan uang usaha dan uang pribadi?",
+        "q2": "Apa yang perlu saya siapkan untuk mengajukan KUR?",
+        "q3": "Bagaimana menentukan harga jual supaya tidak rugi?"
       }
     }
   },
@@ -107,8 +105,8 @@
       }
     },
     "quickEntry": {
-      "input": "makan siang nasi padang 25rb",
-      "description": "Makan siang nasi padang",
+      "input": "beli ayam 400rb",
+      "description": "Beli ayam",
       "descriptionLabel": "Deskripsi",
       "categoryLabel": "Kategori",
       "amountLabel": "Nominal"
@@ -232,7 +230,7 @@
     "collect": {
       "title": "Apa yang kami kumpulkan",
       "account": "<strong>Akun:</strong> alamat email dan kata sandimu (disimpan dalam bentuk hash oleh penyedia autentikasi kami), atau nama, email, dan foto yang dibagikan Google saat kamu masuk dengan Google; serta username.",
-      "profile": "<strong>Jawaban profil</strong> yang kamu pilih untuk diberikan: pendapatan bulanan, tahun lahir, tujuan keuangan utama, jumlah tanggungan, dan apakah kamu punya utang.",
+      "profile": "<strong>Profil usaha</strong> yang kamu pilih untuk diberikan: nama usaha, jenis usaha, kabupaten/kota, dan siapa pelanggan utamamu.",
       "records": "<strong>Catatanmu:</strong> transaksi (nominal, jenis, kategori, deskripsi, tanggal).",
       "conversations": "<strong>Percakapan dengan AI Advisor:</strong> pertanyaanmu dan jawaban Advisor, supaya kamu bisa membukanya lagi. Disimpan sampai kamu menghapus percakapan atau akunmu.",
       "settings": "<strong>Pengaturan:</strong> bahasa dan apakah AI Advisor boleh memakai datamu.",
@@ -290,9 +288,6 @@
     "passwordTooLong": "Kata sandi maksimal 72 karakter",
     "usernameInvalid": "Gunakan 3–30 huruf kecil, angka, atau garis bawah",
     "passwordsMismatch": "Kata sandi tidak sama",
-    "numberNotNegative": "Masukkan angka 0 atau lebih",
-    "birthYearInvalid": "Masukkan tahun lahir yang valid",
-    "dependentsRange": "Masukkan bilangan bulat dari 0 sampai 20",
     "consentRequired": "Setujui dulu sebelum menyimpan jawabanmu",
     "deleteConfirmation": "Ketik DELETE untuk konfirmasi",
     "categoryRequired": "Kategori wajib diisi",
@@ -305,7 +300,8 @@
     "descriptionRequired": "Deskripsi wajib diisi",
     "categoryFitsType": "Pilih kategori yang sesuai dengan jenisnya",
     "messageRequired": "Pesan wajib diisi",
-    "messageTooLong": "Pesan terlalu panjang"
+    "messageTooLong": "Pesan terlalu panjang",
+    "businessNameTooLong": "Nama usaha maksimal 80 karakter"
   },
   "auth": {
     "fields": {
@@ -342,7 +338,7 @@
         "description": "Buat akun TAMAS-mu"
       },
       "title": "Buat akun",
-      "description": "Catat uangmu dan dapatkan saran dari AI Advisor",
+      "description": "Catat usahamu dan dapatkan saran dari AI Advisor",
       "consent": "Dengan membuat akun, kamu menyetujui <link>Kebijakan Privasi</link> kami.",
       "submit": "Buat akun",
       "submitting": "Membuat akun...",
@@ -393,34 +389,13 @@
       "updatePasswordFailed": "Gagal memperbarui kata sandi. Silakan coba lagi."
     }
   },
-  "financialGoals": {
-    "emergency_fund": "Membangun dana darurat",
-    "pay_off_debt": "Melunasi utang",
-    "start_investing": "Mulai berinvestasi",
-    "control_spending": "Mengendalikan pengeluaran",
-    "save_for_goal": "Menabung untuk tujuan tertentu"
-  },
-  "personalContext": {
-    "monthlyIncome": "Pendapatan bulanan",
-    "monthlyIncomePlaceholder": "mis. 7000000",
-    "birthYear": "Tahun lahir",
-    "birthYearPlaceholder": "mis. 1998",
-    "financialGoal": "Tujuan keuangan utama",
-    "financialGoalPlaceholder": "Pilih tujuan",
-    "dependents": "Orang yang bergantung pada penghasilanmu",
-    "dependentsPlaceholder": "mis. 0",
-    "hasDebt": "Apakah kamu punya pinjaman atau cicilan aktif?",
-    "hasDebtPlaceholder": "Pilih jawaban",
-    "yes": "Ya",
-    "no": "Tidak"
-  },
   "onboarding": {
     "metadata": {
       "title": "TAMAS - Mulai",
-      "description": "Ceritakan keuanganmu ke AI Advisor"
+      "description": "Ceritakan usahamu ke AI Advisor"
     },
-    "title": "Bantu AI Advisor mengenalmu",
-    "description": "Beberapa pertanyaan singkat supaya sarannya cocok dengan kondisimu. Semua pertanyaan boleh dilewati.",
+    "title": "Ceritakan usahamu",
+    "description": "Beberapa pertanyaan singkat supaya saran AI Advisor cocok dengan usahamu. Semua pertanyaan boleh dilewati.",
     "consent": "Saya setuju jawaban ini dipakai untuk menyesuaikan AI Advisor dan diproses oleh Google Gemini. Saya bisa mengubahnya kapan saja di Profil.",
     "skip": "Lewati dulu",
     "submit": "Simpan dan lanjut",
@@ -445,95 +420,88 @@
   "dashboard": {
     "metadata": {
       "title": "TAMAS - Dashboard",
-      "description": "Dashboard keuangan pribadimu"
+      "description": "Laba dan kas usahamu"
     },
     "title": "Dashboard",
     "completeProfile": {
-      "body": "Ceritakan pendapatan dan tujuanmu ke AI Advisor supaya sarannya cocok untukmu.",
+      "body": "Ceritakan usahamu ke AI Advisor supaya sarannya cocok untukmu.",
       "cta": "Lengkapi profil"
     },
     "quickLog": {
       "title": "Catat transaksi",
-      "description": "Tulis seperti kamu bicara, mis. \"makan siang 25rb, parkir 5rb\"."
+      "description": "Tulis seperti kamu bicara, mis. \"jual 32 nasi campur 25rb, beli ayam 400rb\"."
     },
     "userMenu": {
       "signedInAs": "Masuk sebagai {username}",
       "profile": "Profil",
       "signOut": "Keluar"
     },
-    "balance": {
-      "title": "Selisih sejak mulai mencatat",
-      "description": "Pemasukan dikurangi pengeluaran yang tercatat, bukan saldo bankmu",
-      "loading": "Memuat saldo",
-      "loadError": "Gagal memuat saldomu. Cek koneksi lalu coba lagi.",
-      "income": "Pemasukan",
-      "expenses": "Pengeluaran",
-      "reminderLabel": "Pengingat keuangan",
-      "reminders": {
-        "empty": "Mulai dengan mencatat gaji dan beberapa pengeluaran harian. Sebulan mencatat akan menunjukkan ke mana uangmu benar-benar pergi.",
-        "negative": "Sejauh ini pengeluaranmu lebih besar dari pemasukan. Pilih satu pengeluaran untuk dikurangi minggu ini, mulai dari kategori terbesar.",
-        "highSpending": "Lebih dari 80% pemasukanmu habis. Coba patokan 50% kebutuhan, 30% keinginan, dan 20% tabungan.",
-        "habits": {
-          "payYourselfFirst": "Bayar dirimu dulu: pindahkan tabungan ke rekening terpisah saat gajian, sebelum mulai belanja.",
-          "emergencyFund": "Kumpulkan dana darurat 3 sampai 6 bulan pengeluaran sebelum masuk ke investasi yang lebih berisiko.",
-          "debtLimit": "Jaga cicilan dan pinjaman di bawah 30% pemasukan, supaya satu bulan yang buruk tidak menumpuk.",
-          "subscriptions": "Cek langgananmu sebulan sekali. Tagihan kecil yang rutin diam-diam jadi besar.",
-          "paylater": "Paylater tetap utang. Hitung setiap cicilan sebagai bagian dari budget bulan depan.",
-          "investHorizon": "Investasikan hanya uang yang tidak kamu perlukan selama 3 sampai 5 tahun. Uang untuk tujuan yang lebih dekat sebaiknya di tabungan atau reksa dana pasar uang."
-        }
-      }
-    },
-    "savings": {
-      "title": "Tersisa bulan ini",
-      "loading": "Memuat sisa bulan ini",
-      "loadError": "Gagal memuat sisa bulan ini. Cek koneksi lalu coba lagi.",
-      "noIncome": "Belum ada pemasukan bulan ini. Tambahkan gajimu untuk melihat persentase tabungan.",
-      "nothing": "Belum ada catatan bulan ini. Tambahkan gaji dan pengeluaran untuk melihat berapa yang tersisa.",
-      "overspent": "Pengeluaranmu {amount} lebih besar dari pemasukan bulan ini.",
-      "aboveTarget": "{amount} di atas target {target}%.",
-      "belowTarget": "Sisihkan {amount} lagi untuk mencapai {target}%.",
-      "previousNothing": "Tidak ada catatan",
-      "previousNoIncome": "{amount}, tanpa pemasukan",
-      "meterLabel": "Porsi pemasukan bulan ini yang tersisa",
-      "meterValue": "{rate} pemasukan tersisa, target {target}%",
-      "rate": "{rate} pemasukan",
-      "target": "Target {target}%",
-      "income": "Pemasukan",
-      "spent": "Pengeluaran"
-    },
     "categorySpending": {
-      "title": "Pengeluaran bulan ini",
-      "loading": "Memuat pengeluaran per kategori",
-      "loadError": "Gagal memuat pengeluaran bulan ini. Cek koneksi lalu coba lagi.",
-      "empty": "Belum ada pengeluaran bulan ini. Catat pengeluaran lewat quick entry di atas dan akan muncul di sini per kategori.",
+      "title": "Biaya usaha bulan ini",
+      "loading": "Memuat biaya usaha per kategori",
+      "loadError": "Gagal memuat biaya usaha bulan ini. Cek koneksi lalu coba lagi.",
+      "empty": "Belum ada biaya usaha bulan ini. Catat belanja bahan lewat quick entry di atas dan akan muncul di sini per kategori.",
       "otherCategories": "{count} kategori lain",
-      "chartLabel": "Pengeluaran per kategori: {breakdown}"
+      "chartLabel": "Biaya usaha per kategori: {breakdown}"
     },
     "recent": {
       "title": "Transaksi terbaru",
       "viewAll": "Lihat semua",
       "loading": "Memuat transaksi",
       "loadError": "Gagal memuat transaksimu. Cek koneksi lalu coba lagi.",
-      "empty": "Belum ada transaksi. Setelah kamu mencatat pemasukan atau pengeluaran, lima yang terbaru muncul di sini."
+      "empty": "Belum ada transaksi. Setelah kamu mencatat penjualan atau belanja, lima yang terbaru muncul di sini."
     },
     "loggingFeedback": {
       "noneLastMonth": "{category} bulan ini: {spent}. Bulan lalu di tanggal yang sama belum ada.",
       "sameAsLastMonth": "{category} bulan ini: {spent}, sama dengan bulan lalu di tanggal yang sama.",
       "moreThanLastMonth": "{category} bulan ini: {spent}, {difference} lebih banyak dari bulan lalu di tanggal yang sama.",
       "lessThanLastMonth": "{category} bulan ini: {spent}, {difference} lebih sedikit dari bulan lalu di tanggal yang sama."
+    },
+    "profit": {
+      "title": "Laba usaha bulan ini",
+      "loading": "Memuat laba usaha",
+      "loadError": "Gagal memuat laba usaha. Cek koneksi lalu coba lagi.",
+      "noSales": "Belum ada penjualan bulan ini. Catat penjualanmu untuk melihat labanya.",
+      "nothing": "Belum ada catatan bulan ini. Catat penjualan dan belanja bahan untuk melihat labamu.",
+      "loss": "Biaya usahamu {amount} lebih besar dari pendapatan bulan ini.",
+      "margin": "Margin {percent} dari pendapatan usaha.",
+      "previousNothing": "Tidak ada catatan",
+      "previousNoSales": "{amount}, tanpa penjualan",
+      "income": "Pendapatan usaha",
+      "expense": "Biaya usaha",
+      "note": "Laba sederhana untuk usaha mikro: bahan dan peralatan dihitung sebagai biaya saat dibeli. Bukan laporan akuntansi."
+    },
+    "cash": {
+      "title": "Sisa kas bulan ini",
+      "loading": "Memuat sisa kas",
+      "loadError": "Gagal memuat sisa kas. Cek koneksi lalu coba lagi.",
+      "profit": "Laba usaha",
+      "capital": "Modal masuk",
+      "loan": "Cicilan pinjaman",
+      "withdrawals": "Diambil untuk pribadi",
+      "ceremony": "Upacara & adat",
+      "insightLabel": "Catatan kas",
+      "insights": {
+        "empty": "Mulai dengan mencatat penjualan dan belanja hari ini. Dalam seminggu kamu akan melihat ke mana uang usahamu pergi.",
+        "noSales": "Bulan ini baru ada uang keluar tanpa penjualan. Catat penjualanmu supaya labanya terlihat.",
+        "loss": "Biaya usaha lebih besar dari pendapatan. Cek biaya terbesar dan harga jualmu minggu ini.",
+        "takenMoreThanProfit": "Bulan ini {taken} diambil untuk pribadi dan adat, lebih besar dari laba {profit}. Selisihnya memakai uang modal usaha.",
+        "cashNegative": "Usahamu untung, tetapi uang keluar lebih besar dari uang masuk bulan ini. Cek cicilan dan uang yang diambil.",
+        "healthy": "Laba menutup semua uang yang kamu ambil bulan ini. Sisihkan sebagian kas untuk belanja berikutnya dan hari raya."
+      }
     }
   },
   "transactionPage": {
     "metadata": {
       "title": "TAMAS - Transaksi",
-      "description": "Lihat dan kelola transaksi keuanganmu"
+      "description": "Lihat dan kelola transaksi usahamu"
     },
     "title": "Transaksi",
-    "description": "Lihat dan kelola transaksi keuanganmu"
+    "description": "Lihat dan kelola transaksi usahamu"
   },
   "wizard": {
     "inputLabel": "Quick entry: tulis transaksi yang ingin dicatat",
-    "placeholder": "Catat transaksi, mis. \"makan siang 25rb, parkir 5rb\"",
+    "placeholder": "Catat transaksi, mis. \"jual 32 nasi 25rb, beli ayam 400rb\"",
     "submit": "Catat transaksi",
     "tooManyDrafts": "Kamu bisa meninjau maksimal {max} transaksi sekaligus. Simpan atau buang yang di bawah dulu.",
     "requestFailed": "Permintaan gagal dengan status {status}",
@@ -585,7 +553,7 @@
     },
     "table": {
       "title": "Transaksi terbaru",
-      "description": "Aktivitas keuanganmu yang terbaru",
+      "description": "Aktivitas usahamu yang terbaru",
       "searchPlaceholder": "Cari deskripsi…",
       "searchLabel": "Cari transaksi berdasarkan deskripsi",
       "headers": {
@@ -608,14 +576,14 @@
     },
     "create": {
       "title": "Tambah Transaksi",
-      "description": "Catat aktivitas keuangan baru",
+      "description": "Catat aktivitas usaha baru",
       "submit": "Tambah Transaksi",
       "success": "Transaksi berhasil ditambahkan",
       "failed": "Gagal menambahkan transaksi"
     },
     "update": {
       "title": "Ubah Transaksi",
-      "description": "Ubah detail aktivitas keuangan ini",
+      "description": "Ubah detail aktivitas ini",
       "submit": "Simpan Perubahan",
       "success": "Transaksi berhasil diubah",
       "failed": "Gagal mengubah transaksi"
@@ -630,11 +598,11 @@
   "advisor": {
     "open": "Buka AI Advisor",
     "close": "Tutup AI Advisor",
-    "defaultDescription": "Tanya soal uangmu",
+    "defaultDescription": "Tanya soal usahamu",
     "history": "Percakapan tersimpan",
     "newChat": "Mulai percakapan baru",
     "newChatTitle": "Percakapan baru",
-    "emptyTitle": "Tanya soal uangmu",
+    "emptyTitle": "Tanya soal usahamu",
     "emptyBody": "Pilih pertanyaan untuk memulai, atau tulis sendiri di bawah.",
     "streamErrorSuffix": "{message} Coba kirim lagi.",
     "unreachable": "Tidak bisa menghubungi AI Advisor ({reason}). Coba kirim lagi.",
@@ -643,7 +611,7 @@
     "typing": "AI Advisor sedang mengetik",
     "composer": {
       "label": "Kirim pesan ke AI Advisor",
-      "placeholder": "Tanya soal uangmu…",
+      "placeholder": "Tanya soal usahamu…",
       "send": "Kirim pesan"
     },
     "feedback": {
@@ -692,18 +660,10 @@
       "description": "Apa yang boleh dibaca AI Advisor saat menjawab. Pesan diproses oleh Google Gemini.",
       "loading": "Memuat akses data",
       "label": "Izinkan AI Advisor memakai dataku",
-      "help": "Jawaban profil dan transaksimu, supaya jawabannya tentang uangmu sendiri. Saat mati, AI Advisor hanya memberi panduan umum.",
+      "help": "Profil usaha dan transaksimu, supaya jawabannya tentang usahamu sendiri. Saat mati, AI Advisor hanya memberi panduan umum.",
       "enabled": "AI Advisor akan memakai datamu.",
       "disabled": "AI Advisor tidak akan membaca datamu lagi.",
       "saveFailed": "Gagal menyimpan pengaturan. Silakan coba lagi."
-    },
-    "advisorContext": {
-      "title": "Konteks AI Advisor",
-      "description": "AI Advisor memakai jawaban ini untuk menyesuaikan sarannya. Jawaban diproses oleh Google Gemini.",
-      "loading": "Memuat jawabanmu",
-      "submit": "Simpan jawaban",
-      "updated": "Konteks AI Advisor diperbarui",
-      "saveFailed": "Gagal menyimpan jawabanmu. Silakan coba lagi."
     },
     "data": {
       "title": "Datamu",
@@ -724,6 +684,14 @@
       "confirmLabel": "Ketik {word} untuk konfirmasi",
       "deleted": "Akunmu sudah dihapus",
       "failed": "Gagal menghapus akunmu. Silakan coba lagi."
+    },
+    "businessProfile": {
+      "title": "Profil usaha",
+      "description": "AI Advisor memakai jawaban ini untuk menyesuaikan sarannya. Jawaban diproses oleh Google Gemini.",
+      "loading": "Memuat profil usahamu",
+      "submit": "Simpan profil usaha",
+      "updated": "Profil usaha diperbarui",
+      "saveFailed": "Gagal menyimpan profil usahamu. Silakan coba lagi."
     }
   },
   "apiErrors": {
@@ -763,6 +731,39 @@
       "category": "Kategori",
       "amount": "Nominal",
       "description": "Deskripsi"
+    }
+  },
+  "businessProfile": {
+    "name": "Nama usaha",
+    "namePlaceholder": "mis. Warung Bu Ayu",
+    "type": "Jenis usaha",
+    "typePlaceholder": "Pilih jenis usaha",
+    "types": {
+      "food_stall": "Warung makan atau restoran",
+      "grocery": "Warung kelontong atau toko kecil",
+      "souvenir_craft": "Oleh-oleh atau kerajinan",
+      "services": "Jasa",
+      "other": "Lainnya"
+    },
+    "regency": "Kabupaten/kota",
+    "regencyPlaceholder": "Pilih kabupaten/kota",
+    "regencies": {
+      "badung": "Badung",
+      "bangli": "Bangli",
+      "buleleng": "Buleleng",
+      "denpasar": "Denpasar",
+      "gianyar": "Gianyar",
+      "jembrana": "Jembrana",
+      "karangasem": "Karangasem",
+      "klungkung": "Klungkung",
+      "tabanan": "Tabanan"
+    },
+    "touristDependence": "Siapa pelanggan utamamu?",
+    "touristDependencePlaceholder": "Pilih jawaban",
+    "touristDependenceOptions": {
+      "high": "Sebagian besar wisatawan",
+      "partial": "Wisatawan dan warga lokal",
+      "none": "Sebagian besar warga lokal"
     }
   }
 }

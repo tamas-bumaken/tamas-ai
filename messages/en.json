@@ -22,39 +22,37 @@
     "home": "Back to home"
   },
   "categories": {
-    "Food": "Food",
-    "Transportation": "Transportation",
-    "Housing": "Housing",
-    "Shopping": "Shopping",
-    "Subscription": "Subscription",
-    "Installments": "Installments",
-    "Phone & Data": "Phone & Data",
-    "Family Transfer": "Family Transfer",
-    "Health": "Health",
-    "Entertainment": "Entertainment",
-    "Education": "Education",
-    "Savings & Investment": "Savings & Investment",
-    "Others": "Others",
-    "Salary": "Salary",
-    "Side Income": "Side Income"
+    "Sales": "Sales",
+    "Other Business Income": "Other business income",
+    "Owner Capital": "Owner capital",
+    "Raw Materials": "Materials & stock",
+    "Staff Wages": "Staff wages",
+    "Rent & Utilities": "Rent & utilities",
+    "Transport & Delivery": "Transport & delivery",
+    "Marketing & Platform Fees": "Marketing & platform fees",
+    "Equipment": "Equipment",
+    "Other Business Expense": "Other business expense",
+    "Loan Installments": "Loan installments",
+    "Owner Withdrawal": "Owner withdrawal",
+    "Ceremony & Adat": "Ceremony & adat"
   },
   "chatModes": {
     "personal": {
       "label": "Data access on",
       "description": "Uses your profile and transactions",
       "suggestions": {
-        "q1": "What's my total spending this month?",
-        "q2": "Which category am I overspending on this month?",
-        "q3": "How much can I save each month?"
+        "q1": "How much profit did I make this month?",
+        "q2": "How much business money went to personal and adat needs?",
+        "q3": "What should I fix this week?"
       }
     },
     "general": {
       "label": "Data access off",
       "description": "Your data stays out",
       "suggestions": {
-        "q1": "How big should my emergency fund be on a 6 million salary?",
-        "q2": "What's the difference between a money market fund and a deposit?",
-        "q3": "How do I start investing with 500k a month?"
+        "q1": "How do I keep business money apart from personal money?",
+        "q2": "What do I need to prepare to apply for KUR?",
+        "q3": "How do I set a selling price that doesn't lose money?"
       }
     }
   },
@@ -107,8 +105,8 @@
       }
     },
     "quickEntry": {
-      "input": "nasi padang lunch 25k",
-      "description": "Nasi padang lunch",
+      "input": "bought chicken 400k",
+      "description": "Bought chicken",
       "descriptionLabel": "Description",
       "categoryLabel": "Category",
       "amountLabel": "Amount"
@@ -232,7 +230,7 @@
     "collect": {
       "title": "What we collect",
       "account": "<strong>Account:</strong> your email address and password (stored hashed by our authentication provider), or the name, email and picture Google shares when you sign in with Google; and a username.",
-      "profile": "<strong>Profile answers</strong> you choose to give: monthly income, birth year, main financial goal, number of dependents, whether you have debt.",
+      "profile": "<strong>Business profile</strong> you choose to give: business name, business type, regency or city, and who your main customers are.",
       "records": "<strong>Your records:</strong> transactions (amount, type, category, description, date).",
       "conversations": "<strong>AI Advisor conversations:</strong> your questions and the Advisor's answers, so you can return to them. They are kept until you delete the conversation or your account.",
       "settings": "<strong>Settings:</strong> your language and whether the AI Advisor may use your data.",
@@ -290,9 +288,6 @@
     "passwordTooLong": "Password must be at most 72 characters",
     "usernameInvalid": "Use 3–30 lowercase letters, numbers, or underscores",
     "passwordsMismatch": "Passwords do not match",
-    "numberNotNegative": "Enter a number of 0 or more",
-    "birthYearInvalid": "Enter a valid birth year",
-    "dependentsRange": "Enter a whole number from 0 to 20",
     "consentRequired": "Please agree before saving your answers",
     "deleteConfirmation": "Type DELETE to confirm",
     "categoryRequired": "Category is required",
@@ -305,7 +300,8 @@
     "descriptionRequired": "Description is required",
     "categoryFitsType": "Pick a category that fits the type",
     "messageRequired": "Message is required",
-    "messageTooLong": "Message is too long"
+    "messageTooLong": "Message is too long",
+    "businessNameTooLong": "Business name must be at most 80 characters"
   },
   "auth": {
     "fields": {
@@ -342,7 +338,7 @@
         "description": "Create your TAMAS account"
       },
       "title": "Create account",
-      "description": "Track your money and get advice from AI Advisor",
+      "description": "Record your business and get advice from AI Advisor",
       "consent": "By creating an account you agree to our <link>Privacy Policy</link>.",
       "submit": "Create account",
       "submitting": "Creating account...",
@@ -393,34 +389,13 @@
       "updatePasswordFailed": "Failed to update your password. Please try again."
     }
   },
-  "financialGoals": {
-    "emergency_fund": "Build an emergency fund",
-    "pay_off_debt": "Pay off debt",
-    "start_investing": "Start investing",
-    "control_spending": "Control my spending",
-    "save_for_goal": "Save for a specific goal"
-  },
-  "personalContext": {
-    "monthlyIncome": "Monthly income",
-    "monthlyIncomePlaceholder": "e.g. 7000000",
-    "birthYear": "Birth year",
-    "birthYearPlaceholder": "e.g. 1998",
-    "financialGoal": "Main financial goal",
-    "financialGoalPlaceholder": "Select a goal",
-    "dependents": "People who depend on your income",
-    "dependentsPlaceholder": "e.g. 0",
-    "hasDebt": "Do you have active loans or installments?",
-    "hasDebtPlaceholder": "Select an answer",
-    "yes": "Yes",
-    "no": "No"
-  },
   "onboarding": {
     "metadata": {
       "title": "TAMAS - Get started",
-      "description": "Tell AI Advisor about your finances"
+      "description": "Tell AI Advisor about your business"
     },
-    "title": "Help AI Advisor get to know you",
-    "description": "A few quick questions so the advice fits your situation. Every question is optional.",
+    "title": "Tell us about your business",
+    "description": "A few quick questions so AI Advisor's advice fits your business. Every question is optional.",
     "consent": "I agree that these answers are used to personalize AI Advisor and are processed by Google Gemini. I can change them anytime in Profile.",
     "skip": "Skip for now",
     "submit": "Save and continue",
@@ -445,95 +420,88 @@
   "dashboard": {
     "metadata": {
       "title": "TAMAS - Dashboard",
-      "description": "Your personal financial dashboard"
+      "description": "Your business profit and cash"
     },
     "title": "Dashboard",
     "completeProfile": {
-      "body": "Tell AI Advisor about your income and goals to get advice that fits you.",
+      "body": "Tell AI Advisor about your business to get advice that fits you.",
       "cta": "Complete profile"
     },
     "quickLog": {
       "title": "Log a transaction",
-      "description": "Write it the way you would say it, e.g. \"lunch 25k, parking 5k\"."
+      "description": "Write it the way you'd say it, e.g. \"sold 32 nasi campur 25k, bought chicken 400k\"."
     },
     "userMenu": {
       "signedInAs": "Signed in as {username}",
       "profile": "Profile",
       "signOut": "Sign out"
     },
-    "balance": {
-      "title": "Net since you started tracking",
-      "description": "Recorded income minus expenses, not your bank balance",
-      "loading": "Loading balance",
-      "loadError": "We couldn't load your balance. Check your connection and try again.",
-      "income": "Income",
-      "expenses": "Expenses",
-      "reminderLabel": "Money reminder",
-      "reminders": {
-        "empty": "Start by recording your salary and a few daily expenses. A month of tracking shows where your money really goes.",
-        "negative": "You've spent more than you've earned so far. Pick one expense to cut this week, starting with your biggest category.",
-        "highSpending": "More than 80% of your income is going out. Aim for 50% needs, 30% wants and 20% savings.",
-        "habits": {
-          "payYourselfFirst": "Pay yourself first: move your savings to a separate account on payday, before the spending starts.",
-          "emergencyFund": "Build an emergency fund of 3 to 6 months of expenses before putting money into riskier investments.",
-          "debtLimit": "Keep loan and installment payments under 30% of your income, so one bad month doesn't snowball.",
-          "subscriptions": "Check your subscriptions once a month. Small recurring charges add up quietly.",
-          "paylater": "Paylater is still debt. Count every installment as part of next month's budget.",
-          "investHorizon": "Only invest money you won't need for 3 to 5 years. Money for sooner goals belongs in savings or a money market fund."
-        }
-      }
-    },
-    "savings": {
-      "title": "Saved this month",
-      "loading": "Loading this month's savings",
-      "loadError": "We couldn't load this month's savings. Check your connection and try again.",
-      "noIncome": "No income recorded this month yet. Add your salary to see your savings rate.",
-      "nothing": "Nothing recorded this month yet. Add your salary and spending to see how much you keep.",
-      "overspent": "You spent {amount} more than you earned this month.",
-      "aboveTarget": "{amount} above the {target}% target.",
-      "belowTarget": "Save {amount} more to reach {target}%.",
-      "previousNothing": "Nothing recorded",
-      "previousNoIncome": "{amount}, no income",
-      "meterLabel": "Share of this month's income saved",
-      "meterValue": "{rate} of income saved, target {target}%",
-      "rate": "{rate} of income",
-      "target": "Target {target}%",
-      "income": "Income",
-      "spent": "Spent"
-    },
     "categorySpending": {
-      "title": "Spent this month",
-      "loading": "Loading spending by category",
-      "loadError": "We couldn't load this month's spending. Check your connection and try again.",
-      "empty": "No spending recorded this month yet. Log an expense with the quick entry above and it will show up here by category.",
+      "title": "Business costs this month",
+      "loading": "Loading business costs by category",
+      "loadError": "We couldn't load this month's business costs. Check your connection and try again.",
+      "empty": "No business costs recorded this month yet. Log a purchase with the quick entry above and it will show up here by category.",
       "otherCategories": "{count} other categories",
-      "chartLabel": "Spending by category: {breakdown}"
+      "chartLabel": "Business costs by category: {breakdown}"
     },
     "recent": {
       "title": "Recent transactions",
       "viewAll": "View all",
       "loading": "Loading transactions",
       "loadError": "We couldn't load your transactions. Check your connection and try again.",
-      "empty": "No transactions yet. Once you record income or an expense, the latest five show up here."
+      "empty": "No transactions yet. Once you record a sale or a purchase, the latest five show up here."
     },
     "loggingFeedback": {
       "noneLastMonth": "{category} this month: {spent}. None by this point last month.",
       "sameAsLastMonth": "{category} this month: {spent}, the same as by this point last month.",
       "moreThanLastMonth": "{category} this month: {spent}, {difference} more than by this point last month.",
       "lessThanLastMonth": "{category} this month: {spent}, {difference} less than by this point last month."
+    },
+    "profit": {
+      "title": "Business profit this month",
+      "loading": "Loading business profit",
+      "loadError": "We couldn't load your business profit. Check your connection and try again.",
+      "noSales": "No sales recorded this month yet. Record your sales to see the profit.",
+      "nothing": "Nothing recorded this month yet. Record sales and purchases to see your profit.",
+      "loss": "Your business costs are {amount} more than your income this month.",
+      "margin": "{percent} margin on business income.",
+      "previousNothing": "Nothing recorded",
+      "previousNoSales": "{amount}, no sales",
+      "income": "Business income",
+      "expense": "Business costs",
+      "note": "A simple profit for micro-businesses: materials and equipment count as costs when bought. Not an accounting statement."
+    },
+    "cash": {
+      "title": "Cash left this month",
+      "loading": "Loading cash left",
+      "loadError": "We couldn't load your cash left. Check your connection and try again.",
+      "profit": "Business profit",
+      "capital": "Capital put in",
+      "loan": "Loan installments",
+      "withdrawals": "Taken for personal use",
+      "ceremony": "Ceremony & adat",
+      "insightLabel": "Cash note",
+      "insights": {
+        "empty": "Start by recording today's sales and purchases. Within a week you'll see where your business money goes.",
+        "noSales": "So far this month money has gone out with no sales recorded. Record your sales to see the profit.",
+        "loss": "Business costs are higher than income. Check your biggest cost and your selling prices this week.",
+        "takenMoreThanProfit": "This month {taken} was taken for personal and adat needs, more than the {profit} profit. The difference comes out of your working capital.",
+        "cashNegative": "Your business made a profit, but more money went out than came in this month. Check loan payments and money taken out.",
+        "healthy": "Profit covers all the money you took out this month. Set some cash aside for your next purchases and upcoming holy days."
+      }
     }
   },
   "transactionPage": {
     "metadata": {
       "title": "TAMAS - Transaction",
-      "description": "View and manage your financial transactions"
+      "description": "View and manage your business transactions"
     },
     "title": "Transaction",
-    "description": "View and manage your financial transactions"
+    "description": "View and manage your business transactions"
   },
   "wizard": {
     "inputLabel": "Quick entry: describe transactions to log",
-    "placeholder": "Log a transaction, e.g. \"lunch 25k, parking 5k\"",
+    "placeholder": "Log a transaction, e.g. \"sold 32 nasi 25k, bought chicken 400k\"",
     "submit": "Log transaction",
     "tooManyDrafts": "You can review up to {max} transactions at once. Save or discard the ones below first.",
     "requestFailed": "Request failed with status {status}",
@@ -585,7 +553,7 @@
     },
     "table": {
       "title": "Recent transactions",
-      "description": "Your latest financial activity",
+      "description": "Your latest business activity",
       "searchPlaceholder": "Search descriptions…",
       "searchLabel": "Search transactions by description",
       "headers": {
@@ -608,14 +576,14 @@
     },
     "create": {
       "title": "Create Transaction",
-      "description": "Add a new financial activity",
+      "description": "Record new business activity",
       "submit": "Create Transaction",
       "success": "Transaction created successfully",
       "failed": "Failed to create transaction"
     },
     "update": {
       "title": "Update Transaction",
-      "description": "Edit the details of this financial activity",
+      "description": "Change the details of this activity",
       "submit": "Save Changes",
       "success": "Transaction updated successfully",
       "failed": "Failed to update transaction"
@@ -630,11 +598,11 @@
   "advisor": {
     "open": "Open AI Advisor",
     "close": "Close AI Advisor",
-    "defaultDescription": "Ask about your money",
+    "defaultDescription": "Ask about your business",
     "history": "Saved conversations",
     "newChat": "Start a new chat",
     "newChatTitle": "New chat",
-    "emptyTitle": "Ask about your money",
+    "emptyTitle": "Ask about your business",
     "emptyBody": "Pick a question to start, or write your own below.",
     "streamErrorSuffix": "{message} Try sending it again.",
     "unreachable": "Couldn't reach AI Advisor ({reason}). Try sending it again.",
@@ -643,7 +611,7 @@
     "typing": "AI Advisor is typing",
     "composer": {
       "label": "Message AI Advisor",
-      "placeholder": "Ask about your money…",
+      "placeholder": "Ask about your business…",
       "send": "Send message"
     },
     "feedback": {
@@ -692,18 +660,10 @@
       "description": "What AI Advisor may read when it answers. Messages are processed by Google Gemini.",
       "loading": "Loading data access",
       "label": "Let AI Advisor use my data",
-      "help": "Your profile answers and transactions, so answers are about your own money. When off, AI Advisor only gives general guidance.",
+      "help": "Your business profile and transactions, so answers are about your own business. When off, AI Advisor only gives general guidance.",
       "enabled": "AI Advisor will use your data.",
       "disabled": "AI Advisor will no longer read your data.",
       "saveFailed": "Couldn't save the setting. Please try again."
-    },
-    "advisorContext": {
-      "title": "AI Advisor context",
-      "description": "AI Advisor uses these answers to tailor its advice. They are processed by Google Gemini.",
-      "loading": "Loading your answers",
-      "submit": "Save answers",
-      "updated": "AI Advisor context updated",
-      "saveFailed": "Failed to save your answers. Please try again."
     },
     "data": {
       "title": "Your data",
@@ -724,6 +684,14 @@
       "confirmLabel": "Type {word} to confirm",
       "deleted": "Your account has been deleted",
       "failed": "Failed to delete your account. Please try again."
+    },
+    "businessProfile": {
+      "title": "Business profile",
+      "description": "AI Advisor uses these answers to tailor its advice. They are processed by Google Gemini.",
+      "loading": "Loading your business profile",
+      "submit": "Save business profile",
+      "updated": "Business profile updated",
+      "saveFailed": "Failed to save your business profile. Please try again."
     }
   },
   "apiErrors": {
@@ -763,6 +731,39 @@
       "category": "Category",
       "amount": "Amount",
       "description": "Description"
+    }
+  },
+  "businessProfile": {
+    "name": "Business name",
+    "namePlaceholder": "e.g. Warung Bu Ayu",
+    "type": "Business type",
+    "typePlaceholder": "Select a business type",
+    "types": {
+      "food_stall": "Food stall or restaurant",
+      "grocery": "Grocery or small shop",
+      "souvenir_craft": "Souvenirs or crafts",
+      "services": "Services",
+      "other": "Other"
+    },
+    "regency": "Regency or city",
+    "regencyPlaceholder": "Select a regency or city",
+    "regencies": {
+      "badung": "Badung",
+      "bangli": "Bangli",
+      "buleleng": "Buleleng",
+      "denpasar": "Denpasar",
+      "gianyar": "Gianyar",
+      "jembrana": "Jembrana",
+      "karangasem": "Karangasem",
+      "klungkung": "Klungkung",
+      "tabanan": "Tabanan"
+    },
+    "touristDependence": "Who are your main customers?",
+    "touristDependencePlaceholder": "Select an answer",
+    "touristDependenceOptions": {
+      "high": "Mostly tourists",
+      "partial": "Tourists and locals",
+      "none": "Mostly locals"
     }
   }
 }
