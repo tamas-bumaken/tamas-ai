@@ -6,7 +6,25 @@ export const MAX_TRANSACTIONS_PER_MESSAGE = 5;
 
 // The tool schemas below are also sent to Gemini as function parameters, so the .describe() texts double as model guidance.
 export const wizardTransactionSchema = z.object({
-  amount: z.number().describe("Transaction nominal, a positive number"),
+  amount: z
+    .number()
+    .optional()
+    .describe(
+      "Total nominal, a positive number. Leave it out when you pass quantity and unit_price.",
+    ),
+  // Positivity is checked on the computed amount by transactionPayloadSchema, so the model can correct it.
+  quantity: z
+    .number()
+    .optional()
+    .describe(
+      'How many units, when the text gives a count and a price per unit, e.g. 32 for "32 porsi 25rb". Pass it with unit_price.',
+    ),
+  unit_price: z
+    .number()
+    .optional()
+    .describe(
+      'Price of one unit, e.g. 25000 for "32 porsi 25rb". Pass it with quantity; the total is computed for you.',
+    ),
   type: z.enum(["income", "expense"]).describe("Type of transaction"),
   // The type-fit rule lives in transactionPayloadSchema: a refine here would break .partial() below.
   category: z
@@ -34,7 +52,7 @@ export const wizardSearchArgsSchema = z.object({
     .max(200)
     .optional()
     .describe(
-      'What the transaction was for, e.g. "kopi" or "gaji". Omit it to list the latest transactions.',
+      'What the transaction was for, e.g. "ayam" or "sewa kios". Omit it to list the latest transactions.',
     ),
   start_date: z.iso
     .date()

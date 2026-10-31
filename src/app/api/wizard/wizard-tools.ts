@@ -82,6 +82,18 @@ export type WizardRunState = {
   proposals: Map<string, WizardProposal>;
 };
 
+// Models never do arithmetic: "32 porsi 25rb" arrives as a quantity and a unit price, and the total is computed here,
+// rounded to whole rupiah. Without both, the fields pass through and transactionPayloadSchema decides if an amount is missing.
+function withComputedAmount({
+  quantity,
+  unit_price,
+  ...fields
+}: Partial<z.infer<typeof wizardTransactionSchema>>) {
+  return quantity !== undefined && unit_price !== undefined
+    ? { ...fields, amount: Math.round(quantity * unit_price) }
+    : fields;
+}
+
 const transactionRowSchema = z.object({
   id: z.string(),
   amount: z.coerce.number(),
@@ -156,7 +168,9 @@ export async function runWizardTool(
       if (!args.success) return invalidArgs(z.prettifyError(args.error));
 
       // Same rules the action enforces, checked first so the model gets to fix a violation instead of the request failing.
-      const payload = transactionPayloadSchema.safeParse(args.data);
+      const payload = transactionPayloadSchema.safeParse(
+        withComputedAmount(args.data),
+      );
       if (!payload.success) return invalidArgs(z.prettifyError(payload.error));
 
       // The parsed payload, not the raw args: the review card shows exactly what would be saved.
@@ -175,7 +189,7 @@ export async function runWizardTool(
       // The merged row is what updateTransaction will receive on confirm, so it is checked against the same rules now.
       const payload = transactionPayloadSchema.safeParse({
         ...before,
-        ...changes,
+        ...withComputedAmount(changes),
       });
       if (!payload.success) return invalidArgs(z.prettifyError(payload.error));
 
