@@ -1,7 +1,7 @@
-// D1 (decided 2026-10-24): English by default, Bahasa Indonesia as an option the user picks.
+// D1 (changed 2026-10-31 for TAMAS): Bahasa Indonesia by default, English as an option the user picks.
 export const LOCALES = ["en", "id"] as const;
 export type Locale = (typeof LOCALES)[number];
-export const DEFAULT_LOCALE: Locale = "en";
+export const DEFAULT_LOCALE: Locale = "id";
 
 // URLs carry no locale; the proxy picks the app/[locale] folder from this cookie.
 export const LOCALE_COOKIE = "NEXT_LOCALE";

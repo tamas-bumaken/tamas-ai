@@ -7,7 +7,7 @@ const UNLOCALIZED_PATH_PREFIXES = ["/api/", "/auth/"];
 
 // Pages live under app/[locale] while URLs stay unprefixed, so the request is rewritten to the cookie's folder.
 // next-intl's own middleware is not used: it either ignores the cookie (localeDetection off) or lets a browser set
-// to Indonesian override the English default (localeDetection on).
+// to English override the Indonesian default (localeDetection on).
 export function localizedNext(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
   if (UNLOCALIZED_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
