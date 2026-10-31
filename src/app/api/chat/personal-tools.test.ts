@@ -20,7 +20,6 @@ function fakeClient(...results: RpcResult[]) {
 
   const client: PersonalToolContext = {
     supabase: { rpc } as unknown as PersonalToolContext["supabase"],
-    monthlyIncome: 10_000_000,
     today: TODAY,
   };
   return { client, rpc };
@@ -42,7 +41,9 @@ describe("get_filtered_total", () => {
       properties: {
         keywords: { type: "array" },
         exclude_keywords: { type: "array" },
-        category: { enum: expect.arrayContaining(["Food", "Installments"]) },
+        category: {
+          enum: expect.arrayContaining(["Raw Materials", "Ceremony & Adat"]),
+        },
         type: { enum: ["income", "expense"] },
       },
     });
@@ -55,9 +56,9 @@ describe("get_filtered_total", () => {
         largest_matches: [
           {
             type: "expense",
-            category: "Food",
+            category: "Raw Materials",
             amount: 32000,
-            description: "KOPI kenangan",
+            description: "AYAM potong",
             date: "2026-10-20",
           },
         ],
@@ -69,8 +70,8 @@ describe("get_filtered_total", () => {
       call({
         start_date: "2026-10-01",
         end_date: "2026-10-31",
-        keywords: ["kopi", "coffee"],
-        exclude_keywords: ["kopiah"],
+        keywords: ["ayam", "chicken"],
+        exclude_keywords: ["ayaman"],
         type: "expense",
       }),
       client,
@@ -79,12 +80,12 @@ describe("get_filtered_total", () => {
     expect(rpc).toHaveBeenCalledWith("aggregate_transactions", {
       start_date: "2026-10-01",
       end_date: "2026-10-31",
-      keywords: ["kopi", "coffee"],
+      keywords: ["ayam", "chicken"],
       category_filter: null,
       type_filter: "expense",
-      exclude_keywords: ["kopiah"],
+      exclude_keywords: ["ayaman"],
     });
-    // 1–23 October has 23 days so far: 75,000 / 23 = 3,260.87 → 3,261; 75,000 is 0.75% of 10,000,000 → 0.7.
+    // 1–23 October has 23 days so far: 75,000 / 23 = 3,260.87 → 3,261.
     expect(response.response?.output).toMatchObject({
       days_counted: 23,
       totals: [
@@ -93,10 +94,9 @@ describe("get_filtered_total", () => {
           total: 75_000,
           transaction_count: 3,
           daily_average: 3_261,
-          percent_of_monthly_income: 0.7,
         },
       ],
-      largest_matches: [{ description: "KOPI kenangan", amount: 32_000 }],
+      largest_matches: [{ description: "AYAM potong", amount: 32_000 }],
     });
   });
 
@@ -119,7 +119,7 @@ describe("get_filtered_total", () => {
       call({
         start_date: "2026-10-31",
         end_date: "2026-10-01",
-        category: "Food",
+        category: "Raw Materials",
       }),
       client,
     );
@@ -139,7 +139,7 @@ describe("get_filtered_total", () => {
       call({
         start_date: "2026-10-01",
         end_date: "2026-10-31",
-        category: "Food",
+        category: "Raw Materials",
       }),
       client,
     );
@@ -150,72 +150,73 @@ describe("get_filtered_total", () => {
   });
 });
 
-describe("get_spending_summary", () => {
+describe("get_business_summary", () => {
   const summaryCall = (args: Record<string, unknown>): FunctionCall => ({
     id: "call-2",
-    name: "get_spending_summary",
+    name: "get_business_summary",
     args,
+  });
+
+  const row = (
+    type: "income" | "expense",
+    category: string,
+    total: number,
+  ) => ({
+    type,
+    category,
+    total,
+    transaction_count: 1,
   });
 
   const october: RpcResult = {
     data: [
-      {
-        type: "income",
-        category: "Salary",
-        total: 10_000_000,
-        transaction_count: 1,
-      },
-      {
-        type: "expense",
-        category: "Food",
-        total: 717_000,
-        transaction_count: 27,
-      },
-      {
-        type: "expense",
-        category: "Shopping",
-        total: 2_000_000,
-        transaction_count: 2,
-      },
+      row("income", "Sales", 10_000_000),
+      row("income", "Owner Capital", 1_000_000),
+      row("expense", "Raw Materials", 4_000_000),
+      row("expense", "Staff Wages", 1_000_000),
+      row("expense", "Owner Withdrawal", 2_000_000),
+      row("expense", "Ceremony & Adat", 1_500_000),
+      row("expense", "Loan Installments", 500_000),
     ],
     error: null,
   };
   const september: RpcResult = {
     data: [
-      {
-        type: "income",
-        category: "Salary",
-        total: 10_000_000,
-        transaction_count: 1,
-      },
-      {
-        type: "expense",
-        category: "Food",
-        total: 900_000,
-        transaction_count: 30,
-      },
-      {
-        type: "expense",
-        category: "Transportation",
-        total: 150_000,
-        transaction_count: 6,
-      },
+      row("income", "Sales", 8_000_000),
+      row("expense", "Raw Materials", 4_000_000),
+      row("expense", "Transport & Delivery", 500_000),
+      row("expense", "Owner Withdrawal", 1_000_000),
     ],
     error: null,
   };
 
   type SummaryOutput = {
     days_counted: number;
-    daily_average_expense: number | null;
-    total_expense_percent_of_monthly_income: number | null;
+    business_income: number;
+    business_expense: number;
+    profit: number;
+    profit_margin_percent: number | null;
+    owner_taken: number;
+    owner_withdrawals: number;
+    ceremony: number;
+    owner_taken_percent_of_profit: number | null;
+    owner_capital: number;
+    loan_installments: number;
+    cash_left: number;
+    daily_average_business_income: number | null;
+    daily_average_business_expense: number | null;
     categories: {
       category: string;
+      group: string;
       daily_average: number | null;
-      percent_of_monthly_income: number | null;
+      percent_of_type_total: number | null;
+      percent_of_business_income: number | null;
     }[];
     comparison?: {
       changes: {
-        total_expense: { difference: number; percent_change: number | null };
+        profit: { difference: number; percent_change: number | null };
+        owner_taken: { difference: number; percent_change: number | null };
+        cash_left: { difference: number; percent_change: number | null };
         categories: {
           category: string;
           total: number;
@@ -227,29 +228,88 @@ describe("get_spending_summary", () => {
     };
   };
 
-  it("returns income shares and daily averages instead of leaving them to the model", async () => {
-    const { client } = fakeClient(october);
-
+  async function summarize(...results: RpcResult[]) {
+    const { client, rpc } = fakeClient(...results);
     const response = await runPersonalTool(
       summaryCall({ start_date: "2026-10-01", end_date: "2026-10-31" }),
       client,
     );
-    const output = response.response?.output as SummaryOutput;
 
-    // The month is counted up to today (23 days), not all 31: 2,717,000 / 23 = 118,130.4.
-    expect(output.days_counted).toBe(23);
-    expect(output.daily_average_expense).toBe(118_130);
-    expect(output.total_expense_percent_of_monthly_income).toBe(27.1);
-    expect(
-      output.categories.find((row) => row.category === "Food"),
-    ).toMatchObject({
-      daily_average: 31_174,
-      percent_of_monthly_income: 7.1,
+    return { output: response.response?.output as SummaryOutput, rpc };
+  }
+
+  it("returns the profit instead of leaving it to the model", async () => {
+    const { output } = await summarize(october);
+
+    expect(output).toMatchObject({
+      business_income: 10_000_000,
+      business_expense: 5_000_000,
+      profit: 5_000_000,
+      profit_margin_percent: 50,
     });
-    expect(
-      output.categories.find((row) => row.category === "Salary")
-        ?.percent_of_monthly_income,
-    ).toBeNull();
+  });
+
+  it("separates what the owner took and shows it against the profit", async () => {
+    const { output } = await summarize(october);
+
+    expect(output).toMatchObject({
+      owner_withdrawals: 2_000_000,
+      ceremony: 1_500_000,
+      owner_taken: 3_500_000,
+      owner_taken_percent_of_profit: 70,
+    });
+  });
+
+  it("returns the cash left with capital and loan payments apart", async () => {
+    const { output } = await summarize(october);
+
+    expect(output).toMatchObject({
+      owner_capital: 1_000_000,
+      loan_installments: 500_000,
+      cash_left: 2_000_000,
+    });
+  });
+
+  it("averages only over the days that have passed", async () => {
+    const { output } = await summarize(october);
+
+    // The month is counted up to today (23 days): 10,000,000 / 23 = 434,782.6; 5,000,000 / 23 = 217,391.3.
+    expect(output.days_counted).toBe(23);
+    expect(output.daily_average_business_income).toBe(434_783);
+    expect(output.daily_average_business_expense).toBe(217_391);
+  });
+
+  it("labels each category and shows costs as a share of business income", async () => {
+    const { output } = await summarize(october);
+    const rawMaterials = output.categories.find(
+      (category) => category.category === "Raw Materials",
+    );
+    const ceremony = output.categories.find(
+      (category) => category.category === "Ceremony & Adat",
+    );
+
+    expect(rawMaterials).toMatchObject({
+      group: "business_expense",
+      percent_of_business_income: 40,
+    });
+    expect(ceremony).toMatchObject({
+      group: "owner_taken",
+      percent_of_business_income: 15,
+    });
+  });
+
+  it("has no share of profit when the business made none", async () => {
+    const { output } = await summarize({
+      data: [
+        row("income", "Sales", 1_000_000),
+        row("expense", "Raw Materials", 1_500_000),
+        row("expense", "Owner Withdrawal", 200_000),
+      ],
+      error: null,
+    });
+
+    expect(output.profit).toBe(-500_000);
+    expect(output.owner_taken_percent_of_profit).toBeNull();
   });
 
   it("computes the differences when asked to compare two periods", async () => {
@@ -268,47 +328,38 @@ describe("get_spending_summary", () => {
       ?.changes;
 
     expect(rpc).toHaveBeenCalledTimes(2);
-    // 2,717,000 vs 1,050,000.
-    expect(changes?.total_expense).toEqual({
-      difference: 1_667_000,
-      percent_change: 158.7,
+    // Profit 5,000,000 vs 3,500,000.
+    expect(changes?.profit).toEqual({
+      difference: 1_500_000,
+      percent_change: 42.8,
+    });
+    // Taken 3,500,000 vs 1,000,000.
+    expect(changes?.owner_taken).toEqual({
+      difference: 2_500_000,
+      percent_change: 250,
     });
     expect(changes?.categories).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          category: "Food",
-          difference: -183_000,
-          percent_change: -20.3,
+          category: "Raw Materials",
+          difference: 0,
+          percent_change: 0,
         }),
         // New this month: no percentage against zero.
         expect.objectContaining({
-          category: "Shopping",
+          category: "Staff Wages",
           previous_total: 0,
           percent_change: null,
         }),
         // Gone this month, but still listed.
         expect.objectContaining({
-          category: "Transportation",
+          category: "Transport & Delivery",
           total: 0,
-          difference: -150_000,
+          difference: -500_000,
           percent_change: -100,
         }),
       ]),
     );
-  });
-
-  it("leaves the income share empty for a range longer than one month", async () => {
-    const { client } = fakeClient(october);
-
-    const response = await runPersonalTool(
-      summaryCall({ start_date: "2026-09-01", end_date: "2026-10-31" }),
-      client,
-    );
-
-    expect(
-      (response.response?.output as SummaryOutput)
-        .total_expense_percent_of_monthly_income,
-    ).toBeNull();
   });
 
   it("asks for both comparison dates", async () => {

@@ -1,6 +1,9 @@
 import "server-only";
 
-import { TRANSACTION_CATEGORIES } from "@/constans/transaction-categories";
+import {
+  getCategoryGroup,
+  TRANSACTION_CATEGORIES,
+} from "@/constans/transaction-categories";
 import { generateEmbedding } from "@/lib/embedding";
 import { createClient } from "@/lib/supabase/server";
 import { percentOf, summarizeTransactions } from "@/lib/transaction-summary";
@@ -10,12 +13,7 @@ import {
   FunctionResponse,
 } from "@google/genai";
 import z from "zod";
-import {
-  change,
-  dailyAverage,
-  elapsedDays,
-  percentOfMonthlyIncome,
-} from "./derived-figures";
+import { change, dailyAverage, elapsedDays } from "./derived-figures";
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
@@ -23,8 +21,6 @@ type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 // RLS is what limits every query to their own rows.
 export type PersonalToolContext = {
   supabase: SupabaseClient;
-  // From the user's profile, for "share of monthly income" figures; null when they did not share it.
-  monthlyIncome: number | null;
   // Today in Jakarta, so averages only count days that have passed.
   today: string;
 };
@@ -82,7 +78,7 @@ const filteredTotalArgsSchema = z
       .min(1)
       .optional()
       .describe(
-        'Words to look for in the transaction description, case-insensitive; a transaction counts when any of them appears. Descriptions can be in Indonesian or English, so include both, e.g. ["kopi", "coffee"].',
+        'Words to look for in the transaction description, case-insensitive; a transaction counts when any of them appears. Descriptions can be in Indonesian or English, so include both, e.g. ["ayam", "chicken"].',
       ),
     exclude_keywords: keywordListSchema
       .optional()
@@ -103,7 +99,7 @@ const filteredTotalArgsSchema = z
   })
   .refine(({ keywords, category }) => keywords || category, {
     message:
-      "Pass keywords or a category; for totals without a filter use get_spending_summary",
+      "Pass keywords or a category; for totals without a filter use get_business_summary",
   });
 
 const aggregateResultSchema = z.object({
@@ -136,15 +132,15 @@ const matchRowSchema = z.object({
 
 export const PERSONAL_TOOL_DECLARATIONS: FunctionDeclaration[] = [
   {
-    name: "get_spending_summary",
+    name: "get_business_summary",
     description:
-      "Returns the user's total income, total expense, net amount, savings rate, and totals per category for a date range (inclusive), with ready-made figures: each category's share of its type's total, daily averages over the days that have passed, and shares of the monthly income from the profile (for ranges within one month). To compare two periods, call it once with compare_start_date and compare_end_date: the differences and percentage changes are computed for you.",
+      "Returns the business's figures for a date range (inclusive): business income, business costs, profit and profit margin; what the owner took out (personal withdrawals and ceremony or adat costs) and its share of the profit; capital put in, loan payments, and the cash left. Also returns totals per category with each category's group, its share of its type's total, its share of business income, and daily averages over the days that have passed. To compare two periods, call it once with compare_start_date and compare_end_date: the differences and percentage changes are computed for you.",
     parametersJsonSchema: z.toJSONSchema(summaryArgsSchema),
   },
   {
     name: "get_filtered_total",
     description:
-      'Returns the exact total and number of the user\'s transactions whose description contains given keywords and/or that are in a category, for a date range (inclusive), split into income and expense, plus the 5 largest matches. Use it whenever the user asks how much they spent or received on a specific item, merchant or purpose, e.g. "total kopi bulan ini" or "berapa habis buat ojek minggu ini". If largest_matches contains unrelated transactions, call it again with exclude_keywords.',
+      'Returns the exact total and number of the user\'s transactions whose description contains given keywords and/or that are in a category, for a date range (inclusive), split into income and expense, plus the 5 largest matches. Use it whenever the user asks how much they spent or received on a specific item, supplier or purpose, e.g. "total beli ayam bulan ini" or "berapa habis buat bensin minggu ini". If largest_matches contains unrelated transactions, call it again with exclude_keywords.',
     parametersJsonSchema: z.toJSONSchema(filteredTotalArgsSchema),
   },
   {
@@ -157,7 +153,7 @@ export const PERSONAL_TOOL_DECLARATIONS: FunctionDeclaration[] = [
         query: {
           type: "string",
           description:
-            'What the transactions were for, e.g. "kopi", "ojek online", "gaji".',
+            'What the transactions were for, e.g. "ayam", "sewa kios", "gaji karyawan".',
         },
       },
       required: ["query"],
@@ -167,6 +163,26 @@ export const PERSONAL_TOOL_DECLARATIONS: FunctionDeclaration[] = [
 
 type Summary = Awaited<ReturnType<typeof summarizeTransactions>>;
 
+function categories(
+  { categories: rows, businessIncome }: Summary,
+  totalIncome: number,
+  totalExpense: number,
+  days: number,
+) {
+  return rows.map((row) => ({
+    ...row,
+    group: getCategoryGroup(row.category),
+    // Share of the total for the row's own type, so expense categories add up to 100.
+    percent_of_type_total: percentOf(
+      row.total,
+      row.type === "income" ? totalIncome : totalExpense,
+    ),
+    daily_average: dailyAverage(row.total, days),
+    percent_of_business_income:
+      row.type === "expense" ? percentOf(row.total, businessIncome) : null,
+  }));
+}
+
 // Totals, percentages and averages are computed here because models are unreliable at arithmetic,
 // and the advice they give leans on exactly these numbers (Phase 1 / 1.13).
 function describePeriod(
@@ -175,33 +191,34 @@ function describePeriod(
   endDate: string,
   context: PersonalToolContext,
 ) {
-  const { totalIncome, totalExpense, net, savingsRatePercent, categories } =
+  const { totalIncome, totalExpense, businessIncome, businessExpense } =
     summary;
   const days = elapsedDays(startDate, endDate, context.today);
-  const shareOfIncome = (total: number) =>
-    percentOfMonthlyIncome(total, context.monthlyIncome, startDate, endDate);
 
   return {
     start_date: startDate,
     end_date: endDate,
     days_counted: days,
-    total_income: totalIncome,
-    total_expense: totalExpense,
-    net,
-    savings_rate_percent: savingsRatePercent,
-    daily_average_expense: dailyAverage(totalExpense, days),
-    total_expense_percent_of_monthly_income: shareOfIncome(totalExpense),
-    categories: categories.map((row) => ({
-      ...row,
-      // Share of the total for the row's own type, so expense categories add up to 100.
-      percent_of_type_total: percentOf(
-        row.total,
-        row.type === "income" ? totalIncome : totalExpense,
-      ),
-      daily_average: dailyAverage(row.total, days),
-      percent_of_monthly_income:
-        row.type === "expense" ? shareOfIncome(row.total) : null,
-    })),
+    business_income: businessIncome,
+    business_expense: businessExpense,
+    profit: summary.profit,
+    profit_margin_percent: summary.profitMarginPercent,
+    daily_average_business_income: dailyAverage(businessIncome, days),
+    daily_average_business_expense: dailyAverage(businessExpense, days),
+    owner_withdrawals: summary.ownerWithdrawals,
+    ceremony: summary.ceremony,
+    owner_taken: summary.ownerTaken,
+    // Null when the business made no profit, where a share of it means nothing.
+    owner_taken_percent_of_profit: percentOf(
+      summary.ownerTaken,
+      summary.profit,
+    ),
+    owner_capital: summary.ownerCapital,
+    loan_installments: summary.loanInstallments,
+    cash_in: totalIncome,
+    cash_out: totalExpense,
+    cash_left: summary.net,
+    categories: categories(summary, totalIncome, totalExpense, days),
   };
 }
 
@@ -232,7 +249,7 @@ function compareCategories(current: Summary, previous: Summary) {
   ].map((row) => ({ ...row, ...change(row.total, row.previous_total) }));
 }
 
-async function getSpendingSummary(
+async function getBusinessSummary(
   {
     start_date,
     end_date,
@@ -260,13 +277,23 @@ async function getSpendingSummary(
     comparison: {
       start_date: compare_start_date,
       end_date: compare_end_date,
-      total_income: previous.totalIncome,
-      total_expense: previous.totalExpense,
-      net: previous.net,
+      business_income: previous.businessIncome,
+      business_expense: previous.businessExpense,
+      profit: previous.profit,
+      owner_taken: previous.ownerTaken,
+      cash_left: previous.net,
       changes: {
-        total_income: change(current.totalIncome, previous.totalIncome),
-        total_expense: change(current.totalExpense, previous.totalExpense),
-        net: change(current.net, previous.net),
+        business_income: change(
+          current.businessIncome,
+          previous.businessIncome,
+        ),
+        business_expense: change(
+          current.businessExpense,
+          previous.businessExpense,
+        ),
+        profit: change(current.profit, previous.profit),
+        owner_taken: change(current.ownerTaken, previous.ownerTaken),
+        cash_left: change(current.net, previous.net),
         categories: compareCategories(current, previous),
       },
     },
@@ -297,15 +324,6 @@ async function getFilteredTotal(
     totals: totals.map((row) => ({
       ...row,
       daily_average: dailyAverage(row.total, days),
-      percent_of_monthly_income:
-        row.type === "expense"
-          ? percentOfMonthlyIncome(
-              row.total,
-              context.monthlyIncome,
-              args.start_date,
-              args.end_date,
-            )
-          : null,
     })),
     largest_matches,
   };
@@ -350,12 +368,12 @@ export async function runPersonalTool(
 
   try {
     switch (call.name) {
-      case "get_spending_summary": {
+      case "get_business_summary": {
         const args = summaryArgsSchema.safeParse(call.args);
         if (!args.success) return invalidArgs(args.error);
 
         return respond({
-          output: await getSpendingSummary(args.data, context),
+          output: await getBusinessSummary(args.data, context),
         });
       }
       case "get_filtered_total": {

@@ -35,7 +35,7 @@ import {
 } from "./personal-tools";
 import { buildSystemInstruction } from "./system-instruction";
 
-const CHAT_MODEL = "gemini-3.6-flash";
+const CHAT_MODEL = "gemini-3-flash-preview";
 
 // Bounds the Gemini calls one message can trigger; the round after the last one must answer in text.
 const MAX_TOOL_ROUNDS = 3;
@@ -196,13 +196,7 @@ export async function POST(request: Request) {
     mode === "personal" ? { mode, profile } : { mode },
   );
   const toolContext: PersonalToolContext | null =
-    mode === "personal"
-      ? {
-          supabase,
-          monthlyIncome: profile.monthly_income,
-          today: getTodayInJakarta(),
-        }
-      : null;
+    mode === "personal" ? { supabase, today: getTodayInJakarta() } : null;
   const usage = createUsageTotals();
   const encoder = new TextEncoder();
 

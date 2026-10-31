@@ -29,24 +29,6 @@ export function dailyAverage(total: number, days: number): number | null {
   return days > 0 ? Math.round(total / days) : null;
 }
 
-// Only a range inside one calendar month can be compared with a monthly income.
-export function isWithinOneMonth(startDate: string, endDate: string): boolean {
-  return startDate.slice(0, 7) === endDate.slice(0, 7);
-}
-
-export function percentOfMonthlyIncome(
-  total: number,
-  monthlyIncome: number | null,
-  startDate: string,
-  endDate: string,
-): number | null {
-  if (monthlyIncome === null || !isWithinOneMonth(startDate, endDate)) {
-    return null;
-  }
-
-  return percentOf(total, monthlyIncome);
-}
-
 // Truncated like percentOf; null when the previous value is 0, where a percentage means nothing.
 export function change(current: number, previous: number) {
   return {

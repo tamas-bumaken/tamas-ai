@@ -1,11 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  change,
-  dailyAverage,
-  elapsedDays,
-  isWithinOneMonth,
-  percentOfMonthlyIncome,
-} from "./derived-figures";
+import { change, dailyAverage, elapsedDays } from "./derived-figures";
 
 describe("elapsedDays", () => {
   it("counts a month asked for mid-month only up to today", () => {
@@ -34,27 +28,6 @@ describe("dailyAverage", () => {
 
   it("is null when no day has passed", () => {
     expect(dailyAverage(500_000, 0)).toBeNull();
-  });
-});
-
-describe("percentOfMonthlyIncome", () => {
-  it("is the truncated share of the profile income for a range within one month", () => {
-    expect(isWithinOneMonth("2026-10-01", "2026-10-23")).toBe(true);
-    expect(
-      percentOfMonthlyIncome(717_000, 10_000_000, "2026-10-01", "2026-10-23"),
-    ).toBe(7.1);
-  });
-
-  it("is null across months or without an income", () => {
-    expect(
-      percentOfMonthlyIncome(717_000, 10_000_000, "2026-09-15", "2026-10-15"),
-    ).toBeNull();
-    expect(
-      percentOfMonthlyIncome(717_000, null, "2026-10-01", "2026-10-23"),
-    ).toBeNull();
-    expect(
-      percentOfMonthlyIncome(717_000, 0, "2026-10-01", "2026-10-23"),
-    ).toBeNull();
   });
 });
 
