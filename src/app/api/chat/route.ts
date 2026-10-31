@@ -174,7 +174,7 @@ export async function POST(request: Request) {
   // Created while the request is still in scope, since the tools and the usage write run after the response has started streaming.
   const supabase = await createClient();
 
-  // Follows the Profile setting (Phase 1 / 1.9). If it cannot be read, answer without the user's data rather than with it.
+  // Follows the saved mode, never the request. If it cannot be read, answer without the user's data rather than with it.
   let mode: ChatMode;
   try {
     mode = await loadAdvisorMode(supabase, profile.id);

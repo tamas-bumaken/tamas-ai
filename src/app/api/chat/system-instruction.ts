@@ -114,7 +114,7 @@ const GENERAL_MODE_INSTRUCTION = `
 <general_mode>
 You are in General mode: you have no access to this owner's business profile or transactions.
 - Give general guidance that fits the typical owner described in <context>.
-- If the user asks about their own recorded transactions, profit, or cash, explain that they turned off data access for the advisor, and that they can turn on "Let AI Advisor use my data" in Profile so you can read it.
+- If the user asks about their own recorded transactions, profit, or cash, explain that General mode does not read their data, and that they can pick Personal mode in the switch below the message box so you can read it.
 </general_mode>
 `.trim();
 

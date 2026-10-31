@@ -13,13 +13,18 @@ import {
 } from "@/components/ui/drawer";
 import { BotIcon, HistoryIcon, SquarePenIcon, XIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { getAdvisorMode } from "@/actions/advisor/actions";
+import { toast } from "sonner";
+import {
+  getAdvisorMode,
+  setAdvisorUsesPersonalData,
+} from "@/actions/advisor/actions";
 import ChatbotTextarea from "./chatbot-textarea";
 import ChatMessageItem from "./chat-message";
 import { ChatMessage, ChatMessagePart, ChatStreamEvent } from "@/types/chat";
 import {
+  ChatMode,
   ChatRequest,
   MAX_CHAT_HISTORY_MESSAGES,
 } from "@/validations/chatbot-validations";
@@ -62,13 +67,44 @@ export default function ChatbotDrawer() {
   // the page is prerendered, and Cache Components rejects random values during render.
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [view, setView] = useState<"chat" | "history">("chat");
-  // Set in Profile; the server applies it to every request, this copy only picks the suggestions and the note.
-  const { data: mode } = useQuery({
+  // The server applies the saved mode to every request; this copy only drives the switch, suggestions and description.
+  const { data: savedMode } = useQuery({
     queryKey: ["advisor-mode"],
     queryFn: () => getAdvisorMode(),
   });
   const [isPending, setIsPending] = useState<boolean>(false);
   const { isOpen, setIsOpen } = useAdvisorDrawer();
+
+  const {
+    mutate: changeMode,
+    isPending: isSavingMode,
+    variables: requestedMode,
+  } = useMutation({
+    mutationFn: (next: ChatMode) =>
+      setAdvisorUsesPersonalData(next === "personal"),
+    onSuccess: (result, next) => {
+      if ("error" in result) {
+        toast.error(result.error);
+        return;
+      }
+
+      queryClient.setQueryData(["advisor-mode"], next);
+
+      if (next === "personal") {
+        toast.success(t("modeSwitch.personalOn"));
+      } else if (conversation.length > 0) {
+        // The chat is resent with every message, so its figures would reach the model after the user turned data off.
+        startNewChat();
+        toast.success(t("modeSwitch.generalOnNewChat"));
+      } else {
+        toast.success(t("modeSwitch.generalOn"));
+      }
+    },
+    onError: () => {
+      toast.error(t("modeSwitch.saveFailed"));
+    },
+  });
+  const mode = isSavingMode ? requestedMode : savedMode;
 
   useEffect(() => () => abortRef.current?.abort(), []);
 
@@ -151,7 +187,8 @@ export default function ChatbotDrawer() {
   }
 
   async function sendMessage(message: string) {
-    if (isPending) return;
+    // While a mode change saves, the server could still answer in the mode the user just left.
+    if (isPending || isSavingMode) return;
 
     const controller = new AbortController();
     abortRef.current = controller;
@@ -348,8 +385,9 @@ export default function ChatbotDrawer() {
           <DrawerFooter className="pt-2">
             <ChatbotTextarea
               mode={mode}
+              onModeChange={changeMode}
               sendMessage={sendMessage}
-              isPending={isPending}
+              isPending={isPending || isSavingMode}
             />
           </DrawerFooter>
         )}

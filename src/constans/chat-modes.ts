@@ -1,7 +1,7 @@
 import { ChatMode } from "@/validations/chatbot-validations";
 import { GlobeIcon, LucideIcon, UserRoundIcon } from "lucide-react";
 
-// The mode follows the "Let AI Advisor use my data" setting in Profile (Phase 1 / 1.9); this is how the drawer shows it.
+// Chosen with the switch in the Advisor drawer and saved on the profile; this is how the app shows each mode.
 // Labels, descriptions and the starter questions live in the "chatModes" messages; the questions are sent as-is when
 // tapped, so they are written the way users actually ask.
 type ChatModeOption = {

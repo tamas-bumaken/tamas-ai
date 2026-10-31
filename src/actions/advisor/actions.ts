@@ -32,7 +32,7 @@ export async function sendAdvisorFeedback(
   return { success: true };
 }
 
-// Read by the Advisor drawer for its suggestions and privacy note, and by the Profile setting.
+// Read by the Advisor drawer for its mode switch, suggestions and description.
 export async function getAdvisorMode() {
   const userId = await requireUserId();
   const supabase = await createClient();

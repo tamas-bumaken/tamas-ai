@@ -36,7 +36,7 @@ export function PrivacySection() {
               >
                 <h3 className="flex items-center gap-2 text-xl font-semibold">
                   <Icon aria-hidden className="size-5 text-primary-ink" />
-                  {tModes(`${mode}.label`)}
+                  {tModes(`${mode}.name`)}
                 </h3>
                 <p className="mt-1 text-base font-medium">
                   {tModes(`${mode}.description`)}

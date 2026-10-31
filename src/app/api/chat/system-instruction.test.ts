@@ -54,6 +54,12 @@ describe("buildSystemInstruction", () => {
     expect(general).not.toContain("get_business_summary");
   });
 
+  it("sends a user asking about their own figures to the switch in the Advisor, not to Profile", () => {
+    expect(general).toContain("Personal mode");
+    expect(general).toContain("message box");
+    expect(general).not.toContain("in Profile");
+  });
+
   it("states the limits on advice in both modes", () => {
     for (const prompt of [personal, general]) {
       expect(prompt).toContain("KUR");

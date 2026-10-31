@@ -3,10 +3,8 @@ import { Suspense } from "react";
 import { DownloadIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { getAdvisorMode } from "@/actions/advisor/actions";
 import { getCurrentProfile } from "@/lib/auth";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import AdvisorDataSetting from "./_components/advisor-data-setting";
 import BusinessProfileCardForm from "./_components/business-profile-form";
 import DeleteAccountDialog from "./_components/delete-account-dialog";
 import ProfileDetailsForm from "./_components/profile-form";
@@ -61,24 +59,6 @@ export default function ProfilePage() {
             fallback={<FormSkeleton label={t("account.loading")} rows={2} />}
           >
             <AccountSection />
-          </Suspense>
-        </CardContent>
-      </Card>
-      {/* Linked from the privacy note in the Advisor drawer. */}
-      <Card id="advisor-data" className="scroll-mt-4">
-        <CardHeader>
-          <CardTitle>
-            <h2>{t("advisorData.title")}</h2>
-          </CardTitle>
-          <CardDescription>{t("advisorData.description")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Suspense
-            fallback={
-              <FormSkeleton label={t("advisorData.loading")} rows={1} />
-            }
-          >
-            <AdvisorDataSection />
           </Suspense>
         </CardContent>
       </Card>
@@ -164,10 +144,4 @@ async function BusinessProfileSection() {
   const profile = await getCurrentProfile();
 
   return <BusinessProfileCardForm profile={profile} />;
-}
-
-async function AdvisorDataSection() {
-  const mode = await getAdvisorMode();
-
-  return <AdvisorDataSetting enabled={mode === "personal"} />;
 }

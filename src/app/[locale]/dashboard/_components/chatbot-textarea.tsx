@@ -9,46 +9,23 @@ import { Field } from "@/components/ui/field";
 import { ArrowUpIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { KeyboardEvent } from "react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { CHAT_MODES } from "@/constans/chat-modes";
-import { useAdvisorDrawer } from "./advisor-drawer-context";
-
-// Says whether the advisor reads the user's data, and links to the Profile setting that changes it.
-function AdvisorDataNote({
-  mode,
-  onNavigate,
-}: {
-  mode: ChatMode;
-  onNavigate: () => void;
-}) {
-  const t = useTranslations("chatModes");
-  const { Icon } = CHAT_MODES[mode];
-
-  return (
-    <Link
-      href="/dashboard/profile#advisor-data"
-      onClick={onNavigate}
-      className="flex items-center gap-1.5 px-2 text-xs rounded-md outline-none text-muted-foreground hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 max-sm:min-h-11"
-    >
-      <Icon aria-hidden className="size-3.5" />
-      {t(`${mode}.description`)}
-    </Link>
-  );
-}
+import AdvisorModeSwitch from "./advisor-mode-switch";
 
 export default function ChatbotTextarea({
   sendMessage,
   mode,
+  onModeChange,
   isPending,
 }: {
   sendMessage: (message: string) => void;
   // Undefined while the setting loads.
   mode: ChatMode | undefined;
+  onModeChange: (next: ChatMode) => void;
+  // True while an answer streams or a mode change is being saved.
   isPending: boolean;
 }) {
   const t = useTranslations("advisor.composer");
-  const advisor = useAdvisorDrawer();
   const form = useForm<ChatbotForm>({
     resolver: zodResolver(chatbotFormSchema),
     defaultValues: {
@@ -99,9 +76,10 @@ export default function ChatbotTextarea({
       />
       <div className="flex items-center justify-between gap-2">
         {mode ? (
-          <AdvisorDataNote
+          <AdvisorModeSwitch
             mode={mode}
-            onNavigate={() => advisor.setIsOpen(false)}
+            disabled={isPending}
+            onChange={onModeChange}
           />
         ) : (
           <span />

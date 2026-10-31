@@ -8,7 +8,7 @@ type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
 const settingsRowSchema = z.object({ advisor_uses_personal_data: z.boolean() });
 
-// The advisor's mode follows the Profile setting (Phase 1 / 1.9), never the request, so a client cannot opt itself
+// The advisor's mode follows the setting saved on the profile, never the request, so a client cannot opt itself
 // into reading data the user turned off. RLS limits the row to the caller's own profile.
 export async function loadAdvisorMode(
   supabase: SupabaseClient,

@@ -38,7 +38,7 @@
   },
   "chatModes": {
     "personal": {
-      "label": "Data access on",
+      "name": "Personal",
       "description": "Uses your profile and transactions",
       "suggestions": {
         "q1": "How much profit did I make this month?",
@@ -47,7 +47,7 @@
       }
     },
     "general": {
-      "label": "Data access off",
+      "name": "General",
       "description": "Your data stays out",
       "suggestions": {
         "q1": "How do I keep business money apart from personal money?",
@@ -149,7 +149,7 @@
     },
     "privacy": {
       "title": "You choose what the Advisor can see",
-      "body": "One setting in your Profile, on or off any time. When it's off, your transactions never reach the Advisor.",
+      "body": "One switch inside the Advisor, Personal or General, any time. In General mode, your transactions never reach the Advisor.",
       "modes": {
         "personal": "For questions about your money: totals, categories, trends and how close you are to your goal.",
         "general": "General guidance only: how big an emergency fund should be, deposits versus money market funds, how to start investing."
@@ -190,7 +190,7 @@
         },
         "visibility": {
           "question": "Who can see my transactions?",
-          "answer": "Only you. Each transaction belongs to your account, and the database rejects requests from anyone else. Turn off the Advisor's data access in Profile and it doesn't read them at all."
+          "answer": "Only you. Each transaction belongs to your account, and the database rejects requests from anyone else. Switch the Advisor to General mode and it doesn't read them at all."
         },
         "advice": {
           "question": "Is the Advisor professional financial advice?",
@@ -249,7 +249,7 @@
       "title": "Who processes your data for us",
       "supabase": "<strong>Supabase</strong>: database, sign-in and file storage ({region}).",
       "vercel": "<strong>Vercel</strong>: hosting of the app.",
-      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. When “Let AI Advisor use my data” is on, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can turn that off in Profile at any time.",
+      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can switch to General mode in the Advisor at any time.",
       "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
       "posthog": "<strong>PostHog</strong>: the product analytics events described above.",
       "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
@@ -264,7 +264,7 @@
       "access": "<strong>See and take your data:</strong> download all your transactions as a CSV file in Profile.",
       "correct": "<strong>Correct it:</strong> edit any transaction or profile answer.",
       "delete": "<strong>Delete it:</strong> delete single records, or your whole account in Profile.",
-      "withdraw": "<strong>Withdraw consent:</strong> turn off the AI Advisor's data access in Profile.",
+      "withdraw": "<strong>Withdraw consent:</strong> switch the AI Advisor to General mode.",
       "contactEmail": "For anything else, or to file a complaint, email us at <link>{email}</link>.",
       "contactPending": "For anything else, or to file a complaint, contact us. A contact email will be listed here before the beta opens."
     },
@@ -643,6 +643,13 @@
       "deleteFailed": "Couldn't delete the conversation. Please try again.",
       "delete": "Delete \"{title}\"",
       "confirmDelete": "Confirm deleting \"{title}\""
+    },
+    "modeSwitch": {
+      "label": "AI Advisor mode",
+      "personalOn": "Personal mode: AI Advisor will use your data.",
+      "generalOn": "General mode: AI Advisor will no longer read your data.",
+      "generalOnNewChat": "General mode: AI Advisor will no longer read your data. A new chat has started; the previous one is in Saved conversations.",
+      "saveFailed": "Couldn't change the mode. Please try again."
     }
   },
   "profile": {
@@ -659,16 +666,6 @@
       "submit": "Save changes",
       "updated": "Profile updated",
       "updateFailed": "Failed to update profile. Please try again."
-    },
-    "advisorData": {
-      "title": "AI Advisor data access",
-      "description": "What AI Advisor may read when it answers. Messages are processed by Google Gemini.",
-      "loading": "Loading data access",
-      "label": "Let AI Advisor use my data",
-      "help": "Your business profile and transactions, so answers are about your own business. When off, AI Advisor only gives general guidance.",
-      "enabled": "AI Advisor will use your data.",
-      "disabled": "AI Advisor will no longer read your data.",
-      "saveFailed": "Couldn't save the setting. Please try again."
     },
     "data": {
       "title": "Your data",
