@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   getMonthRanges,
+  getTrailingMonthRanges,
   getPreviousMonthToDate,
   getTodayInJakarta,
 } from "./dates";
@@ -81,6 +82,23 @@ describe("getPreviousMonthToDate", () => {
     expect(getPreviousMonthToDate("2027-01-05")).toEqual({
       startDate: "2026-12-01",
       endDate: "2026-12-05",
+    });
+  });
+});
+
+describe("getTrailingMonthRanges", () => {
+  it("lists full past months oldest first and ends with this month up to today", () => {
+    expect(getTrailingMonthRanges("2026-11-15", 3)).toEqual([
+      { startDate: "2026-09-01", endDate: "2026-09-30" },
+      { startDate: "2026-10-01", endDate: "2026-10-31" },
+      { startDate: "2026-11-01", endDate: "2026-11-15" },
+    ]);
+  });
+
+  it("crosses into the previous year", () => {
+    expect(getTrailingMonthRanges("2027-02-10", 3)[0]).toEqual({
+      startDate: "2026-12-01",
+      endDate: "2026-12-31",
     });
   });
 });

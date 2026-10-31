@@ -489,6 +489,34 @@
         "cashNegative": "Your business made a profit, but more money went out than came in this month. Check loan payments and money taken out.",
         "healthy": "Profit covers all the money you took out this month. Set some cash aside for your next purchases and upcoming holy days."
       }
+    },
+    "trend": {
+      "title": "Profit trend, 6 months",
+      "loading": "Loading the profit trend",
+      "loadError": "Couldn't load the profit trend. Check your connection and try again.",
+      "empty": "No records yet. This chart fills in once you log sales and purchases.",
+      "chartLabel": "Business profit per month",
+      "barLabel": "{month}: profit {amount}",
+      "barLabelEmpty": "{month}: no records",
+      "projectionKey": "Estimate for the end of the month",
+      "soFar": "so far",
+      "income": "Business income",
+      "expense": "Business costs",
+      "profit": "Business profit",
+      "noRecords": "No records",
+      "insightLabel": "End of month estimate",
+      "note": "A rough estimate from this month's daily average. A large purchase early in the month can throw it off.",
+      "insights": {
+        "higher": "If this month's pace continues, profit ends the month at about {projected}, higher than {previous} last month.",
+        "lower": "If this month's pace continues, profit ends the month at about {projected}, lower than {previous} last month.",
+        "similar": "If this month's pace continues, profit ends the month at about {projected}, close to {previous} last month.",
+        "noPrevious": "If this month's pace continues, profit ends the month at about {projected}.",
+        "loss": "If this month's pace continues, the month ends with a loss of about {projected}. Check your largest costs and your prices this week.",
+        "takenMoreThanProfit": "Money taken for personal use and ceremonies is also on course to reach {taken}, more than that profit.",
+        "tooEarly": "The end of month estimate appears from the 7th, once the month's pattern is clearer.",
+        "monthEnd": "This month ends today. The next estimate appears from the 7th.",
+        "noSales": "Log this month's sales to see the end of month estimate."
+      }
     }
   },
   "transactionPage": {

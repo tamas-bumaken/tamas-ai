@@ -30,6 +30,24 @@ export function getMonthRanges(today: string): {
   };
 }
 
+// Oldest first: `count - 1` full months, then this month up to today.
+export function getTrailingMonthRanges(
+  today: string,
+  count: number,
+): DateRange[] {
+  const [year, month] = today.split("-").map(Number);
+
+  return Array.from({ length: count }, (_, index) => {
+    const monthsBack = count - 1 - index;
+    if (monthsBack === 0) return getMonthRanges(today).current;
+
+    return {
+      startDate: toIsoDate(new Date(Date.UTC(year, month - 1 - monthsBack, 1))),
+      endDate: toIsoDate(new Date(Date.UTC(year, month - monthsBack, 0))),
+    };
+  });
+}
+
 // The same stretch of last month, so a month-to-date total is compared like for like:
 // the 1st up to the same day, or up to last month's final day when it is shorter (31 Oct → 1–30 Sep).
 export function getPreviousMonthToDate(today: string): DateRange {

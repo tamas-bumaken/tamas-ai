@@ -4,7 +4,13 @@ import { getCategoryGroup } from "@/constans/transaction-categories";
 import { captureEvent } from "@/lib/analytics";
 import { requireUserId } from "@/lib/auth";
 import { LoggingInsight, loadLoggingInsight } from "@/lib/logging-feedback";
-import { DateRange, getMonthRanges, getTodayInJakarta } from "@/lib/dates";
+import {
+  DateRange,
+  getMonthRanges,
+  getTodayInJakarta,
+  getTrailingMonthRanges,
+} from "@/lib/dates";
+import { projectMonthEnd } from "@/lib/profit-trend";
 import { summarizeTransactions } from "@/lib/transaction-summary";
 import { generateEmbedding, toEmbeddingText } from "@/lib/embedding";
 import { createClient } from "@/lib/supabase/server";
@@ -44,6 +50,34 @@ async function loadInsightAfterSave(
     console.error("[transaction] failed to load logging insight", error);
     return null;
   }
+}
+
+const PROFIT_TREND_MONTHS = 6;
+
+// One RPC per month, in SQL like every other total; the projection is computed from this month's result.
+export async function getProfitTrend() {
+  const today = getTodayInJakarta();
+  const supabase = await createClient();
+  const ranges = getTrailingMonthRanges(today, PROFIT_TREND_MONTHS);
+  const summaries = await Promise.all(
+    ranges.map(({ startDate, endDate }) =>
+      summarizeTransactions(supabase, startDate, endDate),
+    ),
+  );
+
+  const months = summaries.map((summary, index) => ({
+    startDate: ranges[index].startDate,
+    businessIncome: summary.businessIncome,
+    businessExpense: summary.businessExpense,
+    profit: summary.profit,
+    // A month without records is not the same as a month that broke even.
+    hasRecords: summary.categories.length > 0,
+  }));
+
+  return {
+    months,
+    projection: projectMonthEnd(summaries[summaries.length - 1], today),
+  };
 }
 
 // One action for every "this month" card, so they share a single query instead of each calling the RPC.

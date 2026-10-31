@@ -7,5 +7,6 @@ export const formats = {
     day: { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" },
     dayMonth: { day: "numeric", month: "short", timeZone: "UTC" },
     monthName: { month: "long", timeZone: "UTC" },
+    monthShort: { month: "short", timeZone: "UTC" },
   },
 } satisfies Formats;

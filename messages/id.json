@@ -489,6 +489,34 @@
         "cashNegative": "Usahamu untung, tetapi uang keluar lebih besar dari uang masuk bulan ini. Cek cicilan dan uang yang diambil.",
         "healthy": "Laba menutup semua uang yang kamu ambil bulan ini. Sisihkan sebagian kas untuk belanja berikutnya dan hari raya."
       }
+    },
+    "trend": {
+      "title": "Tren laba 6 bulan",
+      "loading": "Memuat tren laba",
+      "loadError": "Gagal memuat tren laba. Cek koneksi lalu coba lagi.",
+      "empty": "Belum ada catatan. Grafik ini terisi setelah kamu mencatat penjualan dan belanja.",
+      "chartLabel": "Laba usaha per bulan",
+      "barLabel": "{month}: laba {amount}",
+      "barLabelEmpty": "{month}: tidak ada catatan",
+      "projectionKey": "Perkiraan akhir bulan",
+      "soFar": "sejauh ini",
+      "income": "Pendapatan usaha",
+      "expense": "Biaya usaha",
+      "profit": "Laba usaha",
+      "noRecords": "Tidak ada catatan",
+      "insightLabel": "Perkiraan akhir bulan",
+      "note": "Perkiraan kasar dari rata-rata harian bulan ini. Belanja besar di awal bulan bisa membuatnya meleset.",
+      "insights": {
+        "higher": "Kalau pola bulan ini berlanjut, laba akhir bulan sekitar {projected}, lebih tinggi dari {previous} bulan lalu.",
+        "lower": "Kalau pola bulan ini berlanjut, laba akhir bulan sekitar {projected}, lebih rendah dari {previous} bulan lalu.",
+        "similar": "Kalau pola bulan ini berlanjut, laba akhir bulan sekitar {projected}, mirip dengan {previous} bulan lalu.",
+        "noPrevious": "Kalau pola bulan ini berlanjut, laba akhir bulan sekitar {projected}.",
+        "loss": "Kalau pola bulan ini berlanjut, bulan ini berakhir rugi sekitar {projected}. Cek biaya terbesar dan harga jualmu minggu ini.",
+        "takenMoreThanProfit": "Uang yang diambil untuk pribadi dan adat juga diperkirakan mencapai {taken}, lebih besar dari laba itu.",
+        "tooEarly": "Perkiraan akhir bulan muncul mulai tanggal 7, setelah pola bulan ini lebih terlihat.",
+        "monthEnd": "Bulan ini berakhir hari ini. Perkiraan berikutnya muncul mulai tanggal 7.",
+        "noSales": "Catat penjualan bulan ini untuk melihat perkiraan akhir bulan."
+      }
     }
   },
   "transactionPage": {

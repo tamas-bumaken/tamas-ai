@@ -2,6 +2,7 @@ import { RecentTransactions } from "./recent-transactions";
 import { CashCard } from "./cash-card";
 import { CategorySpendingCard } from "./category-spending-card";
 import { ProfitCard } from "./profit-card";
+import { ProfitTrendCard } from "./profit-trend-card";
 
 export default function DashboardContent() {
   return (
@@ -10,6 +11,7 @@ export default function DashboardContent() {
         <ProfitCard />
         <CashCard />
       </div>
+      <ProfitTrendCard />
       <div className="grid gap-4 lg:grid-cols-2">
         <CategorySpendingCard />
         <RecentTransactions />
