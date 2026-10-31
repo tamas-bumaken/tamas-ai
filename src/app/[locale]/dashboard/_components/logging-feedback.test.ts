@@ -19,7 +19,7 @@ const formatLoggingInsight = (insight: Parameters<typeof format>[2]) =>
 describe("formatLoggingInsight", () => {
   it("compares with the same point last month", () => {
     const base = {
-      category: "Food",
+      category: "Raw Materials",
       spent: 320_000,
     };
 
@@ -30,7 +30,7 @@ describe("formatLoggingInsight", () => {
         difference: -80_000,
       }),
     ).toBe(
-      "Food this month: Rp 320.000, Rp 80.000 less than by this point last month.",
+      "Raw Materials this month: Rp 320.000, Rp 80.000 less than by this point last month.",
     );
     expect(
       formatLoggingInsight({
@@ -39,15 +39,17 @@ describe("formatLoggingInsight", () => {
         difference: 20_000,
       }),
     ).toBe(
-      "Food this month: Rp 320.000, Rp 20.000 more than by this point last month.",
+      "Raw Materials this month: Rp 320.000, Rp 20.000 more than by this point last month.",
     );
     expect(
       formatLoggingInsight({ ...base, previousSpent: 320_000, difference: 0 }),
     ).toBe(
-      "Food this month: Rp 320.000, the same as by this point last month.",
+      "Raw Materials this month: Rp 320.000, the same as by this point last month.",
     );
     expect(
       formatLoggingInsight({ ...base, previousSpent: 0, difference: 320_000 }),
-    ).toBe("Food this month: Rp 320.000. None by this point last month.");
+    ).toBe(
+      "Raw Materials this month: Rp 320.000. None by this point last month.",
+    );
   });
 });

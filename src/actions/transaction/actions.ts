@@ -1,5 +1,6 @@
 "use server";
 
+import { getCategoryGroup } from "@/constans/transaction-categories";
 import { captureEvent } from "@/lib/analytics";
 import { requireUserId } from "@/lib/auth";
 import { LoggingInsight, loadLoggingInsight } from "@/lib/logging-feedback";
@@ -45,26 +46,6 @@ async function loadInsightAfterSave(
   }
 }
 
-// Wide enough for any stored date (future-dated entries included), so the RPC covers every transaction.
-const ALL_TIME_START = "0001-01-01";
-const ALL_TIME_END = "9999-12-31";
-
-// Summed in SQL: selecting every row was capped by PostgREST's row limit and undercounted after ~1,000 rows.
-export async function getBalanceSummary() {
-  const supabase = await createClient();
-  const { totalIncome, totalExpense, net } = await summarizeTransactions(
-    supabase,
-    ALL_TIME_START,
-    ALL_TIME_END,
-  );
-
-  return {
-    totalIncome,
-    totalExpense,
-    savings: net,
-  };
-}
-
 // One action for every "this month" card, so they share a single query instead of each calling the RPC.
 export async function getMonthlySummary() {
   const ranges = getMonthRanges(getTodayInJakarta());
@@ -89,17 +70,26 @@ export async function getMonthlySummary() {
   ) => ({
     startDate,
     endDate,
-    income: summary.totalIncome,
-    expense: summary.totalExpense,
-    saved: summary.net,
-    savingsRatePercent: summary.savingsRatePercent,
+    businessIncome: summary.businessIncome,
+    businessExpense: summary.businessExpense,
+    profit: summary.profit,
+    profitMarginPercent: summary.profitMarginPercent,
+    ownerCapital: summary.ownerCapital,
+    loanInstallments: summary.loanInstallments,
+    ownerWithdrawals: summary.ownerWithdrawals,
+    ceremony: summary.ceremony,
+    ownerTaken: summary.ownerTaken,
+    cashIn: summary.totalIncome,
+    cashOut: summary.totalExpense,
+    cashLeft: summary.net,
   });
 
   return {
     current: toPeriod(ranges.current, current),
     previous: toPeriod(ranges.previous, previous),
+    // Business costs only: what the owner takes out is shown on the cash card, not as a cost of the business.
     spendingByCategory: current.categories
-      .filter((row) => row.type === "expense")
+      .filter((row) => getCategoryGroup(row.category) === "business_expense")
       .map(({ category, total }) => ({ category, total }))
       .sort((a, b) => b.total - a.total),
   };

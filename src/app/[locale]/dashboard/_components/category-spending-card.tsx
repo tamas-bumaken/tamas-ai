@@ -76,7 +76,7 @@ export function CategorySpendingCard() {
   const formatPeriod = useFormatPeriod();
   const { data, isPending, isError, refetch } = useMonthlySummary();
 
-  const total = data?.current.expense ?? 0;
+  const total = data?.current.businessExpense ?? 0;
   const { rows, restCount } = data
     ? toRows(data.spendingByCategory)
     : { rows: [], restCount: 0 };
