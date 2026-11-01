@@ -1,54 +1,11 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 // The same values as --primary, --foreground and --background in globals.css, which images cannot read.
 export const BRAND_COLOR = "#30B155";
 export const BRAND_BACKGROUND = "#E7E6E7";
 const BRAND_TEXT = "#050315";
-
-// The sizes the web app manifest needs for installing (Phase 1 / 1.3).
-export const ICON_SIZES = [192, 512] as const;
-
-// The lucide HandCoins glyph from the sidebar logo, drawn dark because white on the brand color is only 2.78:1.
-function HandCoinsGlyph({ size }: { size: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={BRAND_TEXT}
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
-      <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
-      <path d="m2 16 6 6" />
-      <circle cx="16" cy="9" r="2.9" />
-      <circle cx="6" cy="5" r="3" />
-    </svg>
-  );
-}
-
-// Dark glyph on the brand color. It fills about half of the square, inside the safe zone of maskable icons,
-// so Android can crop the icon to any shape without cutting the glyph.
-export function renderAppIcon(size: number) {
-  return new ImageResponse(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: BRAND_COLOR,
-      }}
-    >
-      <HandCoinsGlyph size={Math.round(size * 0.5)} />
-    </div>,
-    { width: size, height: size },
-  );
-}
 
 // iPhone launch screens, portrait, in CSS pixels. iOS ignores the manifest and shows a blank white screen while an
 // installed app loads unless a startup image matches the device exactly.
@@ -73,8 +30,14 @@ export function splashMediaQuery({ width, height, ratio }: SplashScreen) {
 }
 
 // The app icon and name centered on the app's background, so launching looks intentional rather than broken.
-export function renderSplashScreen({ width, height, ratio }: SplashScreen) {
+// Uses the same file as the manifest's icon, so the launch screen matches the home screen.
+export async function renderSplashScreen({
+  width,
+  height,
+  ratio,
+}: SplashScreen) {
   const icon = 96 * ratio;
+  const logo = await readFile(join(process.cwd(), "public/icons/icon-512.png"));
 
   return new ImageResponse(
     <div
@@ -89,19 +52,13 @@ export function renderSplashScreen({ width, height, ratio }: SplashScreen) {
         background: BRAND_BACKGROUND,
       }}
     >
-      <div
-        style={{
-          width: icon,
-          height: icon,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: icon * 0.22,
-          background: BRAND_COLOR,
-        }}
-      >
-        <HandCoinsGlyph size={Math.round(icon * 0.5)} />
-      </div>
+      <img
+        src={`data:image/png;base64,${logo.toString("base64")}`}
+        alt=""
+        width={icon}
+        height={icon}
+        style={{ borderRadius: icon * 0.22 }}
+      />
       <div style={{ fontSize: 32 * ratio, color: BRAND_TEXT }}>TAMAS</div>
     </div>,
     { width: width * ratio, height: height * ratio },

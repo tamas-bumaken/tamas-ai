@@ -39,6 +39,9 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("description"),
     icons: {
       icon: "/logo/logo-1.png",
+      // Listed here because icons set in metadata replace the app-icon file's own tag, and iOS only
+      // takes the home screen icon from this tag.
+      apple: "/apple-icon.png",
     },
     // Opened from the iOS home screen, the app runs full screen under its own name.
     // The startup images replace the blank white screen iOS shows while the installed app loads.
@@ -75,7 +78,8 @@ export default async function RootLayout({
         geistMono.variable,
         "font-sans",
         inter.variable,
-      )}>
+      )}
+    >
       <body className="flex flex-col min-h-full">
         <NextIntlClientProvider>
           <QueryProvider>
