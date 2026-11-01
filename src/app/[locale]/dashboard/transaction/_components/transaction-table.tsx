@@ -63,6 +63,15 @@ export default function TransactionTable({
   const format = useFormatter();
   const categoryLabel = useCategoryLabel();
 
+  const refetchAfterDelete = (rowCount: number) => {
+    // Deleting the only row of a later page would leave an empty page.
+    if (rowCount === 1 && page > 1) {
+      setPage(page - 1);
+    } else {
+      refetch();
+    }
+  };
+
   return (
     <Fragment>
       <Card className="w-full gap-2">
@@ -84,60 +93,111 @@ export default function TransactionTable({
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {TABELS_HEADER_TRANSACTION.map((header) => (
-                  <TableHead key={`th-${header}`}>
-                    {t(`headers.${header}`)}
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {!isLoading &&
-                transactions?.data?.map((transaction, index) => (
-                  <TableRow key={`tr-${transaction.id}`}>
-                    <TableCell>{(page - 1) * limit + index + 1}</TableCell>
-                    <TableCell className="font-medium ">
-                      {format.dateTime(new Date(transaction.date), "day")}
-                    </TableCell>
-                    <TableCell>{transaction.description}</TableCell>
-                    <TableCell>{categoryLabel(transaction.category)}</TableCell>
-                    <TableCell
-                      className={cn(
-                        "font-semibold",
-                        transaction.type === "expense"
-                          ? "text-destructive"
-                          : "text-primary-ink",
-                      )}
-                    >
-                      {transaction.type === "expense" && "-"}
-                      {convertToIDR(transaction.amount)}
-                    </TableCell>
-                    <TableCell>
-                      <TransactionRowActions
-                        transaction={transaction}
-                        onUpdated={refetch}
-                        onDeleted={() => {
-                          // Deleting the only row of a later page would leave an empty page.
-                          if (transactions.data.length === 1 && page > 1) {
-                            setPage(page - 1);
-                          } else {
-                            refetch();
-                          }
-                        }}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-            {!isLoading && transactions?.data?.length === 0 && (
-              <TableCaption>{t("empty")}</TableCaption>
+          {/* On phones the six columns would push the amount out of view, so each row stacks instead. */}
+          <div className="md:hidden">
+            {isLoading && (
+              <p className="py-6 text-sm text-muted-foreground">
+                {t("loading")}
+              </p>
             )}
+            {!isLoading && transactions?.data?.length === 0 && (
+              <p className="py-6 text-sm text-muted-foreground">{t("empty")}</p>
+            )}
+            {!isLoading && (
+              <ul className="divide-y">
+                {transactions?.data?.map((transaction) => (
+                  <li
+                    key={`li-${transaction.id}`}
+                    className="flex items-center gap-2 py-3"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">
+                        {transaction.description ||
+                          categoryLabel(transaction.category)}
+                      </p>
+                      {transaction.description && (
+                        <p className="text-sm truncate text-muted-foreground">
+                          {categoryLabel(transaction.category)}
+                        </p>
+                      )}
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p
+                        className={cn(
+                          "font-medium tabular-nums",
+                          transaction.type === "income" && "text-primary-ink",
+                        )}
+                      >
+                        {transaction.type === "income" ? "+" : "−"}
+                        {convertToIDR(transaction.amount)}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {format.dateTime(new Date(transaction.date), "day")}
+                      </p>
+                    </div>
+                    <TransactionRowActions
+                      transaction={transaction}
+                      onUpdated={refetch}
+                      onDeleted={() =>
+                        refetchAfterDelete(transactions.data.length)
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  {TABELS_HEADER_TRANSACTION.map((header) => (
+                    <TableHead key={`th-${header}`}>
+                      {t(`headers.${header}`)}
+                    </TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {!isLoading &&
+                  transactions?.data?.map((transaction, index) => (
+                    <TableRow key={`tr-${transaction.id}`}>
+                      <TableCell>{(page - 1) * limit + index + 1}</TableCell>
+                      <TableCell className="font-medium ">
+                        {format.dateTime(new Date(transaction.date), "day")}
+                      </TableCell>
+                      <TableCell>{transaction.description}</TableCell>
+                      <TableCell>
+                        {categoryLabel(transaction.category)}
+                      </TableCell>
+                      <TableCell
+                        className={cn(
+                          "font-semibold tabular-nums",
+                          transaction.type === "income" && "text-primary-ink",
+                        )}
+                      >
+                        {transaction.type === "income" ? "+" : "−"}
+                        {convertToIDR(transaction.amount)}
+                      </TableCell>
+                      <TableCell>
+                        <TransactionRowActions
+                          transaction={transaction}
+                          onUpdated={refetch}
+                          onDeleted={() =>
+                            refetchAfterDelete(transactions.data.length)
+                          }
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+              {!isLoading && transactions?.data?.length === 0 && (
+                <TableCaption>{t("empty")}</TableCaption>
+              )}
 
-            {isLoading && <TableCaption>{t("loading")}</TableCaption>}
-          </Table>
+              {isLoading && <TableCaption>{t("loading")}</TableCaption>}
+            </Table>
+          </div>
           <div className="flex items-center justify-between mt-4">
             <div className="flex items-center gap-2">
               <div className="text-sm text-muted-foreground">

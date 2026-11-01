@@ -44,7 +44,7 @@ export default function TransactionRowActions({
           <Button
             variant="ghost"
             size="icon"
-            className="text-muted-foreground"
+            className="text-muted-foreground max-md:size-11"
             aria-label={t("actions")}
           >
             <MoreHorizontalIcon className="size-4" />

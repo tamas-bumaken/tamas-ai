@@ -17,8 +17,8 @@ export default function TransactionPage() {
     <div>
       <div className="p-2 space-y-4">
         <section id="header">
-          <h1 className="text-4xl font-bold text-primary-ink">{t("title")}</h1>
-          <p>{t("description")}</p>
+          <h1 className="text-2xl font-semibold">{t("title")}</h1>
+          <p className="mt-1 text-muted-foreground">{t("description")}</p>
         </section>
         <WizardInput />
         <section id="content">
