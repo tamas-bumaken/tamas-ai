@@ -6,6 +6,11 @@ export function getTodayInJakarta(): string {
   }).format(new Date());
 }
 
+// A string, not a number: next-intl would format 2026 as "2.026" in Bahasa Indonesia.
+export function getCurrentYearInJakarta(): string {
+  return getTodayInJakarta().slice(0, 4);
+}
+
 export type DateRange = { startDate: string; endDate: string };
 
 function toIsoDate(date: Date): string {

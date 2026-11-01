@@ -212,7 +212,7 @@
       "signIn": "Sign in",
       "createAccount": "Create account",
       "privacy": "Privacy Policy",
-      "copyright": "© 2026 TAMAS. All rights reserved."
+      "copyright": "© {year} TAMAS. All rights reserved."
     }
   },
   "betaAiNotice": {

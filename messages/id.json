@@ -212,7 +212,7 @@
       "signIn": "Masuk",
       "createAccount": "Buat akun",
       "privacy": "Kebijakan Privasi",
-      "copyright": "© 2026 TAMAS. Semua hak dilindungi."
+      "copyright": "© {year} TAMAS. Semua hak dilindungi."
     }
   },
   "betaAiNotice": {

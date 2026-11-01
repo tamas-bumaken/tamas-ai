@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  getCurrentYearInJakarta,
   getMonthRanges,
   getTrailingMonthRanges,
   getPreviousMonthToDate,
@@ -100,5 +101,21 @@ describe("getTrailingMonthRanges", () => {
       startDate: "2026-12-01",
       endDate: "2026-12-31",
     });
+  });
+});
+
+describe("getCurrentYearInJakarta", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("follows the year in Jakarta, which turns seven hours before UTC does", () => {
+    vi.useFakeTimers();
+
+    vi.setSystemTime(new Date("2026-12-31T16:59:59Z"));
+    expect(getCurrentYearInJakarta()).toBe("2026");
+
+    vi.setSystemTime(new Date("2026-12-31T17:00:00Z"));
+    expect(getCurrentYearInJakarta()).toBe("2027");
   });
 });

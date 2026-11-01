@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { cacheLife } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { getCurrentYearInJakarta } from "@/lib/dates";
 
 const FOOTER_LINKS = [
   { href: "/login", key: "signIn" },
@@ -8,8 +10,20 @@ const FOOTER_LINKS = [
   { href: "/privacy", key: "privacy" },
 ] as const;
 
-export function SiteFooter() {
-  const t = useTranslations("landing.footer");
+// Cached so the landing page stays prerendered: reading the clock during render would make it dynamic.
+// The year can lag a few hours after New Year's Eve, which no visitor will notice.
+async function getFooterYear() {
+  "use cache";
+  cacheLife("hours");
+
+  return getCurrentYearInJakarta();
+}
+
+export async function SiteFooter() {
+  const [t, year] = await Promise.all([
+    getTranslations("landing.footer"),
+    getFooterYear(),
+  ]);
 
   return (
     <footer className="border-t bg-muted/40">
@@ -46,7 +60,8 @@ export function SiteFooter() {
                         isPrimary
                           ? "font-semibold text-primary-ink"
                           : "text-muted-foreground"
-                      }`}>
+                      }`}
+                    >
                       {t(link.key)}
                       {/* Garis bawah tumbuh dari kiri saat hover atau fokus */}
                       <span
@@ -62,7 +77,7 @@ export function SiteFooter() {
         </div>
 
         <p className="pt-8 mt-8 text-xs border-t border-foreground/10 text-muted-foreground">
-          &copy; {t("copyright")}
+          {t("copyright", { year })}
         </p>
       </div>
     </footer>

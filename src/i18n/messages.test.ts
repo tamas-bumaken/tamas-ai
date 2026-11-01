@@ -21,6 +21,12 @@ describe("messages", () => {
     expect(keys(id)).toEqual(keys(en));
   });
 
+  it("takes the footer year as a value instead of a hardcoded one", () => {
+    for (const messages of [en, id]) {
+      expect(messages.landing.footer.copyright).toContain("{year}");
+    }
+  });
+
   it("has no empty translations", () => {
     const empty = [...flatten(en), ...flatten(id)].filter(
       ([, text]) => typeof text !== "string" || text.trim() === "",
