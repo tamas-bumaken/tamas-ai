@@ -201,14 +201,18 @@
     "closing": {
       "title": "Mulai dari gaji bulan ini",
       "body": "Catat pemasukanmu, tambahkan beberapa pengeluaran, lalu ajukan pertanyaan pertamamu ke Advisor. Cuma sekitar lima menit.",
-      "cta": "Buat akun gratis"
+      "cta": "Buat akun gratis",
+      "mock": {
+        "answer": "Bulan ini kamu bisa menabung <strong>{saved}</strong>. Kurangi belanja sebesar {trim} dan targetmu lebih cepat tercapai."
+      }
     },
     "footer": {
       "tagline": "Asisten Bisnis AI untuk UMKM Bali",
       "label": "Footer",
       "signIn": "Masuk",
       "createAccount": "Buat akun",
-      "privacy": "Kebijakan Privasi"
+      "privacy": "Kebijakan Privasi",
+      "copyright": "© 2026 TAMAS. Semua hak dilindungi."
     }
   },
   "betaAiNotice": {

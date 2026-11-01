@@ -201,14 +201,18 @@
     "closing": {
       "title": "Start with this month's salary",
       "body": "Record your income, add a few expenses, and ask the Advisor your first question. It takes about five minutes.",
-      "cta": "Create free account"
+      "cta": "Create free account",
+      "mock": {
+        "answer": "This month you could save <strong>{saved}</strong>. Trim shopping to {trim} and you'll reach your target faster."
+      }
     },
     "footer": {
       "tagline": "AI Business Assistant for MSMEs in Bali",
       "label": "Footer",
       "signIn": "Sign in",
       "createAccount": "Create account",
-      "privacy": "Privacy Policy"
+      "privacy": "Privacy Policy",
+      "copyright": "© 2026 TAMAS. All rights reserved."
     }
   },
   "betaAiNotice": {
