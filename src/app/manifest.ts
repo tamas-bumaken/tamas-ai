@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BRAND_BACKGROUND, BRAND_COLOR } from "./_lib/app-icon";
 
-// Made from public/Logo/Logo-1.png on white. The maskable ones keep the logo inside the circle Android always shows,
+// Made from public/logo/logo-1.png on white. The maskable ones keep the logo inside the circle Android always shows,
 // so any mask shape leaves it whole. Keep each file's size in step with `sizes` (manifest.test.ts checks it).
 const ICONS = [
   { src: "/icons/icon-192.png", size: 192, purpose: "any" },

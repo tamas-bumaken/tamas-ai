@@ -1,7 +1,7 @@
 "use client";
 
-import { HandCoinsIcon } from "lucide-react";
 import { ReactNode } from "react";
+import { BrandLogo } from "../brand-logo";
 import {
   Sidebar,
   SidebarContent,
@@ -30,8 +30,10 @@ export function AppSidebar({ footer }: { footer: ReactNode }) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/dashboard">
-                <HandCoinsIcon className="text-primary-ink size-5!" />
-                <h1 className="text-xl font-bold text-primary-ink">TAMAS</h1>
+                <BrandLogo className="size-6 group-data-[collapsible=icon]:size-4" />
+                <span className="text-xl font-bold text-primary-ink">
+                  TAMAS
+                </span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

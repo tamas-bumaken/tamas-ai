@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { cacheLife } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { getCurrentYearInJakarta } from "@/lib/dates";
 
 const FOOTER_LINKS = [
@@ -30,13 +30,7 @@ export async function SiteFooter() {
       <div className="px-4 py-10 mx-auto max-w-6xl sm:px-6">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo/logo-1.png"
-              alt=""
-              width={44}
-              height={44}
-              className="object-contain size-11 rounded-xl"
-            />
+            <BrandLogo className="size-11" />
             <div>
               <p className="text-lg font-bold leading-none text-primary-ink">
                 TAMAS

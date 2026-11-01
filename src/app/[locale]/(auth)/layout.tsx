@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { HandCoinsIcon } from "lucide-react";
 import { ReactNode } from "react";
+import { BrandLogo } from "@/components/brand-logo";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
@@ -14,7 +14,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         href="/"
         className="flex items-center gap-2 text-primary-ink rounded-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
       >
-        <HandCoinsIcon className="size-7" aria-hidden="true" />
+        <BrandLogo className="size-9" />
         <span className="text-2xl font-bold">TAMAS</span>
       </Link>
       <div className="w-full max-w-sm">{children}</div>

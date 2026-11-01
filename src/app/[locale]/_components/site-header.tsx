@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { BrandLogo } from "@/components/brand-logo";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { NAV_LINKS } from "../_data/nav-links";
 import { HeaderActions } from "./header-actions";
 import { SignedOutActions } from "./signed-out-actions";
-import Image from "next/image";
 
 export function SiteHeader() {
   const t = useTranslations("landing");
@@ -15,16 +15,11 @@ export function SiteHeader() {
       <div className="flex items-center justify-between h-16 gap-4 px-4 mx-auto max-w-6xl sm:px-6">
         <Link
           href="/"
-          className="group flex items-center gap-2 text-primary-ink rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-          {/* The logo tilts and grows slightly when the brand is hovered */}
-          <Image
-            src="/logo/logo-1.png"
-            alt=""
-            width={30}
-            height={30}
-            className="object-contain size-11 rounded-xl"
-          />
-          <span className="text-xl font-bold ">TAMAS</span>
+          className="flex items-center gap-2 text-primary-ink rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        >
+          <BrandLogo className="size-10" />
+          {/* On phones the name does not fit beside the language switcher and the button, but stays the link's label. */}
+          <span className="text-xl font-bold max-sm:sr-only">TAMAS</span>
         </Link>
         <nav aria-label={t("header.sections")} className="hidden lg:block">
           <ul className="flex items-center gap-1">
@@ -32,7 +27,8 @@ export function SiteHeader() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="group relative inline-flex items-center px-3 py-2 text-sm rounded-md text-muted-foreground outline-none transition-colors motion-reduce:transition-none hover:text-primary-ink focus-visible:ring-3 focus-visible:ring-ring/50">
+                  className="group relative inline-flex items-center px-3 py-2 text-sm rounded-md text-muted-foreground outline-none transition-colors motion-reduce:transition-none hover:text-primary-ink focus-visible:ring-3 focus-visible:ring-ring/50"
+                >
                   {t(`nav.${link.key}`)}
                   {/* Underline grows from the left on hover or keyboard focus */}
                   <span
