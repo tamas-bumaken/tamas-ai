@@ -37,6 +37,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "TAMAS",
     description: t("description"),
+    icons: {
+      icon: "/logo/logo-1.png",
+    },
     // Opened from the iOS home screen, the app runs full screen under its own name.
     // The startup images replace the blank white screen iOS shows while the installed app loads.
     appleWebApp: {
@@ -72,8 +75,7 @@ export default async function RootLayout({
         geistMono.variable,
         "font-sans",
         inter.variable,
-      )}
-    >
+      )}>
       <body className="flex flex-col min-h-full">
         <NextIntlClientProvider>
           <QueryProvider>
