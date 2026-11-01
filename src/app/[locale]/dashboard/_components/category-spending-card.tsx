@@ -8,59 +8,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getCategorySwatch } from "@/constans/category-swatches";
+import { BUSINESS_EXPENSE_CATEGORIES } from "@/constans/transaction-categories";
 import { useCategoryLabel } from "@/hooks/use-category-label";
 import { convertToIDR } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { QueryError } from "./query-error";
-import {
-  MonthlySummary,
-  useFormatPeriod,
-  useMonthlySummary,
-} from "./use-monthly-summary";
+import { useFormatPeriod, useMonthlySummary } from "./use-monthly-summary";
 
-// Same ramp as the landing page's sample month: darkest for the biggest category.
-const CATEGORY_SWATCHES = [
-  "bg-chart-1",
-  "bg-chart-2",
-  "bg-chart-3",
-  "bg-chart-4",
-];
-const REST_SWATCH = "bg-chart-5";
-// Beyond four greens plus one grey the shades stop being distinguishable, so the tail is merged.
-const MAX_ROWS = CATEGORY_SWATCHES.length + 1;
+// The bar keeps the category list's order, whatever the amounts: that is the order whose neighbouring colours
+// stay apart for colour-blind readers. The list below it stays sorted by size, so it names every segment.
+function barOrder(category: string) {
+  const categories: readonly string[] = BUSINESS_EXPENSE_CATEGORIES;
 
-type CategoryRow = {
-  // Stored category, or null for the merged tail.
-  category: string | null;
-  amount: number;
-  swatch: string;
-};
-
-function toRows(spending: MonthlySummary["spendingByCategory"]): {
-  rows: CategoryRow[];
-  restCount: number;
-} {
-  const named =
-    spending.length > MAX_ROWS
-      ? spending.slice(0, CATEGORY_SWATCHES.length)
-      : spending;
-  const rest = spending.slice(named.length);
-
-  const rows: CategoryRow[] = named.map(({ category, total }, index) => ({
-    category,
-    amount: total,
-    swatch: CATEGORY_SWATCHES[index] ?? REST_SWATCH,
-  }));
-
-  if (rest.length > 0) {
-    rows.push({
-      category: null,
-      amount: rest.reduce((sum, { total }) => sum + total, 0),
-      swatch: REST_SWATCH,
-    });
-  }
-
-  return { rows, restCount: rest.length };
+  return categories.indexOf(category);
 }
 
 function formatShare(amount: number, total: number) {
@@ -77,13 +38,7 @@ export function CategorySpendingCard() {
   const { data, isPending, isError, refetch } = useMonthlySummary();
 
   const total = data?.current.businessExpense ?? 0;
-  const { rows, restCount } = data
-    ? toRows(data.spendingByCategory)
-    : { rows: [], restCount: 0 };
-  const rowName = (row: CategoryRow) =>
-    row.category === null
-      ? t("otherCategories", { count: restCount })
-      : categoryLabel(row.category);
+  const rows = data?.spendingByCategory ?? [];
 
   return (
     <Card>
@@ -133,38 +88,44 @@ export function CategorySpendingCard() {
                   breakdown: rows
                     .map(
                       (row) =>
-                        `${rowName(row)} ${formatShare(row.amount, total)}`,
+                        `${categoryLabel(row.category)} ${formatShare(row.total, total)}`,
                     )
                     .join(", "),
                 })}
                 className="flex h-3 overflow-hidden rounded-full gap-0.5"
               >
-                {rows.map((row) => (
-                  <div
-                    key={row.category ?? "rest"}
-                    className={row.swatch}
-                    style={{ width: `${(row.amount / total) * 100}%` }}
-                  />
-                ))}
+                {rows
+                  .toSorted(
+                    (a, b) => barOrder(a.category) - barOrder(b.category),
+                  )
+                  .map((row) => (
+                    <div
+                      key={row.category}
+                      className={getCategorySwatch(row.category)}
+                      style={{ width: `${(row.total / total) * 100}%` }}
+                    />
+                  ))}
               </div>
               <ul className="text-base space-y-2.5">
                 {rows.map((row) => (
                   <li
-                    key={row.category ?? "rest"}
+                    key={row.category}
                     className="grid grid-cols-[1fr_auto_3rem] items-center gap-x-3"
                   >
                     <span className="flex items-center min-w-0 gap-2.5">
                       <span
                         aria-hidden
-                        className={`size-2.5 shrink-0 rounded-full ${row.swatch}`}
+                        className={`size-2.5 shrink-0 rounded-full ${getCategorySwatch(row.category)}`}
                       />
-                      <span className="truncate">{rowName(row)}</span>
+                      <span className="truncate">
+                        {categoryLabel(row.category)}
+                      </span>
                     </span>
                     <span className="tabular-nums">
-                      {convertToIDR(row.amount)}
+                      {convertToIDR(row.total)}
                     </span>
                     <span className="text-sm text-right tabular-nums text-muted-foreground">
-                      {formatShare(row.amount, total)}
+                      {formatShare(row.total, total)}
                     </span>
                   </li>
                 ))}

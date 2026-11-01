@@ -105,7 +105,7 @@ export function ProfitTrendCard() {
         )}
       </CardContent>
       {data?.projection.status === "ready" && (
-        <CardFooter className="text-xs text-muted-foreground">
+        <CardFooter className="text-sm text-muted-foreground">
           {t("note")}
         </CardFooter>
       )}

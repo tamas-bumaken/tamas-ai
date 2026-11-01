@@ -86,7 +86,7 @@ export function RecentTransactions() {
                       categoryLabel(transaction.category)}
                   </p>
                   {transaction.description && (
-                    <p className="text-xs truncate text-muted-foreground">
+                    <p className="text-sm truncate text-muted-foreground">
                       {categoryLabel(transaction.category)}
                     </p>
                   )}
@@ -101,7 +101,7 @@ export function RecentTransactions() {
                     {transaction.type === "income" ? "+" : "−"}
                     {convertToIDR(Number(transaction.amount))}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     {format.dateTime(new Date(transaction.date), "day")}
                   </p>
                 </div>

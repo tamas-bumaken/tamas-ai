@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { convertToIDR, convertToSignedIDR } from "@/lib/utils";
+import { cn, convertToIDR, convertToSignedIDR } from "@/lib/utils";
 import { useFormatter, useTranslations } from "next-intl";
 import { QueryError } from "./query-error";
 import {
@@ -69,7 +69,8 @@ export function ProfitCard() {
   const current = data?.current;
 
   return (
-    <Card>
+    // The one figure the owner opens the app for, so it is the one card on the deep green.
+    <Card className="surface-deep">
       <CardHeader>
         <CardTitle className="text-sm font-normal text-muted-foreground">
           <h2>{t("title")}</h2>
@@ -100,7 +101,12 @@ export function ProfitCard() {
         {data && current && (
           <>
             <div className="space-y-2">
-              <p className="text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">
+              <p
+                className={cn(
+                  "text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl",
+                  current.profit < 0 && "text-loss",
+                )}
+              >
                 {convertToSignedIDR(current.profit)}
               </p>
               <p className="text-sm">{getStatus(t, current)}</p>
@@ -133,7 +139,7 @@ export function ProfitCard() {
           </>
         )}
       </CardContent>
-      <CardFooter className="text-xs text-muted-foreground">
+      <CardFooter className="text-sm text-muted-foreground">
         {t("note")}
       </CardFooter>
     </Card>

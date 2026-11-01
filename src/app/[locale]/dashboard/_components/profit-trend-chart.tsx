@@ -9,6 +9,8 @@ import { cn, convertToIDR, convertToSignedIDR } from "@/lib/utils";
 type ProfitTrend = Awaited<ReturnType<typeof getProfitTrend>>;
 
 const AXIS_NUMBER_FORMAT = { notation: "compact" } as const;
+// How far apart two axis labels must be, as a share of the plot's 10rem height, for their text not to overlap.
+const MIN_LABEL_GAP_PERCENT = 12;
 
 function GridLine({ percent }: { percent: number }) {
   return (
@@ -63,8 +65,9 @@ function Bar({
   );
 }
 
-// Direction is carried by position, not by a green/red pair, which fails for colour-blind readers. Hovering,
-// tapping or focusing a month fills the readout below, so every figure is reachable on a phone and by keyboard.
+// Direction is carried by position, because a green/red pair alone fails for colour-blind readers; the loss colour
+// only repeats it. Hovering, tapping or focusing a month fills the readout below, so every figure is reachable on a
+// phone and by keyboard.
 export function ProfitTrendChart({ months, projection }: ProfitTrend) {
   const t = useTranslations("dashboard.trend");
   const format = useFormatter();
@@ -78,6 +81,10 @@ export function ProfitTrendChart({ months, projection }: ProfitTrend) {
     projectedProfit ?? 0,
   ]);
   const selected = months[selectedIndex];
+  // The baseline's own line still shows where zero is when its label has no room.
+  const showZeroLabel =
+    100 - scale.baselinePercent >= MIN_LABEL_GAP_PERCENT &&
+    (scale.bottom === 0 || scale.baselinePercent >= MIN_LABEL_GAP_PERCENT);
 
   return (
     <div className="space-y-4">
@@ -87,7 +94,9 @@ export function ProfitTrendChart({ months, projection }: ProfitTrend) {
             percent={100}
             text={format.number(scale.top, AXIS_NUMBER_FORMAT)}
           />
-          <AxisLabel percent={scale.baselinePercent} text="0" />
+          {showZeroLabel && (
+            <AxisLabel percent={scale.baselinePercent} text="0" />
+          )}
           {scale.bottom > 0 && (
             <AxisLabel
               percent={0}
@@ -132,14 +141,16 @@ export function ProfitTrendChart({ months, projection }: ProfitTrend) {
                           value={projectedProfit}
                           baselinePercent={scale.baselinePercent}
                           heightPercent={scale.heightPercent(projectedProfit)}
-                          className="bg-chart-1/20"
+                          className={
+                            projectedProfit < 0 ? "bg-loss/20" : "bg-chart-1/20"
+                          }
                         />
                       )}
                       <Bar
                         value={month.profit}
                         baselinePercent={scale.baselinePercent}
                         heightPercent={scale.heightPercent(month.profit)}
-                        className="bg-chart-1"
+                        className={month.profit < 0 ? "bg-loss" : "bg-chart-1"}
                       />
                     </span>
                     <span
@@ -160,7 +171,7 @@ export function ProfitTrendChart({ months, projection }: ProfitTrend) {
       </div>
 
       {projectedProfit !== null && (
-        <p className="flex items-center gap-2 text-xs text-muted-foreground">
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
           <span aria-hidden className="rounded-sm size-3 bg-chart-1/20" />
           {t("projectionKey")}
         </p>

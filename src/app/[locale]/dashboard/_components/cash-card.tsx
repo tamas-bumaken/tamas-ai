@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { convertToIDR, convertToSignedIDR } from "@/lib/utils";
+import { cn, convertToIDR, convertToSignedIDR } from "@/lib/utils";
 import { LightbulbIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getCashInsightKey } from "./cash-insight";
@@ -75,7 +75,12 @@ export function CashCard() {
 
         {current && (
           <>
-            <p className="text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">
+            <p
+              className={cn(
+                "text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl",
+                current.cashLeft < 0 && "text-loss",
+              )}
+            >
               {convertToSignedIDR(current.cashLeft)}
             </p>
             <dl className="pt-4 text-base border-t space-y-3">
