@@ -43,15 +43,35 @@ export function LanguageSwitcher({
 
   return (
     <Select value={locale} onValueChange={handleChange} disabled={isPending}>
-      <SelectTrigger size={compact ? "sm" : "default"} aria-label={t("label")}>
-        <LanguagesIcon aria-hidden />
-        {compact ? <span>{locale.toUpperCase()}</span> : <SelectValue />}
+      <SelectTrigger
+        size={compact ? "sm" : "default"}
+        aria-label={t("label")}
+        className="group cursor-pointer rounded-full transition-all duration-200 motion-reduce:transition-none hover:border-primary/50 hover:bg-primary/5 hover:text-primary-ink data-[state=open]:border-primary/60 data-[state=open]:bg-primary/10">
+        {/* The icon tilts on hover and while open, and pulses while the language is being saved */}
+        <LanguagesIcon
+          aria-hidden
+          className={`transition-transform duration-200 motion-reduce:transition-none group-hover:rotate-12 group-data-[state=open]:rotate-12 ${
+            isPending ? "animate-pulse" : ""
+          }`}
+        />
+        {compact ? (
+          <span className="font-semibold">{locale.toUpperCase()}</span>
+        ) : (
+          <SelectValue />
+        )}
       </SelectTrigger>
       {/* Opens below the trigger: the default item-aligned position lays the list over it, so with
           Bahasa Indonesia selected the list jumped above the button. */}
-      <SelectContent position="popper" align={compact ? "end" : "start"}>
+      <SelectContent
+        position="popper"
+        align={compact ? "end" : "start"}
+        className="p-1 rounded-xl shadow-lg">
         {LOCALES.map((value) => (
-          <SelectItem key={value} value={value} lang={value}>
+          <SelectItem
+            key={value}
+            value={value}
+            lang={value}
+            className="cursor-pointer rounded-lg py-2 transition-all duration-150 motion-reduce:transition-none data-highlighted:translate-x-0.5 data-highlighted:bg-primary/10 data-highlighted:text-primary-ink data-[state=checked]:font-semibold data-[state=checked]:text-primary-ink">
             {LANGUAGE_NAMES[value]}
           </SelectItem>
         ))}
