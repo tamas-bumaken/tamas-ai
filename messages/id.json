@@ -59,7 +59,7 @@
   "landing": {
     "metadata": {
       "title": "TAMAS — Asisten Bisnis AI untuk UMKM Bali",
-      "description": "Catat pemasukan dan pengeluaran dengan satu kalimat, lalu tanya AI Advisor ke mana uangmu pergi dan apa yang bisa diubah. Gratis, dalam Bahasa Indonesia atau Inggris."
+      "description": "Catat penjualan dan belanja dengan satu kalimat atau foto nota, lalu lihat laba usaha, uang yang diambil pemilik, dan sisa kas. Gratis, dalam Bahasa Indonesia atau Inggris."
     },
     "header": {
       "sections": "Bagian halaman",
@@ -75,28 +75,28 @@
       "faq": "FAQ"
     },
     "hero": {
-      "title": "Pencatat pengeluaran yang bisa kamu tanya",
-      "body": "Catat pemasukan dan pengeluaran dengan satu kalimat. AI Advisor di TAMAS membaca angkamu sendiri, lalu menjelaskan ke mana gajimu pergi dan apa yang bisa kamu ubah, dalam Bahasa Indonesia atau Inggris yang sederhana.",
+      "title": "Usaha ramai, tapi uangnya ke mana?",
+      "body": "Catat penjualan dan belanja dengan satu kalimat atau foto nota. TAMAS menunjukkan laba usahamu, uang yang terpakai untuk pribadi dan adat, dan sisa kas. Ada yang kurang jelas? Tanya AI Advisor dengan bahasa sehari-hari.",
       "createAccount": "Buat akun gratis",
       "haveAccount": "Saya sudah punya akun",
       "note": "Tanpa login bank. Hanya kamu yang bisa melihat transaksimu."
     },
     "preview": {
-      "answerTop": "Paling besar ke <strong>makan</strong>: {food}, sepertiga dari total pengeluaranmu bulan ini ({expense}).",
-      "answerBottom": "Kabar baiknya, kamu masih menyisakan {saved} atau {rate}% gaji, di atas target {target}%. Mau lebih longgar? Batasi belanja ke {shoppingCap}, jadi ada tambahan {trim} tiap bulan.",
-      "caption": "Contoh jawaban dari satu bulan contoh: pemasukan {income}, pengeluaran {expense}."
+      "answerTop": "Bulan ini <strong>{taken}</strong> uang usaha terpakai untuk pribadi dan adat, dari laba {profit}.",
+      "answerBottom": "Karena itu kas hanya tersisa {cashLeft}, walaupun usahamu untung. Coba tetapkan batas ambilan pemilik supaya kas tidak habis menjelang hari raya.",
+      "caption": "Contoh jawaban dari satu bulan warung makan: penjualan {sales}, biaya usaha {costs}."
     },
     "howItWorks": {
-      "title": "Dari satu kalimat jadi rencana, dalam tiga langkah",
-      "body": "Tanpa spreadsheet dan tanpa login bank. Kamu yang menentukan apa yang dicatat, TAMAS membantu memahaminya.",
+      "title": "Dari satu kalimat sampai laba usaha, dalam tiga langkah",
+      "body": "Tanpa spreadsheet dan tanpa aplikasi kasir. Kamu yang menentukan apa yang dicatat, TAMAS membantu memahaminya.",
       "steps": {
         "quickEntry": {
           "title": "Tulis seperti kamu bicara",
-          "body": "Ketik satu kalimat dalam Bahasa Indonesia atau Inggris. TAMAS mengisi nominal, kategori, dan tanggalnya untukmu, atau kamu bisa pakai form biasa."
+          "body": "Ketik satu kalimat atau foto nota belanja. TAMAS mengisi nominal, kategori, dan tanggalnya, lalu kamu periksa sebelum disimpan. Form biasa juga tersedia."
         },
-        "savings": {
-          "title": "Lihat bulanmu sekilas",
-          "body": "Dashboard menampilkan saldo dan berapa banyak pemasukan bulan ini yang berhasil kamu sisihkan, dibandingkan target tabungan {target}%."
+        "dashboard": {
+          "title": "Lihat laba dan kas usahamu",
+          "body": "Dashboard memisahkan laba usaha dari uang yang diambil pemilik dan biaya adat, jadi kamu tahu kenapa untung tapi kas terasa tipis."
         },
         "starterQuestions": {
           "title": "Tanyakan ke Advisor",
@@ -111,48 +111,48 @@
       "categoryLabel": "Kategori",
       "amountLabel": "Nominal"
     },
-    "savingsExample": {
-      "title": "Tersisa bulan ini",
-      "barLabel": "{rate}% pemasukan tersisa, target {target}%",
-      "rate": "{rate}% pemasukan",
-      "target": "Target {target}%"
+    "profitExample": {
+      "title": "Laba usaha bulan ini",
+      "taken": "Diambil pemilik dan adat",
+      "cashLeft": "Sisa kas"
     },
     "advisor": {
-      "title": "Pertanyaan yang biasa kamu tanyakan ke teman yang jago atur uang",
-      "body": "Advisor membaca profil dan transaksi yang kamu catat, lalu menjawab dengan angkamu sendiri dan satu langkah praktis. Begini jawabannya untuk bulan khas pekerja pemula.",
+      "title": "Pertanyaan yang biasa muncul saat tutup warung",
+      "body": "Advisor membaca profil usaha dan transaksi yang kamu catat, lalu menjawab dengan angkamu sendiri dan satu langkah praktis. Begini jawabannya untuk satu bulan warung makan.",
       "questions": {
-        "biggest": {
-          "question": "Uangku paling banyak ke mana?",
-          "answer": "Makan, {food}. Itu sepertiga dari semua pengeluaranmu bulan ini."
+        "profit": {
+          "question": "Bulan ini untung berapa?",
+          "answer": "Laba usaha {profit}: penjualan {sales} dikurangi biaya usaha {costs}."
         },
-        "trend": {
-          "question": "Apakah pengeluaranku naik?",
-          "answer": "Ya. Kamu keluar {increase} lebih banyak dari bulan lalu ({previous}), dan sebagian besar kenaikannya dari makan di luar."
+        "biggestCost": {
+          "question": "Biaya apa yang paling besar?",
+          "answer": "Bahan & barang dagangan, {rawMaterials}. Itu lebih dari setengah biaya usahamu bulan ini, jadi selisih harga di sana paling terasa."
         },
-        "cut": {
-          "question": "Apa yang bisa kupangkas tanpa terasa?",
-          "answer": "Belanja paling mudah dikurangi. Menurunkannya dari {shopping} ke {shoppingCap} membebaskan {trim} sebulan, atau {trimYear} setahun."
+        "cash": {
+          "question": "Kenapa untung, tapi kas terasa habis?",
+          "answer": "Dari laba {profit}, {owner} diambil pemilik dan {ceremony} dipakai untuk upacara dan adat. Yang tersisa di kas {cashLeft}."
         },
-        "emergencyFund": {
-          "question": "Kapan dana daruratku terkumpul?",
-          "answer": "Tiga bulan pengeluaran adalah {target}. Menabung {saved} sebulan membuatnya terkumpul dalam {months} bulan, atau {monthsWithTrim} bulan kalau belanja juga dikurangi."
+        "fix": {
+          "question": "Apa yang harus saya perbaiki minggu ini?",
+          "answer": "Tetapkan batas ambilan pemilik {ownerCap} sebulan. Kas bulan depan bertambah {trim} tanpa mengubah penjualan."
         }
       }
     },
     "sampleMonth": {
-      "title": "Bulan contoh",
-      "income": "Pemasukan",
-      "spent": "Pengeluaran",
-      "byCategory": "Pengeluaran per kategori",
-      "saved": "Tersisa",
-      "savedRate": "({rate}%, target {target}%)"
+      "title": "Bulan contoh: warung makan",
+      "sales": "Penjualan",
+      "costs": "Biaya usaha",
+      "byCategory": "Biaya usaha per kategori",
+      "profit": "Laba usaha",
+      "taken": "Diambil pemilik dan adat",
+      "cashLeft": "Sisa kas"
     },
     "privacy": {
       "title": "Kamu yang menentukan apa yang bisa dilihat Advisor",
       "body": "Satu switch di dalam Advisor, Personal atau Umum, bisa diganti kapan saja. Di mode Umum, transaksimu tidak pernah sampai ke Advisor.",
       "modes": {
-        "personal": "Untuk pertanyaan soal uangmu: total, kategori, tren, dan seberapa dekat kamu dengan tujuanmu.",
-        "general": "Hanya panduan umum: berapa besar dana darurat, deposito atau reksa dana pasar uang, cara mulai investasi."
+        "personal": "Untuk pertanyaan soal usahamu: laba, biaya, sisa kas, dan perbandingan dengan bulan lalu.",
+        "general": "Hanya panduan umum: cara memisahkan uang usaha dan pribadi, menentukan harga jual, dan menyiapkan pengajuan KUR."
       },
       "facts": {
         "noBankLogin": {
@@ -181,8 +181,8 @@
           "answer": "Tidak. Kamu mencatat transaksi sendiri, dengan mengetik satu kalimat atau mengisi form singkat. Tidak ada data yang diambil dari bank atau e-wallet."
         },
         "beginner": {
-          "question": "Aku baru belajar atur uang. Cocok untukku?",
-          "answer": "Justru dibuat untuk itu. Catat uang masuk dan keluar, lalu tanya Advisor dengan bahasa sehari-hari, misalnya \"kenapa uangku cepat habis?\". Tidak perlu istilah keuangan."
+          "question": "Aku tidak paham pembukuan. Cocok untukku?",
+          "answer": "Justru dibuat untuk itu. Catat uang masuk dan keluar, lalu tanya Advisor dengan bahasa sehari-hari, misalnya \"kenapa untung tapi kas habis?\". Tidak perlu istilah akuntansi."
         },
         "languages": {
           "question": "TAMAS tersedia dalam bahasa apa?",
@@ -193,17 +193,17 @@
           "answer": "Hanya kamu. Setiap transaksi milik akunmu, dan database menolak permintaan dari orang lain. Ganti Advisor ke mode Umum dan Advisor tidak membacanya sama sekali."
         },
         "advice": {
-          "question": "Apakah Advisor itu nasihat keuangan profesional?",
-          "answer": "Bukan. Advisor membantumu memahami angkamu sendiri dan menyarankan langkah praktis. Untuk keputusan besar seperti pinjaman atau investasi besar, bicarakan juga dengan perencana keuangan berlisensi."
+          "question": "Apakah angkanya sama dengan laporan akuntansi?",
+          "answer": "Bukan. Ini laba sederhana untuk usaha mikro, dan Advisor hanya membantumu memahami catatanmu sendiri. Untuk keputusan besar seperti pinjaman atau pajak, bicarakan juga dengan ahlinya."
         }
       }
     },
     "closing": {
-      "title": "Mulai dari gaji bulan ini",
-      "body": "Catat pemasukanmu, tambahkan beberapa pengeluaran, lalu ajukan pertanyaan pertamamu ke Advisor. Cuma sekitar lima menit.",
+      "title": "Mulai dari penjualan hari ini",
+      "body": "Catat penjualan dan belanja hari ini, lalu ajukan pertanyaan pertamamu ke Advisor. Cuma sekitar lima menit.",
       "cta": "Buat akun gratis",
       "mock": {
-        "answer": "Bulan ini kamu bisa menabung <strong>{saved}</strong>. Kurangi belanja sebesar {trim} dan targetmu lebih cepat tercapai."
+        "answer": "Bulan ini <strong>{taken}</strong> terpakai untuk pribadi dan adat, jadi kas tersisa {cashLeft}."
       }
     },
     "footer": {
@@ -445,7 +445,6 @@
       "loading": "Memuat biaya usaha per kategori",
       "loadError": "Gagal memuat biaya usaha bulan ini. Cek koneksi lalu coba lagi.",
       "empty": "Belum ada biaya usaha bulan ini. Catat belanja bahan lewat quick entry di atas dan akan muncul di sini per kategori.",
-      "otherCategories": "{count} kategori lain",
       "chartLabel": "Biaya usaha per kategori: {breakdown}"
     },
     "recent": {

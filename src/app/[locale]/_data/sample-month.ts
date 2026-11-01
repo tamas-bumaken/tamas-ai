@@ -1,50 +1,51 @@
-import { EXPENSE_CATEGORIES } from "@/constans/transaction-categories";
+import { CATEGORY_SWATCHES } from "@/constans/category-swatches";
+import {
+  BUSINESS_EXPENSE_CATEGORIES,
+  CEREMONY_CATEGORY,
+  OWNER_WITHDRAWAL_CATEGORY,
+} from "@/constans/transaction-categories";
 
-// One illustrative month shared by every landing section, so the figures in the hero chat,
+// One illustrative month of a warung makan, shared by every landing section, so the figures in the hero chat,
 // the breakdown and the Advisor answers always agree with each other.
-// Category names are checked against the app's expense categories, so the page only shows categories the app has.
+// Category names are checked against the app's cost categories, so the page only shows categories the app has.
 export const SAMPLE_MONTH = {
-  income: 6_000_000,
-  previousExpense: 4_150_000,
+  sales: 18_000_000,
+  ownerWithdrawal: {
+    name: OWNER_WITHDRAWAL_CATEGORY,
+    amount: 3_000_000,
+  },
+  ceremony: { name: CEREMONY_CATEGORY, amount: 1_000_000 },
   categories: [
-    { name: "Raw Materials", amount: 1_500_000, swatch: "bg-chart-1" },
-    { name: "Rent & Utilities", amount: 1_200_000, swatch: "bg-chart-2" },
-    { name: "Staff Wages", amount: 800_000, swatch: "bg-chart-3" },
-    { name: "Transport & Delivery", amount: 700_000, swatch: "bg-chart-4" },
-    { name: "Other Business Expense", amount: 300_000, swatch: "bg-chart-5" },
+    { name: "Raw Materials", amount: 8_500_000 },
+    { name: "Staff Wages", amount: 2_500_000 },
+    { name: "Rent & Utilities", amount: 1_700_000 },
+    { name: "Transport & Delivery", amount: 500_000 },
+    { name: "Other Business Expense", amount: 300_000 },
   ],
 } as const satisfies {
-  income: number;
-  previousExpense: number;
+  sales: number;
+  ownerWithdrawal: { name: string; amount: number };
+  ceremony: { name: string; amount: number };
   categories: readonly {
-    name: (typeof EXPENSE_CATEGORIES)[number];
+    name: (typeof BUSINESS_EXPENSE_CATEGORIES)[number];
     amount: number;
-    swatch: string;
   }[];
 };
 
-export type SampleCategoryName =
-  (typeof SAMPLE_MONTH.categories)[number]["name"];
+export function sampleCategorySwatch(
+  name: (typeof SAMPLE_MONTH.categories)[number]["name"],
+) {
+  return CATEGORY_SWATCHES[name];
+}
 
-// Mirrors the 20% target on the dashboard's savings card.
-export const SAVINGS_TARGET_PERCENT = 20;
+// The trim the Advisor suggests: a monthly limit on what the owner takes out.
+export const OWNER_WITHDRAWAL_TRIM = 500_000;
 
-// The trim the Advisor suggests: Shopping from Rp800.000 down to Rp500.000.
-export const SHOPPING_TRIM = 300_000;
-
-const EMERGENCY_FUND_MONTHS_OF_EXPENSES = 3;
-
-export const expense = SAMPLE_MONTH.categories.reduce(
+export const businessCosts = SAMPLE_MONTH.categories.reduce(
   (total, category) => total + category.amount,
   0,
 );
-export const saved = SAMPLE_MONTH.income - expense;
-export const savingsRatePercent = Math.trunc(
-  (saved / SAMPLE_MONTH.income) * 100,
-);
-export const spendingIncrease = expense - SAMPLE_MONTH.previousExpense;
-export const emergencyFundTarget = expense * EMERGENCY_FUND_MONTHS_OF_EXPENSES;
-export const monthsToEmergencyFund = Math.ceil(emergencyFundTarget / saved);
-export const monthsToEmergencyFundWithTrim = Math.ceil(
-  emergencyFundTarget / (saved + SHOPPING_TRIM),
-);
+export const profit = SAMPLE_MONTH.sales - businessCosts;
+export const ownerTaken =
+  SAMPLE_MONTH.ownerWithdrawal.amount + SAMPLE_MONTH.ceremony.amount;
+export const cashLeft = profit - ownerTaken;

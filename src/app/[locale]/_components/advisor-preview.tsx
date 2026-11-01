@@ -3,15 +3,12 @@ import { BotIcon } from "lucide-react";
 import { CHAT_MODES } from "@/constans/chat-modes";
 import {
   SAMPLE_MONTH,
-  SAVINGS_TARGET_PERCENT,
-  SHOPPING_TRIM,
-  expense,
-  saved,
-  savingsRatePercent,
+  businessCosts,
+  cashLeft,
+  ownerTaken,
+  profit,
 } from "../_data/sample-month";
 import { formatIDR } from "../_lib/format-idr";
-
-const [food, housing, shopping, transportation] = SAMPLE_MONTH.categories;
 
 // A static replica of the dashboard's AI Advisor drawer, using the same bubble and label styles.
 export function AdvisorPreview() {
@@ -21,8 +18,8 @@ export function AdvisorPreview() {
   const PersonalIcon = CHAT_MODES.personal.Icon;
 
   return (
-    <figure className="p-3 rounded-3xl bg-accent sm:p-6">
-      <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10 shadow-sm">
+    <figure>
+      <div className="overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10">
         <div className="flex items-center justify-between gap-3 px-4 py-3 border-b">
           <p className="text-base font-semibold">AI Advisor</p>
           <p className="flex items-center gap-1.5 px-2.5 py-1 text-sm rounded-full bg-muted">
@@ -43,34 +40,28 @@ export function AdvisorPreview() {
               <p>
                 {t.rich("answerTop", {
                   strong: (chunks) => <strong>{chunks}</strong>,
-                  food: formatIDR(food.amount),
-                  expense: formatIDR(expense),
+                  taken: formatIDR(ownerTaken),
+                  profit: formatIDR(profit),
                 })}
               </p>
               <ul>
-                {[food, housing, shopping, transportation].map((category) => (
-                  <li key={category.name} className="tabular-nums">
-                    {tCategories(category.name)} {formatIDR(category.amount)}
-                  </li>
-                ))}
+                {[SAMPLE_MONTH.ownerWithdrawal, SAMPLE_MONTH.ceremony].map(
+                  (category) => (
+                    <li key={category.name} className="tabular-nums">
+                      {tCategories(category.name)} {formatIDR(category.amount)}
+                    </li>
+                  ),
+                )}
               </ul>
-              <p>
-                {t("answerBottom", {
-                  saved: formatIDR(saved),
-                  rate: savingsRatePercent,
-                  target: SAVINGS_TARGET_PERCENT,
-                  shoppingCap: formatIDR(shopping.amount - SHOPPING_TRIM),
-                  trim: formatIDR(SHOPPING_TRIM),
-                })}
-              </p>
+              <p>{t("answerBottom", { cashLeft: formatIDR(cashLeft) })}</p>
             </div>
           </div>
         </div>
       </div>
-      <figcaption className="px-1 pt-3 text-sm text-foreground/80">
+      <figcaption className="px-1 pt-3 text-sm text-muted-foreground">
         {t("caption", {
-          income: formatIDR(SAMPLE_MONTH.income),
-          expense: formatIDR(expense),
+          sales: formatIDR(SAMPLE_MONTH.sales),
+          costs: formatIDR(businessCosts),
         })}
       </figcaption>
     </figure>

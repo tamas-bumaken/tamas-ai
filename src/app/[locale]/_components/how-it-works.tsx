@@ -4,14 +4,13 @@ import {
   HOW_IT_WORKS_STEPS,
   HowItWorksExample,
 } from "../_data/how-it-works-steps";
-import { SAVINGS_TARGET_PERCENT } from "../_data/sample-month";
+import { ProfitExample } from "./profit-example";
 import { QuickEntryExample } from "./quick-entry-example";
-import { SavingsExample } from "./savings-example";
 import { StarterQuestionsExample } from "./starter-questions-example";
 
 const EXAMPLES: Record<HowItWorksExample, ReactNode> = {
   "quick-entry": <QuickEntryExample />,
-  savings: <SavingsExample />,
+  profit: <ProfitExample />,
   "starter-questions": <StarterQuestionsExample />,
 };
 
@@ -54,9 +53,7 @@ export function HowItWorks() {
                     {t(`steps.${step.key}.title`)}
                   </h3>
                   <p className="mt-2 text-base leading-7 text-muted-foreground max-w-prose">
-                    {t(`steps.${step.key}.body`, {
-                      target: SAVINGS_TARGET_PERCENT,
-                    })}
+                    {t(`steps.${step.key}.body`)}
                   </p>
                 </div>
               </div>

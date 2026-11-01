@@ -23,10 +23,7 @@ export function Hero() {
             {t("body")}
           </p>
           <div className="flex flex-col gap-3 mt-10 sm:flex-row">
-            <Button
-              asChild
-              className="h-12 px-6 text-base bg-primary text-primary-foreground hover:bg-primary/85"
-            >
+            <Button asChild className="h-12 px-6 text-base">
               <Link href="/register">{t("createAccount")}</Link>
             </Button>
             <Button asChild variant="outline" className="h-12 px-6 text-base">

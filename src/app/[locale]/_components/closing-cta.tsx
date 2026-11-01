@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { BotIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { SHOPPING_TRIM, saved } from "../_data/sample-month";
+import { cashLeft, ownerTaken } from "../_data/sample-month";
 import { formatIDR } from "../_lib/format-idr";
 
 export function ClosingCta() {
@@ -28,23 +28,26 @@ export function ClosingCta() {
           <div className="max-w-xl">
             <h2
               id="closing-heading"
-              className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              className="text-3xl font-semibold tracking-tight sm:text-4xl"
+            >
               {t("title")}
             </h2>
-            <p className="mt-4 text-lg leading-8 text-primary-foreground/90">
+            <p className="mt-4 text-lg leading-8 text-deep-muted">
               {t("body")}
             </p>
             <Button
               asChild
-              className="h-12 px-7 mt-8 text-base font-semibold shadow-lg bg-foreground text-background hover:bg-foreground/85 focus-visible:ring-foreground/40">
+              className="h-12 px-7 mt-8 text-base font-semibold bg-deep-accent text-deep hover:bg-deep-accent/85 focus-visible:ring-deep-accent/50"
+            >
               <Link href="/register">{t("cta")}</Link>
             </Button>
           </div>
 
-          {/* Mini kartu Advisor, hanya contoh tampilan */}
+          {/* A small Advisor card, for illustration only */}
           <div
             aria-hidden
-            className="hidden shrink-0 md:flex flex-col gap-3 w-72 p-4 mr-2 rounded-2xl bg-background text-foreground shadow-2xl ring-1 ring-foreground/10 rotate-2 lg:w-80 lg:mr-8">
+            className="hidden shrink-0 md:flex flex-col gap-3 w-72 p-4 mr-2 rounded-2xl bg-background text-foreground lg:w-80 lg:mr-8"
+          >
             <p className="self-end max-w-[90%] px-3.5 py-2 text-sm rounded-2xl rounded-br-md bg-primary text-primary-foreground">
               {tModes("personal.suggestions.q2")}
             </p>
@@ -56,8 +59,8 @@ export function ClosingCta() {
               <p className="text-sm leading-6">
                 {t.rich("mock.answer", {
                   strong: (chunks) => <strong>{chunks}</strong>,
-                  saved: formatIDR(saved),
-                  trim: formatIDR(SHOPPING_TRIM),
+                  taken: formatIDR(ownerTaken),
+                  cashLeft: formatIDR(cashLeft),
                 })}
               </p>
             </div>

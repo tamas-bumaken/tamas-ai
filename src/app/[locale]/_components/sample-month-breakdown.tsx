@@ -1,10 +1,11 @@
 import { useTranslations } from "next-intl";
 import {
   SAMPLE_MONTH,
-  SAVINGS_TARGET_PERCENT,
-  expense,
-  saved,
-  savingsRatePercent,
+  businessCosts,
+  cashLeft,
+  ownerTaken,
+  profit,
+  sampleCategorySwatch,
 } from "../_data/sample-month";
 import { formatIDR } from "../_lib/format-idr";
 
@@ -17,15 +18,15 @@ export function SampleMonthBreakdown() {
       <h3 className="text-sm text-muted-foreground">{t("title")}</h3>
       <dl className="grid grid-cols-2 gap-4 mt-3">
         <div>
-          <dt className="text-sm text-muted-foreground">{t("income")}</dt>
+          <dt className="text-sm text-muted-foreground">{t("sales")}</dt>
           <dd className="text-xl font-semibold tracking-tight tabular-nums sm:text-2xl text-primary-ink">
-            {formatIDR(SAMPLE_MONTH.income)}
+            {formatIDR(SAMPLE_MONTH.sales)}
           </dd>
         </div>
         <div>
-          <dt className="text-sm text-muted-foreground">{t("spent")}</dt>
+          <dt className="text-sm text-muted-foreground">{t("costs")}</dt>
           <dd className="text-xl font-semibold tracking-tight tabular-nums sm:text-2xl">
-            {formatIDR(expense)}
+            {formatIDR(businessCosts)}
           </dd>
         </div>
       </dl>
@@ -37,8 +38,8 @@ export function SampleMonthBreakdown() {
         {SAMPLE_MONTH.categories.map((category) => (
           <div
             key={category.name}
-            className={category.swatch}
-            style={{ width: `${(category.amount / expense) * 100}%` }}
+            className={sampleCategorySwatch(category.name)}
+            style={{ width: `${(category.amount / businessCosts) * 100}%` }}
           />
         ))}
       </div>
@@ -51,7 +52,7 @@ export function SampleMonthBreakdown() {
             <span className="flex items-center gap-2.5">
               <span
                 aria-hidden
-                className={`size-2.5 rounded-full ${category.swatch}`}
+                className={`size-2.5 rounded-full ${sampleCategorySwatch(category.name)}`}
               />
               {tCategories(category.name)}
             </span>
@@ -59,18 +60,20 @@ export function SampleMonthBreakdown() {
           </li>
         ))}
       </ul>
-      <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 pt-4 mt-4 text-base font-medium border-t">
-        <span>{t("saved")}</span>
-        <span className="tabular-nums">
-          {formatIDR(saved)}{" "}
-          <span className="font-normal text-muted-foreground">
-            {t("savedRate", {
-              rate: savingsRatePercent,
-              target: SAVINGS_TARGET_PERCENT,
-            })}
-          </span>
-        </span>
-      </p>
+      <dl className="pt-4 mt-4 text-base border-t space-y-2.5">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 font-medium">
+          <dt>{t("profit")}</dt>
+          <dd className="tabular-nums">{formatIDR(profit)}</dd>
+        </div>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+          <dt className="text-muted-foreground">{t("taken")}</dt>
+          <dd className="tabular-nums">−{formatIDR(ownerTaken)}</dd>
+        </div>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 font-medium">
+          <dt>{t("cashLeft")}</dt>
+          <dd className="tabular-nums">{formatIDR(cashLeft)}</dd>
+        </div>
+      </dl>
     </div>
   );
 }

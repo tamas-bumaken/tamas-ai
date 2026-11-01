@@ -1,42 +1,44 @@
 import { formatIDR } from "../_lib/format-idr";
 import {
+  OWNER_WITHDRAWAL_TRIM,
   SAMPLE_MONTH,
-  SHOPPING_TRIM,
-  emergencyFundTarget,
-  monthsToEmergencyFund,
-  monthsToEmergencyFundWithTrim,
-  saved,
-  spendingIncrease,
+  businessCosts,
+  cashLeft,
+  profit,
 } from "./sample-month";
 
-const [food, , shopping] = SAMPLE_MONTH.categories;
+const [rawMaterials] = SAMPLE_MONTH.categories;
 
 // The wording lives in the "landing.advisor.questions" messages; these are the figures each answer quotes.
 export const ADVISOR_QUESTIONS = [
-  { key: "biggest", values: { food: formatIDR(food.amount) } },
   {
-    key: "trend",
+    key: "profit",
     values: {
-      increase: formatIDR(spendingIncrease),
-      previous: formatIDR(SAMPLE_MONTH.previousExpense),
+      profit: formatIDR(profit),
+      sales: formatIDR(SAMPLE_MONTH.sales),
+      costs: formatIDR(businessCosts),
     },
   },
   {
-    key: "cut",
+    key: "biggestCost",
+    values: { rawMaterials: formatIDR(rawMaterials.amount) },
+  },
+  {
+    key: "cash",
     values: {
-      shopping: formatIDR(shopping.amount),
-      shoppingCap: formatIDR(shopping.amount - SHOPPING_TRIM),
-      trim: formatIDR(SHOPPING_TRIM),
-      trimYear: formatIDR(SHOPPING_TRIM * 12),
+      profit: formatIDR(profit),
+      owner: formatIDR(SAMPLE_MONTH.ownerWithdrawal.amount),
+      ceremony: formatIDR(SAMPLE_MONTH.ceremony.amount),
+      cashLeft: formatIDR(cashLeft),
     },
   },
   {
-    key: "emergencyFund",
+    key: "fix",
     values: {
-      target: formatIDR(emergencyFundTarget),
-      saved: formatIDR(saved),
-      months: monthsToEmergencyFund,
-      monthsWithTrim: monthsToEmergencyFundWithTrim,
+      ownerCap: formatIDR(
+        SAMPLE_MONTH.ownerWithdrawal.amount - OWNER_WITHDRAWAL_TRIM,
+      ),
+      trim: formatIDR(OWNER_WITHDRAWAL_TRIM),
     },
   },
 ] as const;

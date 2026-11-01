@@ -59,7 +59,7 @@
   "landing": {
     "metadata": {
       "title": "TAMAS — AI Business Assistant for MSMEs in Bali",
-      "description": "Record your income and spending in a sentence, then ask an AI Advisor where your money goes and what to change. Free, in Bahasa Indonesia or English."
+      "description": "Record sales and purchases in a sentence or a receipt photo, then see your business profit, what the owner took out, and the cash left. Free, in Bahasa Indonesia or English."
     },
     "header": {
       "sections": "Page sections",
@@ -75,28 +75,28 @@
       "faq": "FAQ"
     },
     "hero": {
-      "title": "The expense tracker you can ask questions",
-      "body": "Record your income and spending in a sentence. TAMAS's AI Advisor reads your own numbers and tells you where your salary goes and what you could change, in plain Bahasa Indonesia or English.",
+      "title": "Business is busy, so where did the money go?",
+      "body": "Record sales and purchases in a sentence or a receipt photo. TAMAS shows your business profit, the money that went to personal and adat needs, and the cash left. Something unclear? Ask the AI Advisor in everyday words.",
       "createAccount": "Create free account",
       "haveAccount": "I already have an account",
       "note": "No bank login needed. Only you can see your transactions."
     },
     "preview": {
-      "answerTop": "Most of it goes to <strong>food</strong>: {food}, a third of everything you spent this month ({expense}).",
-      "answerBottom": "The good news: you still kept {saved}, or {rate}% of your salary, above the {target}% target. Want more room? Cap shopping at {shoppingCap} and you'll have an extra {trim} every month.",
-      "caption": "Example answer from a sample month: {income} income, {expense} spent."
+      "answerTop": "This month <strong>{taken}</strong> of business money went to personal and adat needs, out of {profit} profit.",
+      "answerBottom": "That is why only {cashLeft} of cash is left, even though the business made a profit. Try setting a limit on what the owner takes out, so cash doesn't run out before the next holy day.",
+      "caption": "Example answer from one month of a warung makan: {sales} sales, {costs} business costs."
     },
     "howItWorks": {
-      "title": "From one sentence to a plan, in three steps",
-      "body": "No spreadsheets and no bank login. You decide what goes in, and TAMAS helps you make sense of it.",
+      "title": "From one sentence to your business profit, in three steps",
+      "body": "No spreadsheets and no cashier app. You decide what goes in, and TAMAS helps you make sense of it.",
       "steps": {
         "quickEntry": {
           "title": "Write it the way you'd say it",
-          "body": "Type a sentence in Bahasa Indonesia or English. TAMAS fills in the amount, category and date for you, or you can use the regular form."
+          "body": "Type a sentence or take a photo of a receipt. TAMAS fills in the amount, category and date, and you check it before saving. The regular form is there too."
         },
-        "savings": {
-          "title": "See your month at a glance",
-          "body": "Your dashboard shows your balance and how much of this month's income you've kept, measured against a {target}% savings target."
+        "dashboard": {
+          "title": "See your profit and cash",
+          "body": "Your dashboard separates business profit from what the owner took out and from adat costs, so you can see why cash feels thin in a profitable month."
         },
         "starterQuestions": {
           "title": "Ask the Advisor about it",
@@ -111,48 +111,48 @@
       "categoryLabel": "Category",
       "amountLabel": "Amount"
     },
-    "savingsExample": {
-      "title": "Saved this month",
-      "barLabel": "{rate}% of income saved, target {target}%",
-      "rate": "{rate}% of income",
-      "target": "Target {target}%"
+    "profitExample": {
+      "title": "Business profit this month",
+      "taken": "Taken by the owner and adat",
+      "cashLeft": "Cash left"
     },
     "advisor": {
-      "title": "Questions you'd ask a friend who's good with money",
-      "body": "The Advisor reads your profile and the transactions you've recorded, then answers with your own figures and one practical next step. Here is what it says about a typical first-job month.",
+      "title": "Questions that come up at closing time",
+      "body": "The Advisor reads your business profile and the transactions you've recorded, then answers with your own figures and one practical next step. Here is what it says about one month of a warung makan.",
       "questions": {
-        "biggest": {
-          "question": "Where does most of my money go?",
-          "answer": "Food, at {food}. That's a third of everything you spent this month."
+        "profit": {
+          "question": "How much profit did I make this month?",
+          "answer": "Business profit is {profit}: {sales} in sales minus {costs} in business costs."
         },
-        "trend": {
-          "question": "Is my spending going up?",
-          "answer": "Yes. You spent {increase} more than last month ({previous}), and most of the increase is eating out."
+        "biggestCost": {
+          "question": "What is my biggest cost?",
+          "answer": "Materials & stock, at {rawMaterials}. That's more than half of this month's business costs, so price differences there matter most."
         },
-        "cut": {
-          "question": "What could I cut without feeling it?",
-          "answer": "Shopping is the easiest to trim. Bringing it from {shopping} to {shoppingCap} frees {trim} a month, or {trimYear} a year."
+        "cash": {
+          "question": "Why is cash short when I made a profit?",
+          "answer": "Of the {profit} profit, the owner took out {owner} and {ceremony} went to ceremonies and adat. That leaves {cashLeft} in cash."
         },
-        "emergencyFund": {
-          "question": "When will my emergency fund be ready?",
-          "answer": "Three months of expenses is {target}. Saving {saved} a month gets you there in {months} months, or {monthsWithTrim} if you also trim shopping."
+        "fix": {
+          "question": "What should I fix this week?",
+          "answer": "Set a limit of {ownerCap} a month on what the owner takes out. Next month's cash grows by {trim} without changing sales."
         }
       }
     },
     "sampleMonth": {
-      "title": "Sample month",
-      "income": "Income",
-      "spent": "Spent",
-      "byCategory": "Spending by category",
-      "saved": "Saved",
-      "savedRate": "({rate}%, target {target}%)"
+      "title": "Sample month: warung makan",
+      "sales": "Sales",
+      "costs": "Business costs",
+      "byCategory": "Business costs by category",
+      "profit": "Business profit",
+      "taken": "Taken by the owner and adat",
+      "cashLeft": "Cash left"
     },
     "privacy": {
       "title": "You choose what the Advisor can see",
       "body": "One switch inside the Advisor, Personal or General, any time. In General mode, your transactions never reach the Advisor.",
       "modes": {
-        "personal": "For questions about your money: totals, categories, trends and how close you are to your goal.",
-        "general": "General guidance only: how big an emergency fund should be, deposits versus money market funds, how to start investing."
+        "personal": "For questions about your business: profit, costs, cash left, and how it compares with last month.",
+        "general": "General guidance only: keeping business and personal money apart, setting a selling price, and preparing a KUR application."
       },
       "facts": {
         "noBankLogin": {
@@ -181,8 +181,8 @@
           "answer": "No. You add transactions yourself, by typing a sentence or filling in a short form. Nothing is pulled from your bank or e-wallet."
         },
         "beginner": {
-          "question": "I'm new to managing money. Is this for me?",
-          "answer": "It's built for exactly that. Record what comes in and goes out, and ask the Advisor anything in everyday words, like \"why does my money run out so fast?\". No finance vocabulary needed."
+          "question": "I don't know bookkeeping. Is this for me?",
+          "answer": "It's built for exactly that. Record what comes in and goes out, and ask the Advisor anything in everyday words, like \"why is cash short when I made a profit?\". No accounting vocabulary needed."
         },
         "languages": {
           "question": "Which languages does TAMAS speak?",
@@ -193,17 +193,17 @@
           "answer": "Only you. Each transaction belongs to your account, and the database rejects requests from anyone else. Switch the Advisor to General mode and it doesn't read them at all."
         },
         "advice": {
-          "question": "Is the Advisor professional financial advice?",
-          "answer": "No. It helps you understand your own numbers and suggests practical next steps. For big decisions like a loan or a large investment, talk to a licensed financial planner too."
+          "question": "Are the figures the same as an accounting report?",
+          "answer": "No. This is a simple profit figure for micro-businesses, and the Advisor only helps you understand your own records. For big decisions like a loan or taxes, talk to a professional too."
         }
       }
     },
     "closing": {
-      "title": "Start with this month's salary",
-      "body": "Record your income, add a few expenses, and ask the Advisor your first question. It takes about five minutes.",
+      "title": "Start with today's sales",
+      "body": "Record today's sales and purchases, then ask the Advisor your first question. It takes about five minutes.",
       "cta": "Create free account",
       "mock": {
-        "answer": "This month you could save <strong>{saved}</strong>. Trim shopping to {trim} and you'll reach your target faster."
+        "answer": "This month <strong>{taken}</strong> went to personal and adat needs, which leaves {cashLeft} in cash."
       }
     },
     "footer": {
@@ -445,7 +445,6 @@
       "loading": "Loading business costs by category",
       "loadError": "We couldn't load this month's business costs. Check your connection and try again.",
       "empty": "No business costs recorded this month yet. Log a purchase with the quick entry above and it will show up here by category.",
-      "otherCategories": "{count} other categories",
       "chartLabel": "Business costs by category: {breakdown}"
     },
     "recent": {
