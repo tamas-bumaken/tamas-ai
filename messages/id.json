@@ -212,7 +212,8 @@
       "signIn": "Masuk",
       "createAccount": "Buat akun",
       "privacy": "Kebijakan Privasi",
-      "copyright": "© {year} TAMAS. Semua hak dilindungi."
+      "copyright": "© {year} TAMAS. Semua hak dilindungi.",
+      "terms": "Syarat & Ketentuan"
     }
   },
   "betaAiNotice": {
@@ -225,7 +226,6 @@
       "description": "Apa yang dikumpulkan TAMAS, untuk apa, siapa yang memprosesnya, dan hak-hakmu."
     },
     "title": "Kebijakan Privasi",
-    "lastUpdated": "Terakhir diperbarui: {date}",
     "intro": "TAMAS adalah asisten bisnis AI untuk UMKM Bali yang dikelola oleh {operator}. Kebijakan ini menjelaskan apa yang kami kumpulkan, untuk apa, siapa yang memprosesnya untuk kami, dan hak-hakmu menurut Undang-Undang Pelindungan Data Pribadi (UU No. 27 Tahun 2022).",
     "beta": {
       "title": "Selama beta: AI di Google Gemini tier gratis",
@@ -236,6 +236,7 @@
       "account": "<strong>Akun:</strong> alamat email dan kata sandimu (disimpan dalam bentuk hash oleh penyedia autentikasi kami), atau nama, email, dan foto yang dibagikan Google saat kamu masuk dengan Google; serta username.",
       "profile": "<strong>Profil usaha</strong> yang kamu pilih untuk diberikan: nama usaha, jenis usaha, kabupaten/kota, dan siapa pelanggan utamamu.",
       "records": "<strong>Catatanmu:</strong> transaksi (nominal, jenis, kategori, deskripsi, tanggal).",
+      "images": "<strong>Foto nota dan screenshot</strong> yang kamu unggah: dikirim sekali ke Google Gemini untuk dibaca, lalu dibuang. TAMAS tidak menyimpan gambarnya, dan data lokasi foto dihapus di perangkatmu sebelum dikirim. Hasil bacaannya baru tersimpan setelah kamu memeriksa dan menekan Simpan.",
       "conversations": "<strong>Percakapan dengan AI Advisor:</strong> pertanyaanmu dan jawaban Advisor, supaya kamu bisa membukanya lagi. Disimpan sampai kamu menghapus percakapan atau akunmu.",
       "settings": "<strong>Pengaturan:</strong> bahasa dan apakah AI Advisor boleh memakai datamu.",
       "usage": "<strong>Catatan pemakaian AI:</strong> kapan kamu memakai fitur AI dan berapa token yang dipakai, untuk menerapkan batas pemakaian wajar dan mengukur biaya. Bukan isi pesanmu.",
@@ -251,11 +252,9 @@
     },
     "processors": {
       "title": "Siapa yang memproses datamu untuk kami",
-      "supabase": "<strong>Supabase</strong>: database, login, dan penyimpanan file ({region}).",
       "vercel": "<strong>Vercel</strong>: hosting aplikasi.",
       "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota dan screenshot yang kamu unggah (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Di mode Personal, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu. Kamu bisa mengganti ke mode Umum di Advisor kapan saja.",
       "googleSignIn": "<strong>Google (Masuk dengan Google)</strong>: hanya jika kamu memilih masuk dengan Google.",
-      "posthog": "<strong>PostHog</strong>: event analitik produk yang dijelaskan di atas.",
       "abroad": "Sebagian penyedia ini memproses data di luar Indonesia. Kami memakainya hanya untuk menjalankan TAMAS.",
       "region": "Australia, Sydney"
     },
@@ -284,6 +283,78 @@
       "title": "Perubahan",
       "body": "Saat kebijakan ini berubah, kami memperbarui tanggal di atas, dan memberi tahu di aplikasi bila perubahannya memengaruhi apa yang kami kumpulkan atau siapa yang memprosesnya."
     }
+  },
+  "terms": {
+    "metadata": {
+      "title": "TAMAS - Syarat & Ketentuan",
+      "description": "Aturan memakai TAMAS: layanan beta, batas saran AI, data kamu, dan tanggung jawab kita masing-masing."
+    },
+    "title": "Syarat & Ketentuan",
+    "intro": "Syarat ini mengatur pemakaianmu atas TAMAS, asisten bisnis AI untuk UMKM Bali yang dikelola oleh {operator}. Dengan membuat akun atau memakai TAMAS, kamu menyetujuinya. Kalau tidak setuju, mohon jangan memakai TAMAS.",
+    "service": {
+      "title": "Tentang layanan",
+      "what": "TAMAS membantu pemilik usaha mikro mencatat penjualan dan belanja, melihat laba dan sisa kas, dan bertanya kepada AI Advisor.",
+      "beta": "TAMAS masih dalam tahap beta. Fitur bisa berubah, tidak tersedia sementara, atau dihentikan, dan kami tidak menjamin layanan selalu bebas gangguan atau kesalahan."
+    },
+    "account": {
+      "title": "Akunmu",
+      "age": "Kamu berusia 18 tahun ke atas.",
+      "accurate": "Data yang kamu berikan saat mendaftar benar.",
+      "secure": "Kamu menjaga kata sandi dan bertanggung jawab atas aktivitas di akunmu. Kalau akunmu dipakai orang lain, segera hubungi kami."
+    },
+    "records": {
+      "title": "Catatan dan datamu",
+      "own": "Catatan dan jawaban profil yang kamu masukkan tetap milikmu. Kamu mengizinkan kami memprosesnya hanya untuk menjalankan TAMAS, seperti yang dijelaskan di <link>Kebijakan Privasi</link>.",
+      "control": "Kamu bisa mengunduh transaksimu sebagai file CSV, serta menghapus catatan atau seluruh akunmu, kapan saja di Profil.",
+      "others": "Masukkan hanya data yang boleh kamu pakai. Jangan unggah foto atau data pribadi orang lain yang tidak berhak kamu bagikan."
+    },
+    "ai": {
+      "title": "AI dan batas sarannya",
+      "mistakes": "Jawaban AI Advisor dan hasil bacaan AI dari kalimat atau foto nota dibuat oleh model AI, dan bisa keliru. Periksa setiap draf sebelum menyimpannya, dan cek angka penting sebelum mengambil keputusan.",
+      "figures": "Laba, sisa kas, dan perkiraan akhir bulan di TAMAS adalah angka sederhana untuk usaha mikro. Bahan dan peralatan dihitung sebagai biaya saat dibeli, dan perkiraan akhir bulan hanya taksiran kasar. Semuanya bukan laporan akuntansi.",
+      "advice": "AI Advisor memberi panduan umum. Ia bukan nasihat akuntansi, pajak, hukum, atau investasi, dan tidak merekomendasikan produk investasi tertentu. Untuk hal itu, tanyakan kepada profesional berizin.",
+      "beta": "Selama beta, AI berjalan di tier gratis Google Gemini. Apa artinya bagi datamu dijelaskan di Kebijakan Privasi."
+    },
+    "use": {
+      "title": "Yang tidak boleh dilakukan",
+      "law": "Memakai TAMAS untuk hal yang melanggar hukum, atau untuk mencatat transaksi fiktif guna menipu pihak lain.",
+      "content": "Mengunggah konten yang berbahaya atau melanggar hak orang lain.",
+      "attack": "Mencoba membobol, mengganggu, atau membebani layanan secara berlebihan.",
+      "limits": "Menghindari batas pemakaian, atau memanggil fitur AI dengan program otomatis."
+    },
+    "limits": {
+      "title": "Batas pemakaian wajar",
+      "body": "Fitur AI punya batas per menit dan per hari untuk setiap pengguna, supaya layanan tetap adil dan terjangkau. Saat batas AI habis, kamu tetap bisa mencatat lewat form."
+    },
+    "ip": {
+      "title": "Hak kekayaan intelektual",
+      "body": "Nama TAMAS, logo, tampilan, dan perangkat lunaknya dimiliki {operator} atau pemberi lisensinya. Sebagai pengguna kamu boleh memakainya, tetapi tidak boleh menyalin, menjual ulang, atau mengaku sebagai pemiliknya."
+    },
+    "termination": {
+      "title": "Menghentikan akun",
+      "you": "Kamu bisa berhenti kapan saja dengan menghapus akunmu di Profil. Datamu dihapus seperti yang dijelaskan di Kebijakan Privasi.",
+      "us": "Kami bisa membatasi atau menutup akun yang melanggar syarat ini atau menyalahgunakan layanan, dan bisa menghentikan TAMAS atau program beta. Bila itu terjadi, kami memberi tahu di aplikasi lebih dulu kalau memungkinkan."
+    },
+    "liability": {
+      "title": "Batas tanggung jawab",
+      "body": "Selama beta, TAMAS disediakan apa adanya. Sejauh diizinkan hukum yang berlaku, {operator} tidak bertanggung jawab atas kerugian tidak langsung, atau atas keputusan usaha yang kamu ambil berdasarkan angka atau jawaban TAMAS. Ketentuan ini tidak mengurangi hak yang diberikan hukum kepadamu sebagai konsumen."
+    },
+    "changes": {
+      "title": "Perubahan syarat",
+      "body": "Saat syarat ini berubah, kami memperbarui tanggal di atas, dan memberi tahu di aplikasi bila perubahannya memengaruhi hak atau kewajibanmu. Kalau kamu terus memakai TAMAS setelah itu, kamu dianggap menyetujui syarat yang baru."
+    },
+    "law": {
+      "title": "Hukum yang berlaku",
+      "body": "Syarat ini tunduk pada hukum Republik Indonesia. Bila ada perselisihan, mari kita selesaikan lebih dulu secara musyawarah lewat kontak di bawah."
+    },
+    "contact": {
+      "title": "Kontak",
+      "withEmail": "Pertanyaan tentang syarat ini? Kirim email ke <link>{email}</link>.",
+      "pending": "Pertanyaan tentang syarat ini? Hubungi {operator}. Email kontak akan dicantumkan di sini sebelum beta dibuka."
+    }
+  },
+  "legal": {
+    "lastUpdated": "Terakhir diperbarui: {date}"
   },
   "validation": {
     "emailInvalid": "Masukkan email yang valid",
@@ -343,7 +414,7 @@
       },
       "title": "Buat akun",
       "description": "Catat usahamu dan dapatkan saran dari AI Advisor",
-      "consent": "Dengan membuat akun, kamu menyetujui <link>Kebijakan Privasi</link> kami.",
+      "consent": "Dengan membuat akun, kamu menyetujui <terms>Syarat & Ketentuan</terms> dan <privacy>Kebijakan Privasi</privacy> kami.",
       "submit": "Buat akun",
       "submitting": "Membuat akun...",
       "checkEmailTitle": "Cek email kamu",

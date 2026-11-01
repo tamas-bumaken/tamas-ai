@@ -36,7 +36,15 @@ export default function RegisterPage() {
         <EmailSignUpForm />
         <p className="text-xs text-center text-muted-foreground">
           {t.rich("consent", {
-            link: (chunks) => (
+            terms: (chunks) => (
+              <Link
+                href="/terms"
+                className="font-medium text-primary-ink underline-offset-4 hover:underline"
+              >
+                {chunks}
+              </Link>
+            ),
+            privacy: (chunks) => (
               <Link
                 href="/privacy"
                 className="font-medium text-primary-ink underline-offset-4 hover:underline"

@@ -212,7 +212,8 @@
       "signIn": "Sign in",
       "createAccount": "Create account",
       "privacy": "Privacy Policy",
-      "copyright": "© {year} TAMAS. All rights reserved."
+      "copyright": "© {year} TAMAS. All rights reserved.",
+      "terms": "Terms of Service"
     }
   },
   "betaAiNotice": {
@@ -225,7 +226,6 @@
       "description": "What TAMAS collects, why, who processes it, and your rights."
     },
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: {date}",
     "intro": "TAMAS is an AI business assistant for MSMEs in Bali, run by {operator}. This policy explains what we collect, why, who processes it for us, and the rights you have under Indonesia's Personal Data Protection Law (UU No. 27 Tahun 2022).",
     "beta": {
       "title": "During the beta: AI on Google Gemini's free tier",
@@ -236,6 +236,7 @@
       "account": "<strong>Account:</strong> your email address and password (stored hashed by our authentication provider), or the name, email and picture Google shares when you sign in with Google; and a username.",
       "profile": "<strong>Business profile</strong> you choose to give: business name, business type, regency or city, and who your main customers are.",
       "records": "<strong>Your records:</strong> transactions (amount, type, category, description, date).",
+      "images": "<strong>Receipt photos and screenshots</strong> you upload: sent once to Google Gemini to be read, then discarded. TAMAS does not store the image, and the photo's location data is removed on your device before it is sent. What was read is only saved after you review it and press Save.",
       "conversations": "<strong>AI Advisor conversations:</strong> your questions and the Advisor's answers, so you can return to them. They are kept until you delete the conversation or your account.",
       "settings": "<strong>Settings:</strong> your language and whether the AI Advisor may use your data.",
       "usage": "<strong>AI usage records:</strong> when you used an AI feature and how many tokens it took, to enforce fair-use limits and measure cost. Not the content of your messages.",
@@ -251,11 +252,9 @@
     },
     "processors": {
       "title": "Who processes your data for us",
-      "supabase": "<strong>Supabase</strong>: database, sign-in and file storage ({region}).",
       "vercel": "<strong>Vercel</strong>: hosting of the app.",
       "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can switch to General mode in the Advisor at any time.",
       "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
-      "posthog": "<strong>PostHog</strong>: the product analytics events described above.",
       "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
       "region": "Australia, Sydney"
     },
@@ -284,6 +283,78 @@
       "title": "Changes",
       "body": "When we change this policy we update the date above, and tell you in the app when the change affects what we collect or who processes it."
     }
+  },
+  "terms": {
+    "metadata": {
+      "title": "TAMAS - Terms of Service",
+      "description": "The rules for using TAMAS: the beta service, the limits of AI advice, your data, and what each of us is responsible for."
+    },
+    "title": "Terms of Service",
+    "intro": "These terms govern your use of TAMAS, an AI business assistant for MSMEs in Bali, run by {operator}. By creating an account or using TAMAS, you agree to them. If you don't, please don't use TAMAS.",
+    "service": {
+      "title": "About the service",
+      "what": "TAMAS helps owners of micro-businesses record sales and purchases, see profit and cash left, and ask the AI Advisor questions.",
+      "beta": "TAMAS is still in beta. Features may change, be unavailable for a while, or be discontinued, and we do not promise the service will always be free of interruptions or errors."
+    },
+    "account": {
+      "title": "Your account",
+      "age": "You are 18 or older.",
+      "accurate": "The information you give when you sign up is accurate.",
+      "secure": "You keep your password safe and are responsible for activity on your account. If someone else is using your account, contact us right away."
+    },
+    "records": {
+      "title": "Your records and data",
+      "own": "The records and profile answers you enter stay yours. You allow us to process them only to run TAMAS, as described in the <link>Privacy Policy</link>.",
+      "control": "You can download your transactions as a CSV file, and delete your records or your whole account, at any time in Profile.",
+      "others": "Enter only data you are allowed to use. Don't upload photos or personal data of other people that you have no right to share."
+    },
+    "ai": {
+      "title": "AI and the limits of its advice",
+      "mistakes": "AI Advisor's answers, and what the AI reads from a sentence or a receipt photo, are produced by an AI model and can be wrong. Check every draft before you save it, and check important figures before you decide anything.",
+      "figures": "Profit, cash left and the end-of-month estimate in TAMAS are simple figures for micro-businesses. Materials and equipment count as costs when bought, and the end-of-month estimate is only a rough guess. None of it is an accounting statement.",
+      "advice": "AI Advisor gives general guidance. It is not accounting, tax, legal or investment advice, and it does not recommend specific investment products. For those, ask a licensed professional.",
+      "beta": "During the beta, AI runs on Google Gemini's free tier. What that means for your data is explained in the Privacy Policy."
+    },
+    "use": {
+      "title": "What you must not do",
+      "law": "Use TAMAS for anything unlawful, or to record made-up transactions in order to deceive others.",
+      "content": "Upload content that is harmful or infringes other people's rights.",
+      "attack": "Try to break into, disrupt, or put excessive load on the service.",
+      "limits": "Get around the usage limits, or call the AI features with automated programs."
+    },
+    "limits": {
+      "title": "Fair-use limits",
+      "body": "AI features have per-minute and per-day limits for each user, to keep the service fair and affordable. When the AI limit runs out, you can still record through the form."
+    },
+    "ip": {
+      "title": "Intellectual property",
+      "body": "The TAMAS name, logo, design and software belong to {operator} or its licensors. As a user you may use them, but you may not copy them, resell them, or claim to own them."
+    },
+    "termination": {
+      "title": "Ending your account",
+      "you": "You can stop at any time by deleting your account in Profile. Your data is deleted as described in the Privacy Policy.",
+      "us": "We may limit or close an account that breaks these terms or abuses the service, and we may end TAMAS or the beta. When that happens, we tell you in the app first where we can."
+    },
+    "liability": {
+      "title": "Limit of liability",
+      "body": "During the beta, TAMAS is provided as it is. To the extent the law allows, {operator} is not liable for indirect losses, or for business decisions you make based on TAMAS's figures or answers. This does not reduce the rights the law gives you as a consumer."
+    },
+    "changes": {
+      "title": "Changes to these terms",
+      "body": "When these terms change, we update the date above, and tell you in the app if the change affects your rights or duties. If you keep using TAMAS after that, you are treated as agreeing to the new terms."
+    },
+    "law": {
+      "title": "Governing law",
+      "body": "These terms are governed by the law of the Republic of Indonesia. If a dispute comes up, let's first try to settle it by talking, through the contact below."
+    },
+    "contact": {
+      "title": "Contact",
+      "withEmail": "Questions about these terms? Email <link>{email}</link>.",
+      "pending": "Questions about these terms? Contact {operator}. A contact email will be listed here before the beta opens."
+    }
+  },
+  "legal": {
+    "lastUpdated": "Last updated: {date}"
   },
   "validation": {
     "emailInvalid": "Enter a valid email",
@@ -343,7 +414,7 @@
       },
       "title": "Create account",
       "description": "Record your business and get advice from AI Advisor",
-      "consent": "By creating an account you agree to our <link>Privacy Policy</link>.",
+      "consent": "By creating an account you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
       "submit": "Create account",
       "submitting": "Creating account...",
       "checkEmailTitle": "Check your email",

@@ -7,6 +7,7 @@ import { getCurrentYearInJakarta } from "@/lib/dates";
 const FOOTER_LINKS = [
   { href: "/login", key: "signIn" },
   { href: "/register", key: "createAccount" },
+  { href: "/terms", key: "terms" },
   { href: "/privacy", key: "privacy" },
 ] as const;
 
