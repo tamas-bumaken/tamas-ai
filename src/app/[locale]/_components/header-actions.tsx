@@ -13,10 +13,7 @@ export async function HeaderActions() {
   const t = await getTranslations("landing.header");
 
   return (
-    <Button
-      asChild
-      className="h-11 px-4 text-base bg-primary text-primary-foreground hover:bg-primary/85 sm:h-10"
-    >
+    <Button asChild className="h-11 px-4 text-base sm:h-10">
       <Link href="/dashboard">{t("openDashboard")}</Link>
     </Button>
   );

@@ -10,10 +10,7 @@ export function SignedOutActions() {
       <Button asChild variant="ghost" className="h-11 px-3 text-base sm:h-10">
         <Link href="/login">{t("signIn")}</Link>
       </Button>
-      <Button
-        asChild
-        className="h-11 px-4 text-base bg-primary text-primary-foreground hover:bg-primary/85 sm:h-10"
-      >
+      <Button asChild className="h-11 px-4 text-base sm:h-10">
         <Link href="/register">
           {/* The full label does not fit next to the logo on a 360px screen. */}
           <span className="sm:hidden">{t("signUp")}</span>

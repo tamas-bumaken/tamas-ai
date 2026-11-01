@@ -3,9 +3,9 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 // The same values as --primary, --foreground and --background in globals.css, which images cannot read.
-export const BRAND_COLOR = "#30B155";
-export const BRAND_BACKGROUND = "#E7E6E7";
-const BRAND_TEXT = "#050315";
+export const BRAND_COLOR = "#1B7135";
+export const BRAND_BACKGROUND = "#F6F8F3";
+const BRAND_TEXT = "#13231A";
 
 // iPhone launch screens, portrait, in CSS pixels. iOS ignores the manifest and shows a blank white screen while an
 // installed app loads unless a startup image matches the device exactly.

@@ -4,21 +4,19 @@ import { cn } from "cn";
 import { Slot } from "radix-ui";
 
 const buttonVariants = cva(
-  // Dasar: transisi lebih halus, ikon ikut bergerak, dan efek lift dimatikan untuk reduced motion.
-  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-200 ease-out outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 motion-reduce:[&_svg]:transition-none [&_svg:not([class*='size-'])]:size-4 hover:[&_svg[data-icon=inline-end]]:translate-x-0.5 hover:[&_svg[data-icon=inline-start]]:-translate-x-0.5",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-200 ease-out outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 motion-reduce:transition-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 motion-reduce:[&_svg]:transition-none [&_svg:not([class*='size-'])]:size-4 hover:[&_svg[data-icon=inline-end]]:translate-x-0.5 hover:[&_svg[data-icon=inline-start]]:-translate-x-0.5",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30",
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover",
         outline:
-          "border-border bg-background shadow-xs hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/5 hover:text-primary-ink hover:shadow-md aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:border-primary/60 dark:hover:bg-input/50",
+          "border-border bg-background shadow-xs hover:border-primary/50 hover:bg-primary/5 hover:text-primary-ink aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:border-primary/60 dark:hover:bg-input/50",
         secondary:
-          "bg-secondary text-secondary-foreground hover:-translate-y-0.5 hover:shadow-md hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_6%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_6%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
           "hover:bg-primary/10 hover:text-primary-ink aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-primary/15",
         destructive:
-          "bg-destructive/10 text-destructive hover:-translate-y-0.5 hover:bg-destructive/20 hover:shadow-md hover:shadow-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         // Garis bawah tumbuh dari kiri ke kanan saat hover.
         link: "bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-[position:0_100%] bg-no-repeat text-primary hover:bg-[length:100%_1px] motion-reduce:bg-[length:100%_1px]",
       },
