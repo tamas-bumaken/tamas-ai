@@ -15,14 +15,12 @@ export function PrivacySection() {
     <section
       id="privacy"
       aria-labelledby="privacy-heading"
-      className="py-20 scroll-mt-16 bg-muted/50 sm:py-28"
-    >
+      className="py-20 scroll-mt-16 bg-muted/50 sm:py-28">
       <div className="px-4 mx-auto max-w-6xl sm:px-6">
         <div className="flex flex-col gap-5 max-w-2xl">
           <h2
             id="privacy-heading"
-            className="text-3xl font-semibold tracking-tight sm:text-4xl"
-          >
+            className="text-3xl font-semibold tracking-tight sm:text-4xl">
             {t("title")}
           </h2>
           <p className="text-lg leading-8 text-muted-foreground">{t("body")}</p>
@@ -36,10 +34,16 @@ export function PrivacySection() {
             return (
               <li
                 key={mode}
-                className="p-6 rounded-2xl bg-card ring-1 ring-foreground/10"
-              >
+                // Hover: kilau hijau lembut menyapu dari kiri ke kanan dan halo melebar, seperti pada tombol.
+                className="group p-6 rounded-2xl bg-card ring-1 ring-foreground/10
+                  bg-[linear-gradient(110deg,transparent_40%,color-mix(in_oklch,var(--primary)_12%,transparent)_50%,transparent_60%)] bg-size-[250%_100%] bg-position-[100%_0] bg-no-repeat
+                  transition-all duration-500 ease-out hover:bg-position-[0%_0] hover:ring-1 hover:ring-primary/15
+                  motion-reduce:transition-none motion-reduce:bg-none">
                 <h3 className="flex items-center gap-2 text-xl font-semibold">
-                  <Icon aria-hidden className="size-5 text-primary-ink" />
+                  <Icon
+                    aria-hidden
+                    className="size-5 text-primary-ink transition-transform duration-300 motion-reduce:transition-none group-hover:scale-125"
+                  />
                   {tModes(`${mode}.name`)}
                 </h3>
                 <p className="mt-1 text-base font-medium text-primary-ink">
@@ -54,16 +58,22 @@ export function PrivacySection() {
         </ul>
 
         {/* Jaminan keamanan dalam satu panel */}
-        <dl className="grid mt-12 overflow-hidden rounded-2xl bg-primary/5 ring-1 ring-primary/20 md:grid-cols-3">
+        <dl className="grid mt-12 overflow-hidden rounded-2xl bg-primary/5  transition-shadow duration-500 motion-reduce:transition-none hover:ring-1 hover:ring-primary/15 md:grid-cols-3">
           {TRUST_FACT_KEYS.map((key, index) => {
             const FactIcon = FACT_ICONS[index % FACT_ICONS.length];
 
             return (
               <div
                 key={key}
-                className="flex flex-col gap-3 p-6 border-t border-primary/15 first:border-t-0 sm:p-7 md:border-t-0 md:border-l md:first:border-l-0"
-              >
-                <FactIcon aria-hidden className="size-6 text-primary-ink" />
+                // Hover: kilau menyapu di dalam poin yang disorot dan latarnya sedikit lebih pekat.
+                className="group flex flex-col gap-3 p-6 border-t border-primary/15 first:border-t-0 sm:p-7 md:border-t-0 md:border-l md:first:border-l-0
+                  bg-[linear-gradient(110deg,transparent_40%,color-mix(in_oklch,var(--primary)_16%,transparent)_50%,transparent_60%)] bg-size-[250%_100%] bg-position-[100%_0] bg-no-repeat
+                  transition-[background-position,background-color] duration-500 ease-out hover:bg-primary/5 hover:bg-position-[0%_0]
+                  motion-reduce:transition-none motion-reduce:bg-none">
+                <FactIcon
+                  aria-hidden
+                  className="size-6 text-primary-ink transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 group-hover:-rotate-6"
+                />
                 <dt className="text-lg font-semibold">
                   {t(`facts.${key}.title`)}
                 </dt>
