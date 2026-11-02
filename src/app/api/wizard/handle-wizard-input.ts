@@ -28,7 +28,7 @@ export class InvalidWizardTransactionError extends Error {
   }
 }
 
-export const WIZARD_MODEL = "gemini-3.6-flash";
+export const WIZARD_MODEL = "gemini-3-flash-preview";
 
 // Bounds the Gemini calls one message can trigger: a search round, an action round, and one retry.
 const MAX_TOOL_ROUNDS = 3;
