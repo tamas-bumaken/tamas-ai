@@ -35,7 +35,7 @@ import {
 } from "./personal-tools";
 import { buildSystemInstruction } from "./system-instruction";
 
-const CHAT_MODEL = "gemini-3-flash-preview";
+const CHAT_MODEL = "gemini-3.6-flash";
 
 // Bounds the Gemini calls one message can trigger; the round after the last one must answer in text.
 const MAX_TOOL_ROUNDS = 3;
