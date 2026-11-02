@@ -238,6 +238,7 @@
       "records": "<strong>Your records:</strong> transactions (amount, type, category, description, date).",
       "images": "<strong>Receipt photos and screenshots</strong> you upload: sent once to Google Gemini to be read, then discarded. TAMAS does not store the image, and the photo's location data is removed on your device before it is sent. What was read is only saved after you review it and press Save.",
       "conversations": "<strong>AI Advisor conversations:</strong> your questions and the Advisor's answers, so you can return to them. They are kept until you delete the conversation or your account.",
+      "suggestion": "<strong>AI suggestion on the dashboard:</strong> the latest one, so it is not made again every time you open the dashboard. It is only made in Personal mode, and is replaced by the next one.",
       "settings": "<strong>Settings:</strong> your language and whether the AI Advisor may use your data.",
       "usage": "<strong>AI usage records:</strong> when you used an AI feature and how many tokens it took, to enforce fair-use limits and measure cost. Not the content of your messages.",
       "analytics": "<strong>Product analytics:</strong> events such as “signed up”, “transaction created” or “advisor answer rated”, linked to a random account ID. They never include amounts, descriptions or profile answers.",
@@ -253,14 +254,14 @@
     "processors": {
       "title": "Who processes your data for us",
       "vercel": "<strong>Vercel</strong>: hosting of the app.",
-      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you. You can switch to General mode in the Advisor at any time.",
+      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you, and the dashboard suggestion is made from your business name and type and this month's summary figures. You can switch to General mode in the Advisor at any time.",
       "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
       "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
       "region": "Australia, Sydney"
     },
     "retention": {
       "title": "How long we keep it",
-      "body": "We keep your data while you have an account. When you delete your account in Profile, your profile, records, Advisor conversations, settings and AI usage records are deleted immediately. You can also delete a single conversation from the Advisor's history at any time. To have your analytics events deleted as well, contact us."
+      "body": "We keep your data while you have an account. When you delete your account in Profile, your profile, records, Advisor conversations, AI suggestion, settings and AI usage records are deleted immediately. You can also delete a single conversation from the Advisor's history at any time. To have your analytics events deleted as well, contact us."
     },
     "rights": {
       "title": "Your rights",
@@ -819,6 +820,7 @@
     "quotaCheckFailed": "Couldn't check your AI usage limit. Try again later.",
     "dailyChat": "You've used today's {limit} AI Advisor messages. The limit resets at midnight (WIB).",
     "dailyWizard": "You've used today's {limit} quick entries. The limit resets at midnight (WIB); you can still add transactions with the form.",
+    "dailySuggestion": "You have used today's {limit} AI suggestions. The limit resets at midnight (WIB).",
     "wizardTooMany": "Describe at most {max} transactions per message.",
     "wizardNothingFound": "Couldn't find a transaction to record, update, or delete in that message.",
     "imageTooLarge": "This image is too large. Try another photo.",

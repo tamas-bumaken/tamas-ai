@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import {
   Card,
@@ -13,46 +13,48 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LightbulbIcon, ArrowRightIcon, MessageCircleIcon } from "lucide-react";
+import { getAdvisorMode } from "@/actions/advisor/actions";
 import { getAISuggestion } from "@/actions/advisor/ai-suggestion";
+import { useIsHydrated } from "@/hooks/use-is-hydrated";
 import { useAdvisorDrawer } from "./advisor-drawer-context";
 
-export type AISuggestion = {
-  title: string;
-  explanation: string;
-  actionLabel: string;
-  actionMessage: string;
-};
+// The server reuses a stored suggestion while the figures are unchanged, so this only limits how often it checks.
+const SUGGESTION_STALE_MS = 5 * 60 * 1000;
+
+// The Advisor drawer in the layout loads the mode too, so its answer can already be in the cache when this section
+// hydrates. The server rendered nothing here, so the queries wait until hydration is done.
+export default function AISuggestionCard() {
+  const isHydrated = useIsHydrated();
+
+  return isHydrated ? <AISuggestionContent /> : null;
+}
 
 // One AI suggestion per view, placed right below the quick entry. Figures come from
 // the user's own records via Gemini, so the suggestion references real business numbers.
-export default function AISuggestionCard() {
+// It reads their data, so it only shows in Personal mode and follows the switch in the Advisor.
+function AISuggestionContent() {
   const t = useTranslations("dashboard.aiSuggestion");
   const advisor = useAdvisorDrawer();
-  const [suggestion, setSuggestion] = useState<AISuggestion | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const { data: mode } = useQuery({
+    queryKey: ["advisor-mode"],
+    queryFn: () => getAdvisorMode(),
+  });
+  const isPersonal = mode === "personal";
+  // Not under "balance": saving several transactions in a row must not ask Gemini each time.
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["ai-suggestion"],
+    queryFn: () => getAISuggestion(),
+    enabled: isPersonal,
+    staleTime: SUGGESTION_STALE_MS,
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
 
-  useEffect(() => {
-    let mounted = true;
+  if (!isPersonal) return null;
 
-    async function load() {
-      const result = await getAISuggestion();
-      if (!mounted) return;
-      if ("suggestion" in result) {
-        setSuggestion(result.suggestion);
-      } else if ("noData" in result) {
-        setSuggestion(null);
-      } else {
-        setHasError(true);
-      }
-      setIsLoading(false);
-    }
-
-    load();
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const isLoading = isPending;
+  const hasError = isError || (data !== undefined && "error" in data);
+  const suggestion = data && "suggestion" in data ? data.suggestion : null;
 
   // Nothing to suggest yet (no transactions recorded this month).
   if (!isLoading && !suggestion && !hasError) return null;
@@ -145,14 +147,16 @@ export default function AISuggestionCard() {
         <Button
           onClick={() => openAdvisor(suggestion.actionMessage)}
           variant="default"
-          className="text-sm">
+          className="text-sm"
+        >
           {suggestion.actionLabel}
           <ArrowRightIcon className="ml-1.5 size-4" aria-hidden />
         </Button>
         <Button
           onClick={() => openAdvisor(t("askMoreMessage"))}
           variant="ghost"
-          className="text-sm">
+          className="text-sm"
+        >
           <MessageCircleIcon className="mr-1.5 size-4" aria-hidden />
           {t("askMore")}
         </Button>

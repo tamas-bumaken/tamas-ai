@@ -1,52 +1,145 @@
 "use server";
 
-import { requireUserId } from "@/lib/auth";
-import { getCurrentProfile } from "@/lib/auth";
-import { getCookieTranslations } from "@/i18n/server";
-import { getMonthlySummary } from "@/actions/transaction/actions";
-import { ai } from "@/lib/genai";
+import { createHash } from "node:crypto";
 import { ThinkingLevel } from "@google/genai";
+import { getMonthlySummary } from "@/actions/transaction/actions";
+import { isTransactionCategory } from "@/constans/transaction-categories";
+import { Locale } from "@/i18n/routing";
+import { getCookieLocale, getCookieTranslations } from "@/i18n/server";
+import { loadAdvisorMode } from "@/lib/advisor-settings";
+import {
+  addUsage,
+  createUsageTotals,
+  finishAiRequest,
+  startAiRequest,
+} from "@/lib/ai-usage";
+import { getCurrentProfile, requireUserId } from "@/lib/auth";
+import { ai } from "@/lib/genai";
+import { createClient } from "@/lib/supabase/server";
+import {
+  AISuggestion,
+  aiSuggestionSchema,
+} from "@/validations/ai-suggestion-validations";
 
-const SUGGESTION_MODEL = "gemini-3.6-flash";
+const SUGGESTION_MODEL = "gemini-3-flash-preview";
 
-// One concrete suggestion generated from the user's own numbers, never generic advice.
-export type AISuggestion = {
-  title: string;
-  explanation: string;
-  actionLabel: string;
-  actionMessage: string;
-};
+type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
 type SuggestionResult =
   | { suggestion: AISuggestion }
   | { error: string }
   | { noData: true };
 
-// Reads the current user's profile and this-month figures, then asks Gemini for a
-// single actionable suggestion grounded in those real numbers.
-export async function getAISuggestion(): Promise<SuggestionResult> {
-  await requireUserId();
-  const t = await getCookieTranslations("dashboard.aiSuggestion");
+const LANGUAGE_RULES: Record<Locale, string> = {
+  id: 'Write in Bahasa Indonesia, in everyday words with no accounting terms. Example button labels: "Catat belanja", "Lihat laba", "Tetapkan batas ambilan".',
+  en: 'Write in English, in everyday words with no accounting terms. Example button labels: "Log a purchase", "See profit", "Set a withdrawal limit".',
+};
 
-  const [profile, summary] = await Promise.all([
+function buildPrompt(locale: Locale, snapshot: Record<string, unknown>) {
+  return `
+You are the AI Advisor in TAMAS. Write ONE specific action for the owner of a micro-business in Bali, based on their real figures below. Never make up a figure: use only the ones given, and mention at least one so it is clear the suggestion comes from their data and is not general advice.
+
+The owner's figures (in rupiah):
+${JSON.stringify(snapshot, null, 2)}
+
+Rules:
+- ${LANGUAGE_RULES[locale]}
+- "title": at most 6 words.
+- "explanation": exactly 2 sentences.
+- "actionLabel": a short button label.
+- "actionMessage": one question the owner could send to the AI Advisor to discuss this further, mentioning their figures.
+
+Output ONLY valid JSON, with no other text:
+{
+  "title": "...",
+  "explanation": "...",
+  "actionLabel": "...",
+  "actionMessage": "..."
+}
+`.trim();
+}
+
+// The figures carry the period's end date, so a suggestion lasts one day at most, and any new or changed
+// transaction, profile change or language switch gives a different fingerprint.
+function getFingerprint(locale: Locale, snapshot: Record<string, unknown>) {
+  return createHash("sha256")
+    .update(JSON.stringify({ locale, snapshot }))
+    .digest("hex");
+}
+
+// A cache failure only costs a Gemini call, so it is logged and treated as a miss. RLS limits this to the caller's row.
+async function loadStoredSuggestion(
+  supabase: SupabaseClient,
+  fingerprint: string,
+): Promise<AISuggestion | null> {
+  const { data, error } = await supabase
+    .from("ai_suggestions")
+    .select("fingerprint, suggestion")
+    .maybeSingle();
+
+  if (error) {
+    console.error("[ai-suggestion] cache read failed", error);
+    return null;
+  }
+  if (data?.fingerprint !== fingerprint) return null;
+
+  const stored = aiSuggestionSchema.safeParse(data.suggestion);
+  return stored.success ? stored.data : null;
+}
+
+async function storeSuggestion(
+  supabase: SupabaseClient,
+  fingerprint: string,
+  suggestion: AISuggestion,
+) {
+  const { error } = await supabase
+    .from("ai_suggestions")
+    .upsert(
+      { fingerprint, suggestion, updated_at: new Date().toISOString() },
+      { onConflict: "user_id" },
+    );
+
+  if (error) console.error("[ai-suggestion] cache write failed", error);
+}
+
+// One concrete suggestion from the user's own figures. It reads their data, so it follows the Advisor's mode: in
+// General mode, or when the mode cannot be read, nothing is read and nothing is sent to Gemini.
+export async function getAISuggestion(): Promise<SuggestionResult> {
+  const userId = await requireUserId();
+  const supabase = await createClient();
+
+  const mode = await loadAdvisorMode(supabase, userId).catch((error) => {
+    console.error("[ai-suggestion] advisor setting lookup failed", error);
+    return "general" as const;
+  });
+  if (mode !== "personal") return { noData: true };
+
+  const [profile, summary, locale] = await Promise.all([
     getCurrentProfile(),
     getMonthlySummary(),
+    getCookieLocale(),
   ]);
-
-  const current = summary.current;
+  const { current } = summary;
 
   // No business activity yet: nothing meaningful to derive from real data.
   if (current.businessIncome === 0 && current.businessExpense === 0) {
     return { noData: true };
   }
 
+  const [t, tCategories, tBusinessProfile] = await Promise.all([
+    getCookieTranslations("dashboard.aiSuggestion"),
+    getCookieTranslations("categories"),
+    getCookieTranslations("businessProfile"),
+  ]);
   const topCost = summary.spendingByCategory[0];
 
-  // Compact snapshot of real figures for Gemini to reference (never invent numbers).
+  // In the user's language, so the model does not repeat a stored English category name in the suggestion.
   const snapshot = {
-    businessName: profile.business_name ?? "Usaha anda",
-    businessType: profile.business_type ?? "belum ditetapkan",
-    period: `${current.startDate} s.d. ${current.endDate}`,
+    businessName: profile.business_name,
+    businessType: profile.business_type
+      ? tBusinessProfile(`types.${profile.business_type}`)
+      : null,
+    period: `${current.startDate} / ${current.endDate}`,
     businessIncome: current.businessIncome,
     businessExpense: current.businessExpense,
     profit: current.profit,
@@ -55,36 +148,29 @@ export async function getAISuggestion(): Promise<SuggestionResult> {
     ownerTaken: current.ownerTaken,
     ownerWithdrawals: current.ownerWithdrawals,
     ceremony: current.ceremony,
-    topCostCategory: topCost?.category ?? null,
+    topCostCategory: topCost
+      ? isTransactionCategory(topCost.category)
+        ? tCategories(topCost.category)
+        : topCost.category
+      : null,
     topCostAmount: topCost?.total ?? 0,
   };
 
-  const prompt = `
-Anda adalah AI Advisor di TAMAS. Buat SATU saran tindakan yang spesifik untuk pemilik usaha mikro di Bali, berdasarkan data nyata di bawah ini. Jangan buat angka baru; gunakan hanya angka yang tersedia dan sebut setidaknya satu di antaranya agar jelas bahwa saran ini dari data pengguna, bukan jawaban umum.
+  const fingerprint = getFingerprint(locale, snapshot);
+  const stored = await loadStoredSuggestion(supabase, fingerprint);
+  if (stored) return { suggestion: stored };
 
-Data nyata pengguna (Rupiah):
-${JSON.stringify(snapshot, null, 2)}
+  const quota = await startAiRequest(supabase, "suggestion", SUGGESTION_MODEL);
+  if (!quota.allowed) return { error: quota.message };
 
-Aturan:
-- Bahasa Indonesia, gaya sehari-hari, tanpa istilah akuntansi.
-- Judul maksimal 6 kata.
-- Penjelasan tepat 2 kalimat.
-- actionLabel: label tombol aksi singkat (contoh "Catat belanja", "Lihat laba", "Tetapkan batas ambilan").
-- actionMessage: satu pertanyaan yang bisa dikirim ke AI Advisor untuk membahas saran ini lebih dalam, menyebut angka milik pengguna.
-
-Keluarkan HANYA JSON valid, tanpa penutup atau teks lain:
-{
-  "title": "...",
-  "explanation": "...",
-  "actionLabel": "...",
-  "actionMessage": "..."
-}
-`.trim();
+  const usage = createUsageTotals();
 
   try {
     const response = await ai.models.generateContent({
       model: SUGGESTION_MODEL,
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      contents: [
+        { role: "user", parts: [{ text: buildPrompt(locale, snapshot) }] },
+      ],
       config: {
         temperature: 0.4,
         maxOutputTokens: 512,
@@ -94,24 +180,22 @@ Keluarkan HANYA JSON valid, tanpa penutup atau teks lain:
         },
       },
     });
+    addUsage(usage, response.usageMetadata);
 
     const text = response.text ?? "";
     const match = text.match(/\{[\s\S]*\}/);
-    const parsed = JSON.parse(match ? match[0] : text);
+    const suggestion = aiSuggestionSchema.parse({
+      actionLabel: t("actionDefault"),
+      ...JSON.parse(match ? match[0] : text),
+    });
 
-    const suggestion: AISuggestion = {
-      title: String(parsed.title ?? "").slice(0, 60),
-      explanation: String(parsed.explanation ?? "").slice(0, 300),
-      actionLabel: String(parsed.actionLabel ?? t("actionDefault")).slice(
-        0,
-        40,
-      ),
-      actionMessage: String(parsed.actionMessage ?? "").slice(0, 500),
-    };
+    await storeSuggestion(supabase, fingerprint, suggestion);
 
     return { suggestion };
   } catch (error) {
     console.error("[ai-suggestion] failed", error);
     return { error: t("failed") };
+  } finally {
+    await finishAiRequest(supabase, quota.requestId, usage);
   }
 }

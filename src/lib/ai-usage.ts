@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
-export type AiEndpoint = "chat" | "wizard";
+export type AiEndpoint = "chat" | "wizard" | "suggestion";
 
 // Starting limits per user (Phase 0 / 0.5). Quick entry is looser: logging must never feel rationed,
 // the cap only stops abuse. Days reset at midnight in Jakarta. The daily message is a key of "apiErrors".
@@ -16,11 +16,13 @@ const AI_LIMITS: Record<
   {
     perMinute: number;
     daily: number;
-    dailyMessage: "dailyChat" | "dailyWizard";
+    dailyMessage: "dailyChat" | "dailyWizard" | "dailySuggestion";
   }
 > = {
   chat: { perMinute: 5, daily: 30, dailyMessage: "dailyChat" },
   wizard: { perMinute: 10, daily: 100, dailyMessage: "dailyWizard" },
+  // Only spent when the figures changed since the stored suggestion, and nobody asked for it, so the cap is low.
+  suggestion: { perMinute: 3, daily: 10, dailyMessage: "dailySuggestion" },
 };
 
 const startResultSchema = z.object({

@@ -238,6 +238,7 @@
       "records": "<strong>Catatanmu:</strong> transaksi (nominal, jenis, kategori, deskripsi, tanggal).",
       "images": "<strong>Foto nota dan screenshot</strong> yang kamu unggah: dikirim sekali ke Google Gemini untuk dibaca, lalu dibuang. TAMAS tidak menyimpan gambarnya, dan data lokasi foto dihapus di perangkatmu sebelum dikirim. Hasil bacaannya baru tersimpan setelah kamu memeriksa dan menekan Simpan.",
       "conversations": "<strong>Percakapan dengan AI Advisor:</strong> pertanyaanmu dan jawaban Advisor, supaya kamu bisa membukanya lagi. Disimpan sampai kamu menghapus percakapan atau akunmu.",
+      "suggestion": "<strong>Saran AI di dashboard:</strong> saran terakhir, supaya tidak dibuat ulang setiap dashboard dibuka. Hanya dibuat di mode Personal, dan diganti saat ada saran baru.",
       "settings": "<strong>Pengaturan:</strong> bahasa dan apakah AI Advisor boleh memakai datamu.",
       "usage": "<strong>Catatan pemakaian AI:</strong> kapan kamu memakai fitur AI dan berapa token yang dipakai, untuk menerapkan batas pemakaian wajar dan mengukur biaya. Bukan isi pesanmu.",
       "analytics": "<strong>Analitik produk:</strong> event seperti “mendaftar”, “transaksi dibuat”, atau “jawaban advisor dinilai”, terhubung ke ID akun acak. Tidak pernah berisi nominal, deskripsi, atau jawaban profil.",
@@ -253,14 +254,14 @@
     "processors": {
       "title": "Siapa yang memproses datamu untuk kami",
       "vercel": "<strong>Vercel</strong>: hosting aplikasi.",
-      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota dan screenshot yang kamu unggah (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Di mode Personal, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu. Kamu bisa mengganti ke mode Umum di Advisor kapan saja.",
+      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota dan screenshot yang kamu unggah (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Di mode Personal, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu, dan saran di dashboard dibuat dari nama dan jenis usaha serta ringkasan angka bulan ini. Kamu bisa mengganti ke mode Umum di Advisor kapan saja.",
       "googleSignIn": "<strong>Google (Masuk dengan Google)</strong>: hanya jika kamu memilih masuk dengan Google.",
       "abroad": "Sebagian penyedia ini memproses data di luar Indonesia. Kami memakainya hanya untuk menjalankan TAMAS.",
       "region": "Australia, Sydney"
     },
     "retention": {
       "title": "Berapa lama kami menyimpannya",
-      "body": "Kami menyimpan datamu selama kamu memiliki akun. Saat kamu menghapus akun di Profil, profil, catatan, percakapan Advisor, pengaturan, dan catatan pemakaian AI langsung dihapus. Kamu juga bisa menghapus satu percakapan dari riwayat Advisor kapan saja. Untuk menghapus event analitikmu juga, hubungi kami."
+      "body": "Kami menyimpan datamu selama kamu memiliki akun. Saat kamu menghapus akun di Profil, profil, catatan, percakapan Advisor, saran AI, pengaturan, dan catatan pemakaian AI langsung dihapus. Kamu juga bisa menghapus satu percakapan dari riwayat Advisor kapan saja. Untuk menghapus event analitikmu juga, hubungi kami."
     },
     "rights": {
       "title": "Hak-hakmu",
@@ -819,6 +820,7 @@
     "quotaCheckFailed": "Gagal memeriksa batas pemakaian AI. Coba lagi nanti.",
     "dailyChat": "Kamu sudah memakai {limit} pesan AI Advisor hari ini. Batasnya diatur ulang tengah malam (WIB).",
     "dailyWizard": "Kamu sudah memakai {limit} quick entry hari ini. Batasnya diatur ulang tengah malam (WIB); kamu tetap bisa menambah transaksi lewat form.",
+    "dailySuggestion": "Kamu sudah memakai {limit} saran AI hari ini. Batasnya diatur ulang tengah malam (WIB).",
     "wizardTooMany": "Tulis maksimal {max} transaksi per pesan.",
     "wizardNothingFound": "Tidak ada transaksi yang bisa dicatat, diubah, atau dihapus dari pesan itu.",
     "imageTooLarge": "Gambar ini terlalu besar. Coba foto lain.",
