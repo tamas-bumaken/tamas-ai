@@ -506,6 +506,14 @@
       "title": "Log a transaction",
       "description": "Write it the way you'd say it, e.g. \"sold 32 nasi campur 25k, bought chicken 400k\"."
     },
+    "aiSuggestion": {
+      "heading": "AI suggestion for you",
+      "subtitle": "Based on your business numbers this month",
+      "failed": "Couldn't load the AI suggestion. Try again later.",
+      "askMore": "Ask more",
+      "askMoreMessage": "I'd like to hear more about that suggestion, based on my business numbers.",
+      "actionDefault": "See details"
+    },
     "userMenu": {
       "signedInAs": "Signed in as {username}",
       "profile": "Profile",

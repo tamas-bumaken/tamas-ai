@@ -506,6 +506,14 @@
       "title": "Catat transaksi",
       "description": "Tulis seperti kamu bicara, mis. \"jual 32 nasi campur 25rb, beli ayam 400rb\"."
     },
+    "aiSuggestion": {
+      "heading": "Saran AI untukmu",
+      "subtitle": "Berdasarkan angka usahamu bulan ini",
+      "failed": "Gagal memuat saran AI. Coba lagi nanti.",
+      "askMore": "Tanya lebih lanjut",
+      "askMoreMessage": "Saya ingin tahu lebih detail tentang saran tadi, berdasarkan angka usahaku.",
+      "actionDefault": "Lihat detail"
+    },
     "userMenu": {
       "signedInAs": "Masuk sebagai {username}",
       "profile": "Profil",

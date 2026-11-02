@@ -5,6 +5,9 @@ import { createContext, ReactNode, useContext, useState } from "react";
 type AdvisorDrawerState = {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  // A message the drawer should send as soon as it opens, e.g. from an AI suggestion card.
+  pendingMessage: string | null;
+  setPendingMessage: (message: string | null) => void;
 };
 
 const AdvisorDrawerContext = createContext<AdvisorDrawerState | null>(null);
@@ -13,9 +16,12 @@ const AdvisorDrawerContext = createContext<AdvisorDrawerState | null>(null);
 // so its open state lives above both.
 export function AdvisorDrawerProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null);
 
   return (
-    <AdvisorDrawerContext value={{ isOpen, setIsOpen }}>
+    <AdvisorDrawerContext
+      value={{ isOpen, setIsOpen, pendingMessage, setPendingMessage }}
+    >
       {children}
     </AdvisorDrawerContext>
   );

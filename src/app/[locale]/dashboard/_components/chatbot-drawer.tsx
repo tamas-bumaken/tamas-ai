@@ -73,7 +73,17 @@ export default function ChatbotDrawer() {
     queryFn: () => getAdvisorMode(),
   });
   const [isPending, setIsPending] = useState<boolean>(false);
-  const { isOpen, setIsOpen } = useAdvisorDrawer();
+  const { isOpen, setIsOpen, pendingMessage, setPendingMessage } =
+    useAdvisorDrawer();
+
+  // When something outside the drawer (for example an AI suggestion card) asks the
+  // advisor to open with a prefilled message, send it as soon as the drawer is visible.
+  useEffect(() => {
+    if (!isOpen || !pendingMessage) return;
+    sendMessage(pendingMessage);
+    setPendingMessage(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, pendingMessage]);
 
   const {
     mutate: changeMode,

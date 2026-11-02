@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { CompleteProfileBanner } from "./_components/complete-profile-banner";
 import DashboardContent from "./_components/dashboard-context";
 import WizardInput from "./_components/wizard-input";
+import AISuggestionCard from "./_components/ai-suggestion-card";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("dashboard.metadata");
@@ -26,6 +27,7 @@ export default function DashboardPage() {
       </Suspense>
       {/* Logging is the core habit, so it is the first thing on the dashboard (Phase 1 / 1.3). */}
       <WizardInput />
+      <AISuggestionCard />
       <DashboardContent />
     </div>
   );
