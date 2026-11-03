@@ -5,4 +5,4 @@ export const LEGAL_OPERATOR = "Tamas Team";
 export const LEGAL_CONTACT_EMAIL: string | null = null;
 
 // Move this forward whenever either page changes in substance. Month is zero-based: 10 is November.
-export const LEGAL_LAST_UPDATED = new Date(Date.UTC(2026, 10, 2));
+export const LEGAL_LAST_UPDATED = new Date(Date.UTC(2026, 10, 3));

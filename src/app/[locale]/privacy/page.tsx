@@ -35,6 +35,7 @@ export default function PrivacyPage() {
           <li>{t.rich("collect.profile", { strong })}</li>
           <li>{t.rich("collect.records", { strong })}</li>
           <li>{t.rich("collect.images", { strong })}</li>
+          <li>{t.rich("collect.voice", { strong })}</li>
           <li>{t.rich("collect.conversations", { strong })}</li>
           <li>{t.rich("collect.suggestion", { strong })}</li>
           <li>{t.rich("collect.settings", { strong })}</li>
