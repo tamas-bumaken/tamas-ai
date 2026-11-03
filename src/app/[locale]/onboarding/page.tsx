@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { HandCoinsIcon } from "lucide-react";
 import { BetaAiNotice } from "@/components/beta-ai-notice";
+import { BrandLogo } from "@/components/brand-logo";
 import OnboardingForm from "./_components/onboarding-form";
 import {
   Card,
@@ -24,7 +24,7 @@ export default function OnboardingPage() {
   return (
     <main className="flex flex-col items-center justify-center flex-1 min-h-screen px-4 py-10 gap-6">
       <div className="flex items-center gap-2 text-primary-ink">
-        <HandCoinsIcon className="size-7" aria-hidden="true" />
+        <BrandLogo className="size-9" />
         <span className="text-2xl font-bold">TAMAS</span>
       </div>
       <Card className="w-full max-w-lg">
