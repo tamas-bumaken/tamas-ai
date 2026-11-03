@@ -4,6 +4,7 @@ import { ai } from "@/lib/genai";
 import { createClient } from "@/lib/supabase/server";
 import { WizardResult } from "@/types/wizard";
 import { formatCategoriesForPrompt } from "@/constans/transaction-categories";
+import { WizardAudio } from "@/validations/wizard-audio-validations";
 import { WizardImage } from "@/validations/wizard-image-validations";
 import { MAX_TRANSACTIONS_PER_MESSAGE } from "@/validations/wizard-validations";
 import {
@@ -37,12 +38,19 @@ const CATEGORY_INSTRUCTION = `- "category": the most appropriate category listed
 ${formatCategoriesForPrompt()}
     Separate the business from the owner's own money. Money taken out for the household or the owner personally is 'Owner Withdrawal', and money for ceremonies or customary obligations is 'Ceremony & Adat', even when the text only says "ambil". Neither is a business cost. "ambil 150rb buat canang" is 'Ceremony & Adat'; "ambil 200rb buat belanja rumah" is 'Owner Withdrawal'.`;
 
-function buildSystemInstruction(): string {
+// A recording is the owner's own command, so it gets the same tools as typed text; only how it is read differs.
+const AUDIO_INSTRUCTION = `
+    The input is a voice recording of the business owner speaking Indonesian, Balinese, or English. Treat what they say as the text below refers to it.
+    Read spoken numbers as figures: "dua puluh lima ribu" is 25000, "seratus lima puluh ribu" is 150000, and "satu setengah juta" is 1500000.
+    Only act on words you clearly hear the speaker say. If you hear no spoken words, only noise or other people in the background, or you are not sure of an amount, do not call any function; reply with one short sentence instead.
+    Never invent a transaction or a figure that was not said, such as a daily total.`;
+
+function buildSystemInstruction(source: "text" | "audio"): string {
   return `
   <role>
     You are an AI Wizard bookkeeping assistant for owners of micro-businesses in Bali. You record, change, and remove their transactions by calling functions.
   </role>
-  <instruction>
+  <instruction>${source === "audio" ? AUDIO_INSTRUCTION : ""}
     For every new transaction in the text, call create_transaction with these arguments:
     - "amount": a positive number. Read shorthand such as "20rb" or "20k" as 20000 and "1,5jt" as 1500000.
     - "quantity" and "unit_price": when the text gives a count and a price per unit, pass these two instead of "amount". Never multiply them yourself; the total is computed for you. "jual 32 nasi campur 25rb" is quantity 32 and unit_price 25000. A single total such as "jual nasi campur 800rb" or "beli ayam 400rb" is just an "amount".
@@ -180,7 +188,19 @@ export function handleWizardInput(
   return runWizardRounds({
     // Kept apart from the instruction so text in the message cannot pass itself off as part of the prompt.
     contents: [{ role: "user", parts: [{ text: message }] }],
-    systemInstruction: buildSystemInstruction(),
+    systemInstruction: buildSystemInstruction("text"),
+    getDeclarations: getWizardToolDeclarations,
+    usage,
+  });
+}
+
+export function handleWizardAudio(
+  audio: WizardAudio,
+  usage: AiUsageTotals,
+): Promise<WizardResult> {
+  return runWizardRounds({
+    contents: [{ role: "user", parts: [{ inlineData: audio }] }],
+    systemInstruction: buildSystemInstruction("audio"),
     getDeclarations: getWizardToolDeclarations,
     usage,
   });

@@ -237,6 +237,7 @@
       "profile": "<strong>Profil usaha</strong> yang kamu pilih untuk diberikan: nama usaha, jenis usaha, kabupaten/kota, dan siapa pelanggan utamamu.",
       "records": "<strong>Catatanmu:</strong> transaksi (nominal, jenis, kategori, deskripsi, tanggal).",
       "images": "<strong>Foto nota dan screenshot</strong> yang kamu unggah: dikirim sekali ke Google Gemini untuk dibaca, lalu dibuang. TAMAS tidak menyimpan gambarnya, dan data lokasi foto dihapus di perangkatmu sebelum dikirim. Hasil bacaannya baru tersimpan setelah kamu memeriksa dan menekan Simpan.",
+      "voice": "<strong>Rekaman suara</strong> yang kamu buat di quick entry: dikirim sekali ke Google Gemini untuk dipahami, lalu dibuang. TAMAS tidak menyimpan rekamannya. Hasilnya baru tersimpan setelah kamu memeriksa dan menekan Simpan.",
       "conversations": "<strong>Percakapan dengan AI Advisor:</strong> pertanyaanmu dan jawaban Advisor, supaya kamu bisa membukanya lagi. Disimpan sampai kamu menghapus percakapan atau akunmu.",
       "suggestion": "<strong>Saran AI di dashboard:</strong> saran terakhir, supaya tidak dibuat ulang setiap dashboard dibuka. Hanya dibuat di mode Personal, dan diganti saat ada saran baru.",
       "settings": "<strong>Pengaturan:</strong> bahasa dan apakah AI Advisor boleh memakai datamu.",
@@ -254,7 +255,7 @@
     "processors": {
       "title": "Siapa yang memproses datamu untuk kami",
       "vercel": "<strong>Vercel</strong>: hosting aplikasi.",
-      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota dan screenshot yang kamu unggah (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Di mode Personal, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu, dan saran di dashboard dibuat dari nama dan jenis usaha serta ringkasan angka bulan ini. Kamu bisa mengganti ke mode Umum di Advisor kapan saja.",
+      "gemini": "<strong>Google (Gemini API)</strong>: teks yang kamu ketik di quick entry dan AI Advisor, foto nota, screenshot, dan rekaman suara yang kamu kirim (TAMAS mengirimnya sekali untuk dibaca dan tidak menyimpannya), serta setiap transaksi yang kamu simpan (jenis, kategori, deskripsi, nominal, tanggal), yang diubah menjadi indeks pencarian supaya Advisor bisa menemukannya. Di mode Personal, Advisor juga menerima jawaban profilmu dan transaksi yang dicarinya untuk menjawabmu, dan saran di dashboard dibuat dari nama dan jenis usaha serta ringkasan angka bulan ini. Kamu bisa mengganti ke mode Umum di Advisor kapan saja.",
       "googleSignIn": "<strong>Google (Masuk dengan Google)</strong>: hanya jika kamu memilih masuk dengan Google.",
       "abroad": "Sebagian penyedia ini memproses data di luar Indonesia. Kami memakainya hanya untuk menjalankan TAMAS.",
       "region": "Australia, Sydney"
@@ -652,6 +653,16 @@
       "label": "Foto nota atau screenshot",
       "reading": "Membaca gambar...",
       "unreadable": "Gambar ini tidak bisa dibuka. Coba foto lain."
+    },
+    "voice": {
+      "label": "Rekam suara",
+      "stop": "Berhenti merekam",
+      "listening": "Mendengarkan... {time}",
+      "processing": "Mendengarkan rekamanmu...",
+      "permissionDenied": "TAMAS tidak bisa memakai mikrofon. Izinkan di pengaturan browser, atau ketik transaksinya.",
+      "unsupported": "Browser ini tidak bisa merekam suara di sini. Ketik transaksinya, atau coba Chrome atau Safari.",
+      "tooShort": "Rekamannya terlalu pendek. Tahan sedikit lebih lama saat bicara.",
+      "unreadable": "Rekaman ini tidak bisa diproses. Coba lagi."
     }
   },
   "transactions": {
@@ -827,7 +838,12 @@
     "imageInvalid": "File ini tidak didukung. Pakai gambar JPG, PNG, atau WebP.",
     "imageTooMany": "Gambar ini berisi lebih dari {max} transaksi. Potong ke bagian yang ingin dicatat.",
     "imageNothingFound": "Tidak ada transaksi yang terbaca dari gambar ini. Coba foto yang lebih jelas, atau ketik saja.",
-    "imageFailed": "Gagal memproses gambar."
+    "imageFailed": "Gagal memproses gambar.",
+    "audioTooLarge": "Rekaman ini terlalu panjang. Usahakan di bawah 30 detik.",
+    "audioInvalid": "Rekaman ini tidak didukung. Rekam ulang lewat aplikasi.",
+    "audioTooMany": "Sebutkan maksimal {max} transaksi per rekaman.",
+    "audioNothingFound": "Tidak ada transaksi yang terdengar dari rekaman ini. Bicara sedikit lebih dekat ke HP, atau ketik saja.",
+    "audioFailed": "Gagal memproses rekaman."
   },
   "actionErrors": {
     "checkForm": "Periksa lagi formnya lalu coba lagi",

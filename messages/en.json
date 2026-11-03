@@ -237,6 +237,7 @@
       "profile": "<strong>Business profile</strong> you choose to give: business name, business type, regency or city, and who your main customers are.",
       "records": "<strong>Your records:</strong> transactions (amount, type, category, description, date).",
       "images": "<strong>Receipt photos and screenshots</strong> you upload: sent once to Google Gemini to be read, then discarded. TAMAS does not store the image, and the photo's location data is removed on your device before it is sent. What was read is only saved after you review it and press Save.",
+      "voice": "<strong>Voice recordings</strong> you make in quick entry: sent once to Google Gemini to be understood, then discarded. TAMAS does not store the recording. What was heard is only saved after you review it and press Save.",
       "conversations": "<strong>AI Advisor conversations:</strong> your questions and the Advisor's answers, so you can return to them. They are kept until you delete the conversation or your account.",
       "suggestion": "<strong>AI suggestion on the dashboard:</strong> the latest one, so it is not made again every time you open the dashboard. It is only made in Personal mode, and is replaced by the next one.",
       "settings": "<strong>Settings:</strong> your language and whether the AI Advisor may use your data.",
@@ -254,7 +255,7 @@
     "processors": {
       "title": "Who processes your data for us",
       "vercel": "<strong>Vercel</strong>: hosting of the app.",
-      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos and screenshots you upload (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you, and the dashboard suggestion is made from your business name and type and this month's summary figures. You can switch to General mode in the Advisor at any time.",
+      "gemini": "<strong>Google (Gemini API)</strong>: the text you type into quick entry and the AI Advisor, the receipt photos, screenshots and voice recordings you send (TAMAS sends each one once to read it and does not store it), and every transaction you save (type, category, description, amount, date), which is turned into a search index so the Advisor can find it. In Personal mode, the Advisor also receives your profile answers and the transactions it looks up to answer you, and the dashboard suggestion is made from your business name and type and this month's summary figures. You can switch to General mode in the Advisor at any time.",
       "googleSignIn": "<strong>Google (Sign in with Google)</strong>: only if you choose to sign in with Google.",
       "abroad": "Some of these providers process data outside Indonesia. We use them only to provide TAMAS.",
       "region": "Australia, Sydney"
@@ -652,6 +653,16 @@
       "label": "Photo of a receipt or screenshot",
       "reading": "Reading the image...",
       "unreadable": "This image can't be opened. Try another photo."
+    },
+    "voice": {
+      "label": "Record a voice note",
+      "stop": "Stop recording",
+      "listening": "Listening... {time}",
+      "processing": "Listening to your recording...",
+      "permissionDenied": "TAMAS can't use the microphone. Allow it in your browser settings, or type the transaction.",
+      "unsupported": "This browser can't record audio here. Type the transaction, or try Chrome or Safari.",
+      "tooShort": "The recording was too short. Hold on a little longer while you speak.",
+      "unreadable": "This recording can't be processed. Try again."
     }
   },
   "transactions": {
@@ -827,7 +838,12 @@
     "imageInvalid": "This file isn't supported. Use a JPG, PNG or WebP image.",
     "imageTooMany": "This image has more than {max} transactions. Crop it to the ones you want to record.",
     "imageNothingFound": "Couldn't read a transaction from this image. Try a clearer photo, or type it in.",
-    "imageFailed": "Couldn't process the image."
+    "imageFailed": "Couldn't process the image.",
+    "audioTooLarge": "This recording is too long. Keep it under 30 seconds.",
+    "audioInvalid": "This recording isn't supported. Record it again in the app.",
+    "audioTooMany": "Say at most {max} transactions per recording.",
+    "audioNothingFound": "Couldn't hear a transaction in this recording. Speak a little closer to the phone, or type it in.",
+    "audioFailed": "Couldn't process the recording."
   },
   "actionErrors": {
     "checkForm": "Please check the form and try again",

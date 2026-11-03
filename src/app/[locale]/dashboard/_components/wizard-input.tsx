@@ -8,7 +8,14 @@ import {
 } from "@/validations/chatbot-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { CameraIcon, Loader2Icon, LogsIcon, SendIcon } from "lucide-react";
+import {
+  CameraIcon,
+  Loader2Icon,
+  LogsIcon,
+  MicIcon,
+  SendIcon,
+  SquareIcon,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { Field } from "@/components/ui/field";
@@ -17,6 +24,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { WizardProposal, WizardResult } from "@/types/wizard";
 import { MAX_TRANSACTIONS_PER_MESSAGE } from "@/validations/wizard-validations";
 import { compressWizardImage } from "./compress-wizard-image";
+import { encodeWizardAudio } from "./encode-wizard-audio";
+import { useVoiceRecorder } from "./use-voice-recorder";
 import WizardConfirmDialog from "./wizard-confirm-dialog";
 import { WizardDraft } from "./wizard-draft";
 import WizardDraftEditDialog from "./wizard-draft-edit-dialog";
@@ -115,10 +124,48 @@ export default function WizardInput({ onSaved }: { onSaved?: () => void }) {
     },
   });
 
-  const isBusy = isPending || isReadingImage;
+  const { mutate: mutateAudio, isPending: isHearingAudio } = useMutation({
+    mutationKey: ["wizard-audio"],
+    mutationFn: async (recording: Blob) => {
+      const audio = await encodeWizardAudio(recording).catch(() => {
+        throw new Error(t("voice.unreadable"));
+      });
+      const body = new FormData();
+      body.set("audio", audio, "voice.wav");
+
+      return readWizardResponse(
+        await fetch("/api/wizard/audio", { method: "POST", body }),
+        (status) => t("requestFailed", { status }),
+      );
+    },
+    // Like an image, a recording leaves whatever the user typed in the field.
+    onSuccess: applyResult,
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const voice = useVoiceRecorder({
+    onRecorded: (recording) => mutateAudio(recording),
+    onError: (error) => toast.error(t(`voice.${error}`)),
+  });
+
+  const isBusy = isPending || isReadingImage || isHearingAudio;
+  // The microphone button stays usable while recording, since it is also the stop button.
+  const isLocked = isBusy || voice.isRecording;
+
+  function placeholder() {
+    if (voice.isRecording) {
+      const seconds = String(voice.seconds).padStart(2, "0");
+      return t("voice.listening", { time: `0:${seconds}` });
+    }
+    if (isHearingAudio) return t("voice.processing");
+    if (isReadingImage) return t("image.reading");
+    return t("placeholder");
+  }
 
   function onSubmit(data: ChatbotForm) {
-    if (isBusy) return;
+    if (isLocked) return;
 
     mutate(data);
   }
@@ -128,7 +175,7 @@ export default function WizardInput({ onSaved }: { onSaved?: () => void }) {
     // Cleared so picking the same file again after a failure still fires this handler.
     event.target.value = "";
 
-    if (file && !isBusy) mutateImage(file);
+    if (file && !isLocked) mutateImage(file);
   }
 
   return (
@@ -150,11 +197,9 @@ export default function WizardInput({ onSaved }: { onSaved?: () => void }) {
                   {...field}
                   id={messageId}
                   aria-label={t("inputLabel")}
-                  placeholder={
-                    isReadingImage ? t("image.reading") : t("placeholder")
-                  }
+                  placeholder={placeholder()}
                   autoComplete="off"
-                  disabled={isBusy}
+                  disabled={isLocked}
                   // 16px on phones: iOS zooms the whole page into any field with smaller text when it gets focus.
                   className="h-12 text-base focus:outline-none md:text-sm"
                 />
@@ -174,6 +219,24 @@ export default function WizardInput({ onSaved }: { onSaved?: () => void }) {
             variant="ghost"
             size="icon"
             disabled={isBusy}
+            aria-label={voice.isRecording ? t("voice.stop") : t("voice.label")}
+            aria-pressed={voice.isRecording}
+            onClick={voice.isRecording ? voice.stop : voice.start}
+            className="cursor-pointer shrink-0 text-primary-ink hover:text-primary-ink hover:bg-accent disabled:bg-transparent"
+          >
+            {isHearingAudio ? (
+              <Loader2Icon className="size-5 animate-spin" />
+            ) : voice.isRecording ? (
+              <SquareIcon className="size-5 fill-destructive text-destructive" />
+            ) : (
+              <MicIcon className="size-5" />
+            )}
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            disabled={isLocked}
             aria-label={t("image.label")}
             onClick={() => imageInputRef.current?.click()}
             className="cursor-pointer shrink-0 text-primary-ink hover:text-primary-ink hover:bg-accent disabled:bg-transparent"
@@ -188,7 +251,7 @@ export default function WizardInput({ onSaved }: { onSaved?: () => void }) {
             type="submit"
             variant="ghost"
             size="icon"
-            disabled={isBusy}
+            disabled={isLocked}
             aria-label={t("submit")}
             className="cursor-pointer shrink-0 text-primary-ink hover:text-primary-ink hover:bg-accent disabled:bg-transparent"
           >
